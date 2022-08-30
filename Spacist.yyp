@@ -1,12 +1,10 @@
 {
   "resources": [
-    {"id":{"name":"Wall","path":"sprites/Wall/Wall.yy",},"order":0,},
-    {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":1,},
-    {"id":{"name":"Player","path":"sprites/Player/Player.yy",},"order":1,},
-    {"id":{"name":"Moon","path":"sprites/Moon/Moon.yy",},"order":2,},
-    {"id":{"name":"oMoon","path":"objects/oMoon/oMoon.yy",},"order":2,},
-    {"id":{"name":"oWall","path":"objects/oWall/oWall.yy",},"order":0,},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
+    {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"order":1,},
+    {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},"order":1,},
+    {"id":{"name":"spr_moon","path":"sprites/spr_moon/spr_moon.yy",},"order":2,},
+    {"id":{"name":"obj_moon","path":"objects/obj_moon/obj_moon.yy",},"order":2,},
+    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":1,},
   ],
   "Options": [
     {"name":"Main","path":"options/main/options_main.yy",},
@@ -46,7 +44,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.3.0.624",
+    "IDEVersion": "2022.6.1.26",
   },
   "resourceVersion": "1.5",
   "name": "Spacist",

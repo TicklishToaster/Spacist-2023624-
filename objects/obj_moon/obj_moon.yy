@@ -1,10 +1,11 @@
 {
   "spriteId": {
-    "name": "Moon",
-    "path": "sprites/Moon/Moon.yy",
+    "name": "spr_moon",
+    "path": "sprites/spr_moon/spr_moon.yy",
   },
   "solid": false,
   "visible": true,
+  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
@@ -20,8 +21,8 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [
-    {"x":32.0,"y":32.0,},
-    {"x":32.0,"y":32.0,},
+    {"x":512.0,"y":512.0,},
+    {"x":496.0,"y":512.0,},
   ],
   "eventList": [],
   "properties": [],
@@ -31,7 +32,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oMoon",
+  "name": "obj_moon",
   "tags": [],
   "resourceType": "GMObject",
 }

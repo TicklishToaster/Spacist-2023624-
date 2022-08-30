@@ -1,10 +1,11 @@
 {
   "spriteId": {
-    "name": "Player",
-    "path": "sprites/Player/Player.yy",
+    "name": "spr_player",
+    "path": "sprites/spr_player/spr_player.yy",
   },
   "solid": false,
   "visible": true,
+  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
@@ -19,10 +20,16 @@
   "physicsFriction": 0.2,
   "physicsStartAwake": true,
   "physicsKinematic": false,
-  "physicsShapePoints": [],
+  "physicsShapePoints": [
+    {"x":0.0,"y":0.0,},
+    {"x":32.0,"y":0.0,},
+    {"x":32.0,"y":48.0,},
+    {"x":0.0,"y":48.0,},
+  ],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":true,"eventNum":27,"eventType":9,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -31,7 +38,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oPlayer",
+  "name": "obj_player",
   "tags": [],
   "resourceType": "GMObject",
 }
