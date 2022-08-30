@@ -4,6 +4,7 @@
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},"order":1,},
     {"id":{"name":"spr_moon","path":"sprites/spr_moon/spr_moon.yy",},"order":2,},
     {"id":{"name":"obj_moon","path":"objects/obj_moon/obj_moon.yy",},"order":2,},
+    {"id":{"name":"obj_game","path":"objects/obj_game/obj_game.yy",},"order":3,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":1,},
   ],
   "Options": [
