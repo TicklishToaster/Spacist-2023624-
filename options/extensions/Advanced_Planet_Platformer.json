@@ -1,0 +1,9 @@
+{
+  "extensionId": {
+    "name": "Advanced_Planet_Platformer",
+    "path": "extensions/Advanced_Planet_Platformer/Advanced_Planet_Platformer.yy"
+  },
+  "resourceVersion": "1.0",
+  "resourceType": "GMExtensionConfigSet",
+  "configurables": null
+}
