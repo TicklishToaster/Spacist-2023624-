@@ -3,9 +3,9 @@ room_speed = 60;
 
 // Settings
 walkSpd = 4; // speed when walking
-airControl = 0.2; // maneuverability when not on planet
-maxSpd = 20; // maximum moving speed
-jumpForce = 9; // jump height
+airControl = 0.2+0.8; // maneuverability when not on planet
+maxSpd = 20 - 16; // maximum moving speed
+jumpForce = 9 - 4; // jump height
 grav = 6000; // gravity force
 landForce = 0.2; // force applied to a planet when landing on it
 distLimit = 800; // how far away the player can be to the nearest planet (when outside this radius, the player will accelerate towards it)

@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_moon",
-    "path": "sprites/spr_moon/spr_moon.yy",
+    "name": "spr_moon_large",
+    "path": "sprites/spr_moon_large/spr_moon_large.yy",
   },
   "solid": false,
   "visible": true,
@@ -9,7 +9,7 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
-  "physicsObject": true,
+  "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 0,
   "physicsGroup": 1,
