@@ -1,103 +1,185 @@
-// Gravity
-if !onPlanet {
-    near = -1;
-    nearForce = -1;
-    with(oPlanet) {
-        pDist = point_distance(other.x,other.y,x,y);
-        pDir = point_direction(other.x,other.y,x,y);
-        if pDist-other.offset > planetRadius+1 { // apply gravity to player when in the air
-            force = (other.grav/(pDist*(pDist/2)))*mass;
-            if force > other.nearForce {
-                other.nearForce = force;
-                other.near = id;
-            }
-            other.xSpd += lengthdir_x(force,pDir);
-            other.ySpd += lengthdir_y(force,pDir);
-        }
-        else { // put player on surface
-            other.onPlanet = true;
-            other.planet = id;
-            xSpd *= 0.75;
-            ySpd *= 0.75;
-            spd = point_distance(0,0,other.xSpd,other.ySpd);
-            pDir = point_direction(0,0,other.xSpd,other.ySpd);
-            xSpd += lengthdir_x((spd/mass)*other.landForce,pDir);
-            ySpd += lengthdir_y((spd/mass)*other.landForce,pDir);
-        }
+// Declare Temp Variables /////////////////////////////////////////////////////
+var kLeft, kRight, kUp, kDown, kJump, kJumpRelease, tempAccel, tempFric;
+///////////////////////////////////////////////////////////////////////////////
+
+// Input //////////////////////////////////////////////////////////////////////
+
+kLeft        = keyboard_check(ord("A"));
+kRight       = keyboard_check(ord("D"));
+kUp          = keyboard_check(ord("W"));
+kDown        = keyboard_check(ord("S"));
+kJump        = keyboard_check_pressed(vk_space);
+kJumpRelease = keyboard_check_released(vk_space);
+
+///////////////////////////////////////////////////////////////////////////////
+
+// Which form of accel/fric to apply
+if (onGround) {
+    tempAccel = groundAccel;
+    tempFric  = groundFric;
+} else {
+    tempAccel = airAccel;
+    tempFric  = airFric;
+}
+
+// Stick to wall //////////////////////////////////////////////////////////////
+if ((!cRight && !cLeft) || onGround) {
+    canStick = true;
+    sticking = false;
+}   
+
+// Cling to wall
+if (((kRight && cLeft) || (kLeft && cRight)) && canStick && !onGround) {
+    alarm[0] = clingTime;
+    sticking = true; 
+    canStick = false;       
+}
+///////////////////////////////////////////////////////////////////////////////
+
+// Gravity ////////////////////////////////////////////////////////////////////
+if (!onGround) {
+    state = JUMP;
+    if ((cLeft || cRight) && v >= 0) {
+        // Wall slide
+        v = Approach(v, maxV, gravSlide);
+    } else {
+        
+        // Fall normally
+        if (v < 0)
+            v = Approach(v, maxV, gravRise);
+        else
+            v = Approach(v, maxV, gravFall);
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+
+// Left 
+if (kLeft && !kRight && !sticking) {
+    facing = LEFT;
+
+    // Apply acceleration left
+    if (h > 0)
+        h = Approach(h, 0, tempFric);   
+    h = Approach(h, -maxH, tempAccel);
+        
+    if (onGround /*&& !cLeft*/)
+        state = RUN;
+    else {
+        if (onGround)
+            state = IDLE;
     }
 }
 
+// Right 
+if (kRight && !kLeft && !sticking) {
+    facing = RIGHT;
+
+    // Apply acceleration right
+    if (h < 0)
+        h = Approach(h, 0, tempFric);   
+    h = Approach(h, maxH, tempAccel);
+        
+    if (onGround /*&& !cRight*/)
+        state = RUN;
+    else {
+        if (onGround)
+            state = IDLE;
+    }
+}
+
+// Friction
+if (!kRight && !kLeft)
+    h = Approach(h, 0, tempFric);
+
+if (onGround && h == 0)
+    state = IDLE;    
+       
+// Wall jump
+if (kJump && cLeft && !onGround) {
+    // Stretch sprite
+    xscale = 0.66;
+    yscale = 1.33;     
+    
+    // Particles
+    var i;
+    for (i = 0; i < 4; ++i)
+        with (instance_create(x + random_range(-8, 8), bbox_bottom, oParticle))
+            direction = random_range(-45, 45);        
+    
+    // Wall jump is different when pushing off/towards the wall        
+    if (kLeft) {
+        v = -jumpHeight * 1.1;
+        h = jumpHeight * .75  * 1.2;
+    } else {
+        v = -jumpHeight * 1.1;
+        h = maxH;
+    }  
+}
+
+if (kJump && cRight && !onGround) {
+    // Stretch sprite
+    xscale = 0.66;
+    yscale = 1.33;              
+     
+    // Particles
+    var i;
+    for (i = 0; i < 4; ++i)
+        with (instance_create(x + random_range(-8, 8), bbox_bottom, oParticle))
+            direction = 180 + random_range(-45, 45);     
+       
+    // Wall jump is different when pushing off/towards the wall  
+    if (kRight) {
+        v = -jumpHeight * 1.1;
+        h = -jumpHeight * .75 * 1.2;
+    } else {
+        v = -jumpHeight * 1.1;
+        h = -maxH;
+    }  
+}
+  
 // Jump
-if onPlanet {
-    if keyboard_check_pressed(vk_up) {
-        onPlanet = false;
-        pDir = point_direction(planet.x,planet.y,x,y);
-        xSpd = lengthdir_x(jumpForce,pDir);
-        ySpd = lengthdir_y(jumpForce,pDir);
-        near = planet;
+if (kJump && onGround) {
+    if (onGround || (!cRight && !cLeft)) {
+        // Stretch sprite 
+        xscale = 0.66;
+        yscale = 1.33;
+        
+        // Particles
+        var i;
+        for (i = 0; i < 4; ++i)
+            with (instance_create(x + random_range(-8, 8), bbox_bottom, oParticle))
+                direction = 90 + random_range(-45, 45);        
+        
+        v = -jumpHeight;
+        state = JUMP;
+    }
+} else {
+    // Variable hop
+    if (kJumpRelease) {
+        if (v < 0 && v >= -jumpHeight)
+            v *= 0.25; 
     }
 }
 
-// If the player is far away from everything, gravitate to the nearest planet
-inst = instance_nearest(x,y,oPlanet);
-if point_distance(x,y,inst.x,inst.y) > distLimit {
-    xSpd *= 0.97;
-    ySpd *= 0.97;
-    pDir = point_direction(x,y,inst.x,inst.y);
-    xSpd += lengthdir_x(0.6,pDir);
-    ySpd += lengthdir_y(0.6,pDir);
+// Swap facing on walls
+if (!onGround) {
+    if (cLeft)
+        facing = RIGHT;
+    if (cRight)
+        facing = LEFT;
 }
 
-// Limit speed
-xSpd = min(max(xSpd,-maxSpd),maxSpd);
-ySpd = min(max(ySpd,-maxSpd),maxSpd);
+/* */
+if (state == RUN)
+    if (random(100) > 80)
+        with (instance_create(x + random_range(-8, 8), bbox_bottom, oParticle))
+            direction = 90 + random_range(-45, 45); 
 
-// On surface
-if onPlanet {
-    pDir = point_direction(planet.x,planet.y,x,y);
-    x = planet.x+lengthdir_x(planet.planetRadius+offset,pDir);
-    y = planet.y+lengthdir_y(planet.planetRadius+offset,pDir);
-    xSpd = 0;
-    ySpd = 0;
-}
+// Adjust scaling after squash + stretch
+xscale = Approach(xscale, 1, 0.05);
+yscale = Approach(yscale, 1, 0.05);
 
-// Rotate image
-if onPlanet {
-    downDir = point_direction(x,y,planet.x,planet.y);
-}
-else {
-    downDir = point_direction(x,y,near.x,near.y);
-}
-if onPlanet {
-    image_angle -= angle_difference(image_angle,downDir+90)*0.75;
-}
-else {
-    image_angle -= angle_difference(image_angle,downDir+90)*turnSpd;
-}
 
-// Walk
-if onPlanet {
-    if keyboard_check(vk_left) {
-        xSpd = lengthdir_x(walkSpd,downDir-90);
-        ySpd = lengthdir_y(walkSpd,downDir-90);
-    }
-    else if keyboard_check(vk_right) {
-        xSpd = lengthdir_x(walkSpd,downDir+90);
-        ySpd = lengthdir_y(walkSpd,downDir+90);
-    }
-}
-else {
-    if keyboard_check(vk_left) {
-        xSpd += lengthdir_x(airControl,downDir-90);
-        ySpd += lengthdir_y(airControl,downDir-90);
-    }
-    else if keyboard_check(vk_right) {
-        xSpd += lengthdir_x(airControl,downDir+90);
-        ySpd += lengthdir_y(airControl,downDir+90);
-    }
-}
 
-// Move x/y
-x += xSpd;
-y += ySpd;
-
+/* */
+/*  */

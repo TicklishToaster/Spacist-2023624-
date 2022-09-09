@@ -1,0 +1,9 @@
+{
+  "extensionId": {
+    "name": "Intermediate_Platformer_Engine",
+    "path": "extensions/Intermediate_Platformer_Engine/Intermediate_Platformer_Engine.yy"
+  },
+  "resourceVersion": "1.0",
+  "resourceType": "GMExtensionConfigSet",
+  "configurables": null
+}

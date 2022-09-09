@@ -3,7 +3,7 @@
   "isCompatibility": true,
   "parent": {
     "name": "view",
-    "path": "folders/Scripts/compatibility/view.yy",
+    "path": "folders/Scripts/IPE/compatibility/view.yy",
   },
   "resourceVersion": "1.0",
   "name": "__view_set_internal",

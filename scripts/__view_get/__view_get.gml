@@ -27,4 +27,6 @@ function __view_get(argument0, argument1) {
 	};
 
 	return __res;
+
+
 }

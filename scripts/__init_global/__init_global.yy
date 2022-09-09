@@ -3,7 +3,7 @@
   "isCompatibility": true,
   "parent": {
     "name": "compatibility",
-    "path": "folders/Scripts/compatibility.yy",
+    "path": "folders/Scripts/IPE/compatibility.yy",
   },
   "resourceVersion": "1.0",
   "name": "__init_global",
