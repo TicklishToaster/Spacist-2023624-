@@ -2,65 +2,29 @@
 var i;
 
 // Vertical
-for (i = 0; i < abs(v); ++i) {
-    if (!place_meeting(x, y + sign(v), obj_parent_solid))
-        y += sign(v);
+for (i = 0; i < abs(y_speed); ++i) {
+    if (!place_meeting(x, y + sign(y_speed), obj_parent_solid))
+        y += sign(y_speed);
     else {
-        v = 0;
+        y_speed = 0;
         break;
     }
 }
 
 // Horizontal
-for (i = 0; i < abs(h); ++i) {
+for (i = 0; i < abs(x_speed); ++i) {
     // UP slope
-    if (place_meeting(x + sign(h), y, obj_parent_solid) && !place_meeting(x + sign(h), y - 1, obj_parent_solid))
+    if (place_meeting(x + sign(x_speed), y, obj_parent_solid) && !place_meeting(x + sign(x_speed), y - 1, obj_parent_solid))
         --y;
     
     // DOWN slope
-    if (!place_meeting(x + sign(h), y, obj_parent_solid) && !place_meeting(x + sign(h), y + 1, obj_parent_solid) && place_meeting(x + sign(h), y + 2, obj_parent_solid))
+    if (!place_meeting(x + sign(x_speed), y, obj_parent_solid) && !place_meeting(x + sign(x_speed), y + 1, obj_parent_solid) && place_meeting(x + sign(x_speed), y + 2, obj_parent_solid))
         ++y;      
         
-    if (!place_meeting(x + sign(h), y, obj_parent_solid))
-        x += sign(h); 
+    if (!place_meeting(x + sign(x_speed), y, obj_parent_solid))
+        x += sign(x_speed); 
     else {
-        // Push block
-        if (place_meeting(x + sign(h), y, oPushBlock)) {
-            with (instance_place(x + sign(h), y, oPushBlock))
-                h = other.h
-        } else
-            h = 0;
+		x_speed = 0;
         break;
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-//// Update particle trail
-//ydrift = -sign(v);
-//xdrift = -sign(h);
-
-//if (abs(h) > abs(v)) {
-//    xscatter = 0;
-//    yscatter = 4;
-//} else {
-//    xscatter = 4;
-//    yscatter = 0;
-//}
-
-//// Standing
-//if (abs(v) < jumpHeight * 0.5)
-//if (h == 0) {
-//    xdrift = -sign(facing) * 5;
-//    ydrift = 0;
-//    if (v != 0)
-//        xdrift = -sign(facing) * 2;    
-//    xscatter = 0;
-//    yscatter = 2;
-//}
-
-//TrailUpdate(trail, x + facing, y + 2);
-//TrailDrift(trail, xdrift, ydrift);
-//TrailScatter(trail, xscatter, yscatter);
-

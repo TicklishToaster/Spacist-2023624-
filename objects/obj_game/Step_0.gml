@@ -1,14 +1,14 @@
 // Initialize input variables
-var kRestart, kQuit;
+var input_restart, input_quit;
 
-kRestart   = keyboard_check_pressed(ord("R"));
-kQuit      = keyboard_check_pressed(vk_escape);
+input_restart   = keyboard_check_pressed(ord("R"));
+input_quit      = keyboard_check_pressed(vk_escape);
 
 // Restart application
-if (kRestart)
+if (input_restart)
     game_restart();
     
 // Close application
-if (kQuit)
+if (input_quit)
     game_end();
 

@@ -1,4 +1,4 @@
-h = 0;
-v = 0;
-onGround = false;
+x_speed = 0;
+y_speed = 0;
+grounded = false;
 

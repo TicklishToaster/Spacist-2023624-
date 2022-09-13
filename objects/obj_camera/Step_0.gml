@@ -25,8 +25,6 @@ if camera_shake > 0 {
 // Parallax Background Layer 0
 layer_x("Parallax_0", camera_x*0.90);
 layer_y("Parallax_0", camera_y*0.90);
-show_debug_message("X: " + string(camera_x))
-show_debug_message("Y: " + string(camera_y))
 
 // Parallax Background Layer 1
 layer_x("Parallax_1", camera_x*0.80);

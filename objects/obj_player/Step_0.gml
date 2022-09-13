@@ -1,184 +1,86 @@
 // Declare Temp Variables /////////////////////////////////////////////////////
-var kLeft, kRight, kUp, kDown, kJump, kJumpRelease, tempAccel, tempFric;
+var input_left, input_right, input_up, input_down, input_jump, input_jump_release, temp_accel, temp_fric;
 ///////////////////////////////////////////////////////////////////////////////
 
 // Input //////////////////////////////////////////////////////////////////////
 
-kLeft        = keyboard_check(ord("A"));
-kRight       = keyboard_check(ord("D"));
-kUp          = keyboard_check(ord("W"));
-kDown        = keyboard_check(ord("S"));
-kJump        = keyboard_check_pressed(vk_space);
-kJumpRelease = keyboard_check_released(vk_space);
+input_left			= keyboard_check(ord("A"));
+input_right			= keyboard_check(ord("D"));
+input_up			= keyboard_check(ord("W"));
+input_down			= keyboard_check(ord("S"));
+input_jump			= keyboard_check_pressed(vk_space);
+input_jump_release	= keyboard_check_released(vk_space);
 
 ///////////////////////////////////////////////////////////////////////////////
 
 // Which form of accel/fric to apply
-if (onGround) {
-    tempAccel = groundAccel;
-    tempFric  = groundFric;
+if (grounded) {
+    temp_accel = ground_accel;
+    temp_fric  = ground_fric;
 } else {
-    tempAccel = airAccel;
-    tempFric  = airFric;
+    temp_accel = air_accel;
+    temp_fric  = air_fric;
 }
-
-// Stick to wall //////////////////////////////////////////////////////////////
-if ((!cRight && !cLeft) || onGround) {
-    canStick = true;
-    sticking = false;
-}   
-
-// Cling to wall
-if (((kRight && cLeft) || (kLeft && cRight)) && canStick && !onGround) {
-    alarm[0] = clingTime;
-    sticking = true; 
-    canStick = false;       
-}
-///////////////////////////////////////////////////////////////////////////////
 
 // Gravity ////////////////////////////////////////////////////////////////////
-if (!onGround) {
-    state = JUMP;
-    if ((cLeft || cRight) && v >= 0) {
-        // Wall slide
-        v = Approach(v, maxV, gravSlide);
-    } else {
-        // Fall normally
-        if (v < 0)
-            v = Approach(v, maxV, gravRise);
-        else
-            v = Approach(v, maxV, gravFall);
-    }
+if (!grounded) {
+	if y_speed < 0 {
+        // Rise Up
+        y_speed = Approach(y_speed, max_y_speed, grav_rise);
+		//show_debug_message("Y 1: "+string(y_speed))		
+    }	
+    else {
+        // Fall Down
+        y_speed = Approach(y_speed, max_y_speed, grav_fall);
+		//show_debug_message("Y 2: "+string(y_speed))
+    } 
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 
 // Left 
-if (kLeft && !kRight && !sticking) {
-    facing = LEFT;
-
+if (input_left && !input_right) {
     // Apply acceleration left
-    if (h > 0)
-        h = Approach(h, 0, tempFric);   
-    h = Approach(h, -maxH, tempAccel);
-        
-    if (onGround /*&& !cLeft*/)
-        state = RUN;
-    else {
-        if (onGround)
-            state = IDLE;
-    }
+    if (x_speed > 0)
+        x_speed = Approach(x_speed, 0, temp_fric);   
+    x_speed = Approach(x_speed, -max_x_speed, temp_accel);
 }
 
 // Right 
-if (kRight && !kLeft && !sticking) {
-    facing = RIGHT;
-
+if (input_right && !input_left) {
     // Apply acceleration right
-    if (h < 0)
-        h = Approach(h, 0, tempFric);   
-    h = Approach(h, maxH, tempAccel);
-        
-    if (onGround /*&& !cRight*/)
-        state = RUN;
-    else {
-        if (onGround)
-            state = IDLE;
-    }
+    if (x_speed < 0)
+        x_speed = Approach(x_speed, 0, temp_fric);   
+    x_speed = Approach(x_speed, max_x_speed, temp_accel);
 }
 
 // Friction
-if (!kRight && !kLeft)
-    h = Approach(h, 0, tempFric);
-
-if (onGround && h == 0)
-    state = IDLE;    
-       
-//// Wall jump
-//if (kJump && cLeft && !onGround) {
-//    //// Stretch sprite
-//    //xscale = 0.66;
-//    //yscale = 1.33;     
-    
-//    // Particles
-//    var i;
-//    for (i = 0; i < 4; ++i)
-//        with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
-//            direction = random_range(-45, 45);        
-    
-//    // Wall jump is different when pushing off/towards the wall        
-//    if (kLeft) {
-//        v = -jumpHeight * 1.1;
-//        h = jumpHeight * .75  * 1.2;
-//    } else {
-//        v = -jumpHeight * 1.1;
-//        h = maxH;
-//    }  
-//}
-
-//if (kJump && cRight && !onGround) {
-//    //// Stretch sprite
-//    //xscale = 0.66;
-//    //yscale = 1.33;              
-     
-//    // Particles
-//    var i;
-//    for (i = 0; i < 4; ++i)
-//        with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
-//            direction = 180 + random_range(-45, 45);     
-       
-//    // Wall jump is different when pushing off/towards the wall  
-//    if (kRight) {
-//        v = -jumpHeight * 1.1;
-//        h = -jumpHeight * .75 * 1.2;
-//    } else {
-//        v = -jumpHeight * 1.1;
-//        h = -maxH;
-//    }  
-//}
+if (!input_right && !input_left)
+    x_speed = Approach(x_speed, 0, temp_fric); 
   
 // Jump
-if (kJump && onGround) {
-    if (onGround || (!cRight && !cLeft)) {
-        //// Stretch sprite 
-        //xscale = 0.66;
-        //yscale = 1.33;
-        
-        // Particles
-        var i;
-        for (i = 0; i < 4; ++i)
-            with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
-                direction = 90 + random_range(-45, 45);        
-        
-        v = -jumpHeight;
-        state = JUMP;
+if (input_jump) {
+    if (grounded) {        
+		y_speed = -jump_height;
     }
-} else {
-    // Variable hop
-    if (kJumpRelease) {
-        if (v < 0 && v >= -jumpHeight)
-            v *= 0.25; 
-    }
+} 
+else {
+    // Check if short jump.
+    if (input_jump_release) {
+        if (y_speed < 0 && y_speed >= -jump_height) {
+			//y_speed *= 0.25;
+			jump_release_timer = 60;
+		}
+	}
+	
+	// Decrease height gain if short jump.	
+	if jump_release_timer > 0 {
+		if y_speed < 0 {
+			y_speed = lerp(y_speed, 0, 0.1)
+			jump_release_timer = clamp(jump_release_timer-2, 0, 60);
+		} 
+		else {
+			jump_release_timer = 0;
+		}
+	}
 }
-
-// Swap facing on walls
-if (!onGround) {
-    if (cLeft)
-        facing = RIGHT;
-    if (cRight)
-        facing = LEFT;
-}
-
-/* */
-if (state == RUN)
-    if (random(100) > 80)
-        with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
-            direction = 90 + random_range(-45, 45); 
-
-//// Adjust scaling after squash + stretch
-//xscale = Approach(xscale, 1, 0.05);
-//yscale = Approach(yscale, 1, 0.05);
-
-//show_debug_message(string(v));
-//show_debug_message(string(state));
-/* */
-/*  */
