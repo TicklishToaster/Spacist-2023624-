@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "Moon_Ground",
-    "path": "sprites/Moon_Ground/Moon_Ground.yy",
+    "name": "spr_moon_ground",
+    "path": "sprites/spr_moon_ground/spr_moon_ground.yy",
   },
   "solid": false,
   "visible": true,

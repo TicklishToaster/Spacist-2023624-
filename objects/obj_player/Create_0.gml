@@ -5,18 +5,18 @@ v = 0;
 // Collision below
 onGround = false;
 
-// Camera (later versions) ////////////////////////////////////////////////////
-if (!instance_exists(obj_camera))
-    instance_create(x, y, obj_camera);
+//// Camera (later versions) ////////////////////////////////////////////////////
+//if (!instance_exists(obj_camera))
+//    instance_create(x, y, obj_camera);
     
-// Initial camera position  
-__view_set( e__VW.XView, 0, max(0, min(x - __view_get( e__VW.WPort, 0 ) * 0.5, room_width  - __view_get( e__VW.WPort, 0 ))) );
-__view_set( e__VW.YView, 0, max(0, min(y - __view_get( e__VW.HPort, 0 ) * 0.5 - 16, room_height - __view_get( e__VW.HPort, 0 ))) );
+//// Initial camera position  
+//__view_set( e__VW.XView, 0, max(0, min(x - __view_get( e__VW.WPort, 0 ) * 0.5, room_width  - __view_get( e__VW.WPort, 0 ))) );
+//__view_set( e__VW.YView, 0, max(0, min(y - __view_get( e__VW.HPort, 0 ) * 0.5 - 16, room_height - __view_get( e__VW.HPort, 0 ))) );
 
 // Movement Vars //////////////////////////////////////////////////////////////
 
 // Adjust THIS to adjust overall player speed
-m = 1;
+m = 1+1;
 
 // Acceleration + friction
 groundAccel = 1.0  * m;
@@ -33,7 +33,7 @@ gravRise    = 0.5  * m;
 gravFall    = 0.5  * m;
 gravSlide   = 0.25 * m;
 
-camDist     = 24.0; // (later versions)
+//camDist     = 24.0; // (later versions)
 
 // Frames prior to being able to push off of wall slide with arrow keys (doesn't affect wall jump)
 clingTime   = 4.0  * m;

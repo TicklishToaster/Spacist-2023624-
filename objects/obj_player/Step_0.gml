@@ -43,7 +43,6 @@ if (!onGround) {
         // Wall slide
         v = Approach(v, maxV, gravSlide);
     } else {
-        
         // Fall normally
         if (v < 0)
             v = Approach(v, maxV, gravRise);
@@ -94,48 +93,48 @@ if (!kRight && !kLeft)
 if (onGround && h == 0)
     state = IDLE;    
        
-// Wall jump
-if (kJump && cLeft && !onGround) {
-    //// Stretch sprite
-    //xscale = 0.66;
-    //yscale = 1.33;     
+//// Wall jump
+//if (kJump && cLeft && !onGround) {
+//    //// Stretch sprite
+//    //xscale = 0.66;
+//    //yscale = 1.33;     
     
-    // Particles
-    var i;
-    for (i = 0; i < 4; ++i)
-        with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
-            direction = random_range(-45, 45);        
+//    // Particles
+//    var i;
+//    for (i = 0; i < 4; ++i)
+//        with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
+//            direction = random_range(-45, 45);        
     
-    // Wall jump is different when pushing off/towards the wall        
-    if (kLeft) {
-        v = -jumpHeight * 1.1;
-        h = jumpHeight * .75  * 1.2;
-    } else {
-        v = -jumpHeight * 1.1;
-        h = maxH;
-    }  
-}
+//    // Wall jump is different when pushing off/towards the wall        
+//    if (kLeft) {
+//        v = -jumpHeight * 1.1;
+//        h = jumpHeight * .75  * 1.2;
+//    } else {
+//        v = -jumpHeight * 1.1;
+//        h = maxH;
+//    }  
+//}
 
-if (kJump && cRight && !onGround) {
-    //// Stretch sprite
-    //xscale = 0.66;
-    //yscale = 1.33;              
+//if (kJump && cRight && !onGround) {
+//    //// Stretch sprite
+//    //xscale = 0.66;
+//    //yscale = 1.33;              
      
-    // Particles
-    var i;
-    for (i = 0; i < 4; ++i)
-        with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
-            direction = 180 + random_range(-45, 45);     
+//    // Particles
+//    var i;
+//    for (i = 0; i < 4; ++i)
+//        with (instance_create(x + random_range(-8, 8), bbox_bottom, obj_particle))
+//            direction = 180 + random_range(-45, 45);     
        
-    // Wall jump is different when pushing off/towards the wall  
-    if (kRight) {
-        v = -jumpHeight * 1.1;
-        h = -jumpHeight * .75 * 1.2;
-    } else {
-        v = -jumpHeight * 1.1;
-        h = -maxH;
-    }  
-}
+//    // Wall jump is different when pushing off/towards the wall  
+//    if (kRight) {
+//        v = -jumpHeight * 1.1;
+//        h = -jumpHeight * .75 * 1.2;
+//    } else {
+//        v = -jumpHeight * 1.1;
+//        h = -maxH;
+//    }  
+//}
   
 // Jump
 if (kJump && onGround) {
@@ -179,7 +178,7 @@ if (state == RUN)
 //xscale = Approach(xscale, 1, 0.05);
 //yscale = Approach(yscale, 1, 0.05);
 
-
-
+//show_debug_message(string(v));
+//show_debug_message(string(state));
 /* */
 /*  */
