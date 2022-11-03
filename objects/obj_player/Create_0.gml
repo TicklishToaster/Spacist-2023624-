@@ -20,9 +20,9 @@ air_fric     = 0.10 * m;
 max_x_speed	= 5.5  * m;
 max_y_speed	= 9.0  * m;
 
-jump_height  = 7.0  * m;
-grav_rise    = 0.2  * m;
-grav_fall    = 0.2  * m;
+jump_height  = 10.0  * m;
+grav_rise    = 0.2  * m * 0.5;
+grav_fall    = 0.2  * m * 0.5;
 grav_slide   = 0.25 * m;
 
 // Misc ///////////////////////////////////////////////////////////////////////

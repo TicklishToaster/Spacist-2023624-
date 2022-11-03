@@ -72,7 +72,6 @@ else {
 			jump_release_timer = 60;
 		}
 	}
-	
 	// Decrease height gain if short jump.	
 	if jump_release_timer > 0 {
 		if y_speed < 0 {

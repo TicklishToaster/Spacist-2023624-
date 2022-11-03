@@ -3,8 +3,11 @@ var i;
 
 // Vertical
 for (i = 0; i < abs(y_speed); ++i) {
+	// This will shift the player by a number of pixels equal to the integer of y_speed.
+	// Example: y_speed = 5, move 5 pixels per frame.
     if (!place_meeting(x, y + sign(y_speed), obj_parent_solid))
         y += sign(y_speed);
+		
     else {
         y_speed = 0;
         break;
