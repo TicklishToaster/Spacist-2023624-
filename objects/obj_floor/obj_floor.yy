@@ -1,10 +1,13 @@
 {
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "obj_floor",
   "spriteId": {
     "name": "spr_moon_ground",
     "path": "sprites/spr_moon_ground/spr_moon_ground.yy",
   },
   "solid": false,
-  "visible": true,
+  "visible": false,
   "managed": true,
   "spriteMaskId": null,
   "persistent": false,
@@ -31,8 +34,4 @@
     "name": "Objects",
     "path": "folders/Objects.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "obj_floor",
-  "tags": [],
-  "resourceType": "GMObject",
 }
