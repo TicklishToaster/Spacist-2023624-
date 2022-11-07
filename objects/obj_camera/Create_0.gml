@@ -28,3 +28,6 @@ surface_resize(application_surface, display_width, display_height);
 // GUI
 display_set_gui_size(camera_width, camera_height);
 alarm[0] = 1;
+
+// Other
+bg_shift = 0;

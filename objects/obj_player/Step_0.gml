@@ -83,3 +83,23 @@ else {
 		}
 	}
 }
+
+
+
+///movement wrap
+move_wrap(true, false, 0);
+
+
+
+//if x>room_width x-=room_width;
+//if x<0 x+=room_width;
+////room wrapping code
+
+//if (x > (room_width-(view_camera[0] / 2))+1){
+//    x = (view_camera[0] / 2)+1;
+//    view_camera[0] = 0;
+//    }
+//if (x < (view_camera[0] / 2)){
+//    x = (room_width-(view_camera[0] / 2));
+//    view_camera[0] = (room_width-view_camera[0]);
+//    }
