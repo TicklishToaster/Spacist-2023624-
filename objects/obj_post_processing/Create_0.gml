@@ -1,64 +1,61 @@
-////////// *THIS IS FOR APPLYING EFFECTS TO THE WHOLE SCREEN* ////////////////////
-//// Disable the application surface. *REQUIRED*
-//ppfx_application_render_init();
-
-//// Create the ppfx system.
-//ppfx_id = ppfx_create();
-
-//// Create all effects to be loaded into a profile.
-//var effects = [
-//	new pp_panorama(false, 0.3),
-//	new pp_lens_distortion(true, -0.3),
-//	new pp_scanlines(false)
-//];
-//main_profile = ppfx_profile_create("Main", effects);
-
-//// Load the profile, allowing the contained effects to be called.
-//ppfx_profile_load(ppfx_id, main_profile);
+// Store profiles and layers into an array for Clean Up.
+ppfx_ids = []
+ppfx_layer_ids = []
 
 
-////////// *THIS IS FOR APPLYING EFFECTS TO A SPECIFIC ROOM LAYER* ////////////////////
 // Create the profile and all desired effects.
-layer_effects_id = ppfx_create();
-var foreground_profile = ppfx_profile_create("Terrain Curve Effect", [
+terrain_effects_id = ppfx_create();
+ppfx_ids[0] = terrain_effects_id;
+var terrain_profile = ppfx_profile_create("Terrain Curve Effect", [
 	new pp_panorama(true, 0.1),
 	new pp_lens_distortion(false, -0.1),
 	new pp_scanlines(false),
 ]);
 
-// Load the profile, allowing the contained effects to be called.
-ppfx_profile_load(layer_effects_id, foreground_profile);
+star_effects_id = ppfx_create();
+ppfx_ids[1] = star_effects_id;
+var star_profile = ppfx_profile_create("Star Glow Effect", [
+	new pp_bloom(true, 5, 0.40, 3+1),
+	//new pp_sunshafts(true, [0.5, 0.5], 0.3 - 0.3, 0.5, 2.0, 0.6, 0.25)
+	new pp_vignette(true, 1-0.4, 0.6, 0.15 + 0.4, 1.10 - 0.30)
+]);
 
-// Create a layer profile to target a specific layer.
-layer_index = ppfx_layer_create();
+dist_star_effects_id = ppfx_create();
+ppfx_ids[2] = star_effects_id;
+var distant_star_profile = ppfx_profile_create("Star Glow Effect", [
+	new pp_vignette(true, 1-0.4, 0.6, 0.15 + 0.4, 1.10 - 0.00)
+]);
+
+space_effects_id = ppfx_create();
+ppfx_ids[3] = space_effects_id;
+var space_profile = ppfx_profile_create("Background Fog Effect", [
+	new pp_mist(true, 0.1, 1, 1, 0.1, 0, 0.63)
+]);
+
+
+// Load the profile, allowing the contained effects to be called.
+ppfx_profile_load(terrain_effects_id, terrain_profile);
+ppfx_profile_load(star_effects_id, star_profile);
+ppfx_profile_load(dist_star_effects_id, distant_star_profile);
+ppfx_profile_load(space_effects_id, space_profile);
+
+
+// Create layer profiles to target a specific layer.
+terrain_layer_index = ppfx_layer_create();
+ppfx_layer_ids[0] = terrain_layer_index;
+
+star_layer_index = ppfx_layer_create();
+ppfx_layer_ids[1] = star_layer_index;
+
+dist_star_layer_index = ppfx_layer_create();
+ppfx_layer_ids[1] = dist_star_layer_index;
+
+space_layer_index = ppfx_layer_create();
+ppfx_layer_ids[2] = space_layer_index;
+
 
 // Apply the effects from the layer profile onto the original profile, targeting a range of layers.
-ppfx_layer_apply(layer_effects_id, layer_index, layer_get_id("Foreground"), layer_get_id("Foreground"), false);
-
-
-////////// *THIS IS FOR APPLYING EFFECTS TO THE WHOLE SCREEN* ////////////////////
-//// Disable the application surface. *REQUIRED*
-//ppfx_application_render_init();
-
-//// Create the ppfx system.
-//ppfx_id = ppfx_create();
-
-//// Create all effects to be loaded into a profile.
-//var effects = [
-//	new pp_panorama(false, 0.3),
-//	new pp_lens_distortion(false, -0.3),
-//	new pp_scanlines(false)
-//];
-//main_profile = ppfx_profile_create("Main", effects);
-
-//// Load the profile, allowing the contained effects to be called.
-//ppfx_profile_load(ppfx_id, main_profile);
-
-//lens_distort_id = ppfx_create();
-//// disable auto-draw of this system - because we will draw it manually, using the area functions!
-//ppfx_set_draw_enable(lens_distort_id, false);
-//var _profile_distort = ppfx_profile_create("Lens Distort", [
-//    new pp_lens_distortion(true, -0.1),
-//	new pp_palette_swap(false),
-//]);
-//ppfx_profile_load(lens_distort_id, _profile_distort);
+ppfx_layer_apply(terrain_effects_id, terrain_layer_index, layer_get_id("Foreground"), layer_get_id("Foreground"), false);
+ppfx_layer_apply(star_effects_id, star_layer_index, layer_get_id("Parallax_1"), layer_get_id("Parallax_2"), false);
+ppfx_layer_apply(dist_star_effects_id, dist_star_layer_index, layer_get_id("Parallax_3"), layer_get_id("Parallax_3"), false);
+ppfx_layer_apply(space_effects_id, space_layer_index, layer_get_id("Background"), layer_get_id("Background"), false);

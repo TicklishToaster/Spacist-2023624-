@@ -1,2 +1,9 @@
-ppfx_destroy(layer_effects_id); // Free post-processing system from memory
-ppfx_layer_destroy(layer_index); // Destroy created post-processing layer
+// Free post-processing system from memory
+for (var i = 0; i < array_length(ppfx_ids); i++) {
+	ppfx_destroy(ppfx_ids[i]);
+}
+
+// Destroy created post-processing layer
+for (var i = 0; i < array_length(ppfx_layer_ids); i++) {
+	ppfx_layer_destroy(ppfx_layer_ids[i]);
+}
