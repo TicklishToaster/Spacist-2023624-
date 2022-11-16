@@ -8,8 +8,7 @@ terrain_effects_id = ppfx_create();
 ppfx_ids[0] = terrain_effects_id;
 var terrain_profile = ppfx_profile_create("Terrain Curve Effect", [
 	new pp_panorama(true, 0.1),
-	new pp_lens_distortion(false, -0.1),
-	new pp_scanlines(false),
+	new pp_lens_distortion(false, -0.1)
 ]);
 
 star_effects_id = ppfx_create();
@@ -48,14 +47,7 @@ star_layer_index = ppfx_layer_create();
 ppfx_layer_ids[1] = star_layer_index;
 
 dist_star_layer_index = ppfx_layer_create();
-ppfx_layer_ids[1] = dist_star_layer_index;
+ppfx_layer_ids[2] = dist_star_layer_index;
 
 space_layer_index = ppfx_layer_create();
-ppfx_layer_ids[2] = space_layer_index;
-
-
-// Apply the effects from the layer profile onto the original profile, targeting a range of layers.
-ppfx_layer_apply(terrain_effects_id, terrain_layer_index, layer_get_id("Foreground"), layer_get_id("Foreground"), false);
-ppfx_layer_apply(star_effects_id, star_layer_index, layer_get_id("Parallax_1"), layer_get_id("Parallax_2"), false);
-ppfx_layer_apply(dist_star_effects_id, dist_star_layer_index, layer_get_id("Parallax_3"), layer_get_id("Parallax_3"), false);
-ppfx_layer_apply(space_effects_id, space_layer_index, layer_get_id("Background"), layer_get_id("Background"), false);
+ppfx_layer_ids[3] = space_layer_index;

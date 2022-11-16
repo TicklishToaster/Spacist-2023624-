@@ -11,7 +11,6 @@ camera_y = room_height/2;
 //camera_height = 600;
 camera_width = 1920;
 camera_height = 1080;
-camera_shake = 0;
 
 camera_set_view_size(view_camera[0], camera_width, camera_height);
 
@@ -29,5 +28,6 @@ surface_resize(application_surface, display_width, display_height);
 display_set_gui_size(camera_width, camera_height);
 alarm[0] = 1;
 
-// Other
-bg_shift = 0;
+// Parallax Background Movement
+bg_shift_x = 0;
+bg_shift_y = 0;

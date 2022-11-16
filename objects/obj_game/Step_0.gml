@@ -11,4 +11,3 @@ if (input_restart)
 // Close application
 if (input_quit)
     game_end();
-

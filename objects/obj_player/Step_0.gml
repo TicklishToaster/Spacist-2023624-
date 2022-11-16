@@ -63,7 +63,7 @@ if (input_jump) {
     if (grounded) {        
 		y_speed = -jump_height;
     }
-} 
+} 	
 else {
     // Check if short jump.
     if (input_jump_release) {
@@ -85,21 +85,42 @@ else {
 }
 
 
-
-///movement wrap
+// Room Wrap
 move_wrap(true, false, 0);
 
 
+// Room Transitions
+if (room == Room1) && (y < 0) {
+	room_goto(rm_asteroid_belt);
+	var offset = 0;
+	for (i = 0; i < abs(y_speed); ++i) {
+	    offset += sign(y_speed);
+	}
+	y = 2048 + offset;
+}
 
-//if x>room_width x-=room_width;
-//if x<0 x+=room_width;
-////room wrapping code
+if (room == rm_asteroid_belt) && (y > room_height) {
+	room_goto(Room1);
+	var offset = 0;
+	for (i = 0; i < abs(y_speed); ++i) {
+	    offset += sign(y_speed);
+	}
+	y = 0 + offset;	
+}
 
-//if (x > (room_width-(view_camera[0] / 2))+1){
-//    x = (view_camera[0] / 2)+1;
-//    view_camera[0] = 0;
-//    }
-//if (x < (view_camera[0] / 2)){
-//    x = (room_width-(view_camera[0] / 2));
-//    view_camera[0] = (room_width-view_camera[0]);
-//    }
+
+// DEBUG CONTROLS - DELETE LATER
+if (keyboard_check_direct(ord("J"))) {
+	room_goto(Room1);
+	var offset = 0;
+	for (i = 0; i < abs(y_speed); ++i) {
+	    offset += sign(y_speed);
+	}
+	y = 0 + offset;	
+}
+
+// DEBUG CONTROLS - DELETE LATER
+if (keyboard_check_direct(ord("K"))) {
+	//y += -10;
+	y_speed = -10;
+}

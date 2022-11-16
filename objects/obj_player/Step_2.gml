@@ -5,9 +5,10 @@ var i;
 for (i = 0; i < abs(y_speed); ++i) {
 	// This will shift the player by a number of pixels equal to the integer of y_speed.
 	// Example: y_speed = 5, move 5 pixels per frame.
-    if (!place_meeting(x, y + sign(y_speed), obj_parent_solid))
+    if (!place_meeting(x, y + sign(y_speed), obj_parent_solid)) {
         y += sign(y_speed);
-		
+		obj_camera.bg_shift_y += sign(y_speed);		
+	}
     else {
         y_speed = 0;
         break;
@@ -24,8 +25,10 @@ for (i = 0; i < abs(x_speed); ++i) {
     if (!place_meeting(x + sign(x_speed), y, obj_parent_solid) && !place_meeting(x + sign(x_speed), y + 1, obj_parent_solid) && place_meeting(x + sign(x_speed), y + 2, obj_parent_solid))
         ++y;      
         
-    if (!place_meeting(x + sign(x_speed), y, obj_parent_solid))
-        x += sign(x_speed); 
+    if (!place_meeting(x + sign(x_speed), y, obj_parent_solid)) {
+        x += sign(x_speed);
+		obj_camera.bg_shift_x += sign(x_speed);
+	}
     else {
 		x_speed = 0;
         break;
