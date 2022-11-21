@@ -1,9 +1,17 @@
+/// @description Insert description here
+// You can write your code in this editor
+
+
+rot = 0;
+
 // Movement speed
 x_speed = 0;
 y_speed = 0;
 
 // Collision below
 grounded = false;
+
+// Movement Vars //////////////////////////////////////////////////////////////
 
 // Adjust THIS to adjust overall player speed
 m = 1;
@@ -19,15 +27,13 @@ max_x_speed	= 5.5  * m;
 max_y_speed	= 9.0  * m;
 
 jump_height  = 10.0  * m;
-grav_rise    = 0.2 * 0.5 * m;
-grav_fall    = 0.2 * 0.5 * m;
-
-// Grapple Vars ///////////////////////////////////////////////////////////////
-grapple_mode = false;
-grapple_mode_height = 1024 + 512;
-
+grav_rise    = 0.2  * m * 0.5;
+grav_fall    = 0.2  * m * 0.0;
+//grav_slide   = 0.25 * m;
 
 // Misc ///////////////////////////////////////////////////////////////////////
+input_enable = true;
 jump_release_timer = 0;
+
 
 ///////////////////////////////////////////////////////////////////////////////

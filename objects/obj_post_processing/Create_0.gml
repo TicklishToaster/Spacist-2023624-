@@ -2,6 +2,9 @@
 ppfx_ids = []
 ppfx_layer_ids = []
 
+//ppfx_application_render_set_enable(true)
+ppfx_application_render_free();
+
 
 // Create the profile and all desired effects.
 terrain_effects_id = ppfx_create();
@@ -37,7 +40,6 @@ ppfx_profile_load(terrain_effects_id, terrain_profile);
 ppfx_profile_load(star_effects_id, star_profile);
 ppfx_profile_load(dist_star_effects_id, distant_star_profile);
 ppfx_profile_load(space_effects_id, space_profile);
-
 
 // Create layer profiles to target a specific layer.
 terrain_layer_index = ppfx_layer_create();
