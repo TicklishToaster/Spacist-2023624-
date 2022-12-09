@@ -1,4 +1,4 @@
-/// @description Re-adjust Speed
+/// @description Re-adjust Physics
 // You can write your code in this editor
 
 // Acceleration + friction

@@ -1,39 +1,33 @@
-/// @description Insert description here
-// You can write your code in this editor
+// Global Variable Lever //////////////////////////////////////////////////////
+m = 1;
 
-
-rot = 0;
-
-// Movement speed
+// Movement Vars //////////////////////////////////////////////////////////////
 x_speed = 0;
 y_speed = 0;
 
-// Collision below
-grounded = false;
+max_x_speed	= 3.00 * m; // 5.5
+max_y_speed	= 3.00 * m; // 9.0
 
-// Movement Vars //////////////////////////////////////////////////////////////
+grav_rise	= 0.10  * m;
+grav_fall	= 0.00  * m;
 
-// Adjust THIS to adjust overall player speed
-m = 1;
+// Acceleration & Friction Vars ///////////////////////////////////////////////
+air_accel	= 0.75 * m;
+air_fric	= 0.10 * m;
 
-// Acceleration + friction
-ground_accel = 1.0  * m;
-ground_fric  = 2.0  * m;
-air_accel    = 0.75 * m;
-air_fric     = 0.10 * m;
+// States /////////////////////////////////////////////////////////////////////
+thrown_state = true;
+move_state = false;
+fall_state = false;
+camera_state = false;
 
-// Max movement speeds
-max_x_speed	= 5.5  * m;
-max_y_speed	= 9.0  * m;
-
-jump_height  = 10.0  * m;
-grav_rise    = 0.2  * m * 0.5;
-grav_fall    = 0.2  * m * 0.0;
-//grav_slide   = 0.25 * m;
+thrown_physics	= [5.50, 9.00, 0.00, 0.00, 0.75, 0.00];
+move_physics	= [3.00, 3.00, 0.10, 0.00, 0.75, 0.10];
+fall_physics	= [5.50, 9.00 * 2, 0.10, 0.00, 0.75, 0.10];
 
 // Misc ///////////////////////////////////////////////////////////////////////
-input_enable = true;
-jump_release_timer = 0;
+object_attached = 0;
 
-
-///////////////////////////////////////////////////////////////////////////////
+img_index = 0;
+img_speed = 0;
+img_rot = 0;

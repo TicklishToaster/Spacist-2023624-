@@ -13,7 +13,9 @@ for (var i = 0; i <= joint_num; i++) {
 }
 
 // Move last rope joint to hook position. (This must be run in addtion to the copy in Step).
-x_joint[joint_num] = obj_hook.x;
-y_joint[joint_num] = obj_hook.y;
-//x_joint_prev[joint_num] = obj_hook.x;
-//y_joint_prev[joint_num] = obj_hook.y;
+var point_dist = point_distance(x_joint[0], y_joint[0], obj_hook.x, obj_hook.y);
+var point_dir = point_direction(x_joint[0], y_joint[0], obj_hook.x, obj_hook.y);
+var dir_x = lengthdir_x(min(point_dist, rope_len), point_dir);
+var dir_y = lengthdir_y(min(point_dist, rope_len), point_dir);
+x_joint[joint_num] = x_joint[0] + dir_x;
+y_joint[joint_num] = y_joint[0] + dir_y;

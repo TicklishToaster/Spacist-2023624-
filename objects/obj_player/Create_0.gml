@@ -1,33 +1,33 @@
-// Movement speed
+// Global Variable Lever //////////////////////////////////////////////////////
+m = 1;
+
+// Movement Vars //////////////////////////////////////////////////////////////
 x_speed = 0;
 y_speed = 0;
 
-// Collision below
-grounded = false;
-
-// Adjust THIS to adjust overall player speed
-m = 1;
-
-// Acceleration + friction
-ground_accel = 1.0  * m;
-ground_fric  = 2.0  * m;
-air_accel    = 0.75 * m;
-air_fric     = 0.10 * m;
-
-// Max movement speeds
 max_x_speed	= 5.5  * m;
 max_y_speed	= 9.0  * m;
 
-jump_height  = 10.0  * m;
-grav_rise    = 0.2 * 0.5 * m;
-grav_fall    = 0.2 * 0.5 * m;
+jump_height	= 10.0 * m;
+jump_release_timer = 0;
+grounded	= false;
+
+grav_rise	= 0.10 * m; // 0.2 * 0.5 * m;
+grav_fall	= 0.10 * m; // 0.2 * 0.5 * m;
+
+// Acceleration & Friction Vars ///////////////////////////////////////////////
+ground_accel = 1.00 * m;
+ground_fric  = 2.00 * m;
+air_accel    = 0.75 * m;
+air_fric     = 0.10 * m;
 
 // Grapple Vars ///////////////////////////////////////////////////////////////
 grapple_mode = false;
 grapple_mode_height = 1024 + 512;
 
-
 // Misc ///////////////////////////////////////////////////////////////////////
-jump_release_timer = 0;
+hotspot_x = x + sprite_width;
+hotspot_y = y + sprite_height;
+
 
 ///////////////////////////////////////////////////////////////////////////////

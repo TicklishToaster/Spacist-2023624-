@@ -3,13 +3,12 @@
 // Intialise attributes.
 x_grav = 0;
 y_grav = 1200 - 600 - 600 + 0000;
-joint_num = 32 - 8;
-//rope_len = 320;
-rope_len = obj_camera.camera_height;
+joint_num = 32 - 8-12;
+rope_len = 320;
+//rope_len = obj_camera.camera_height;
+//rope_len = obj_player.grapple_mode_height;
 draw_joint_connections = false;
 rope_sprite_width = 32;
-end_rotation = 0;
-recall_rope = false;
 
 // More iterations means better precision and stronger connections
 // - between knots but it's slower to compute.
@@ -17,7 +16,7 @@ constraints_iterations = 10; // default 3
 
 // Create initial state of rope.
 //joint_dist = rope_len/joint_num;
-joint_dist = 8;
+joint_dist = 8
 for (var i = 0; i <= joint_num; i++) {
     // Position of joint.
     x_joint[i] = x+random_range(-1, 1);

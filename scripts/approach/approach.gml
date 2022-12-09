@@ -1,11 +1,10 @@
-/// @description  Approach(start, end, shift);
+/// @description Approach(start, end, shift);
 /// @param start
-/// @param  end
-/// @param  shift
-function Approach(argument0, argument1, argument2) {
-
-	if (argument0 < argument1)
-	    return min(argument0 + argument2, argument1); 
+/// @param end
+/// @param shift
+function Approach(arg_start, arg_end, arg_shift) {
+	if (arg_start < arg_end)
+	    return min(arg_start + arg_shift, arg_end); 
 	else
-	    return max(argument0 - argument2, argument1);
+	    return max(arg_start - arg_shift, arg_end);
 }
