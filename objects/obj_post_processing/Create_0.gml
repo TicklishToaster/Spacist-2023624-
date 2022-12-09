@@ -34,12 +34,21 @@ var space_profile = ppfx_profile_create("Background Fog Effect", [
 	new pp_mist(true, 0.1, 1, 1, 0.1, 0, 0.63)
 ]);
 
+asteroid_effects_id = ppfx_create();
+ppfx_ids[4] = asteroid_effects_id;
+var asteroid_profile = ppfx_profile_create("Asteroid Background Effect", [
+	new pp_depth_of_field(false, 15, 1),
+	new pp_blur_gaussian(false),
+	new pp_blur_kawase(true, 0.1)
+]);
+
 
 // Load the profile, allowing the contained effects to be called.
 ppfx_profile_load(terrain_effects_id, terrain_profile);
 ppfx_profile_load(star_effects_id, star_profile);
 ppfx_profile_load(dist_star_effects_id, distant_star_profile);
 ppfx_profile_load(space_effects_id, space_profile);
+ppfx_profile_load(asteroid_effects_id, asteroid_profile);
 
 // Create layer profiles to target a specific layer.
 terrain_layer_index = ppfx_layer_create();
@@ -53,3 +62,6 @@ ppfx_layer_ids[2] = dist_star_layer_index;
 
 space_layer_index = ppfx_layer_create();
 ppfx_layer_ids[3] = space_layer_index;
+
+asteroid_layer_index = ppfx_layer_create();
+ppfx_layer_ids[4] = asteroid_layer_index;

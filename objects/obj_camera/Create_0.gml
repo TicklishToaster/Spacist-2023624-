@@ -31,9 +31,8 @@ alarm[0] = 1;
 
 // Parallax Background Vars ///////////////////////////////////////////////////
 bg_shift_x = 0;
-bg_shift_y = 0;
+bg_shift_y = 1;
 bg_window_shift_x = 0;
-
 
 // Popup Window Surface Var ///////////////////////////////////////////////////
 popup_window_surface = -1;
