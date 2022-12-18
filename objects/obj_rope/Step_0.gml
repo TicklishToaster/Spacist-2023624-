@@ -24,18 +24,6 @@ repeat constraints_iterations {
     // Move last rope joint to hook position.
     x_joint[joint_num] = obj_hook.x;
     y_joint[joint_num] = obj_hook.y;
-    //x_joint_prev[joint_num] = obj_hook.x;
-    //y_joint_prev[joint_num] = obj_hook.y;
-    
-    //// If current joint position meets a collider object then move it back to previous position.
-    //for (var i = 0; i <= joint_num; i++) {        
-    //    var velX = x_joint[i]-x_joint_prev[i];
-    //    var velY = y_joint[i]-y_joint_prev[i];
-    //    if (position_meeting(x_joint[i]+velX, y_joint[i], obj_parent_solid))
-    //        x_joint[i] = x_joint_prev[i];
-    //    if (position_meeting(x_joint[i], y_joint[i]+velY, obj_parent_solid))
-    //        y_joint[i] = y_joint_prev[i];
-    //}
 }
 
 if (!creator.grapple_mode && recall_rope && joint_num > 1) {

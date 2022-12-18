@@ -6,8 +6,8 @@ if (!grapple_mode) {
 	obj_camera.target = obj_hook;
 	m = 0.2;
 	event_user(0);
-	//max_x_speed = 3.0;
-} else if (grapple_mode) {
+} 
+else if (grapple_mode) {
 	//obj_camera.bg_window_shift_x = obj_camera.bg_shift_x;
 	grapple_mode = false;
 	obj_camera.target = self;

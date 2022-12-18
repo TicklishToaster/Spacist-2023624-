@@ -36,6 +36,6 @@ if (obj_camera.target < room_height - obj_player.grapple_mode_height) {
 // Draw Surfaces (Popup Window) ///////////////////////////////////////////////
 if (obj_camera.target < room_height - obj_player.grapple_mode_height) {
 	if (view_visible[1] && view_current == 0) {
-		draw_surface(popup_window_surface, obj_camera.camera_x, obj_camera.camera_y+obj_camera.camera_height-view_hport[1]-00)
+		draw_surface(popup_window_surface, obj_camera.camera_x, obj_camera.camera_y+obj_camera.camera_height-view_hport[1])
 	}	
 }

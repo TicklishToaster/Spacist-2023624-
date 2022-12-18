@@ -113,18 +113,6 @@ if (input_grab) {
 	}
 }
 
-// Grapple Animation
-img_index = clamp(img_index + img_speed, 0, 2.9);
-
-if (object_attached == 0 && img_index >= 2.9) {
-	img_index = 0;
-	img_speed = 0;
-}
-else if (object_attached != 0 && img_index >= 2.9) {
-	img_speed = 0;
-}
-
-
 // Enable Grapple Settings
 if (y < room_height - obj_player.grapple_mode_height - sprite_get_height(spr_grapple)/2) && (obj_player.grapple_mode) {
 	if (!camera_state) {

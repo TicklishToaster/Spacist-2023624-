@@ -43,24 +43,25 @@ if (!grounded) {
 // Left 
 if (input_left && !input_right) {
     // Apply acceleration left
-    if (x_speed > 0)
-        x_speed = Approach(x_speed, 0, temp_fric);   
+    if (x_speed > 0) {
+        x_speed = Approach(x_speed, 0, temp_fric);
+	}
     x_speed = Approach(x_speed, -max_x_speed, temp_accel);
 }
 
 // Right 
 if (input_right && !input_left) {
     // Apply acceleration right
-    if (x_speed < 0)
-        x_speed = Approach(x_speed, 0, temp_fric);   
+    if (x_speed < 0) {
+        x_speed = Approach(x_speed, 0, temp_fric);
+	}
     x_speed = Approach(x_speed, max_x_speed, temp_accel);
 }
- 
-// Disable jumping if in grapple mode.
+  
+// Jump (Disabled in grapple mode)
 if (!grapple_mode) {
-	// Jump
 	if (input_jump) {
-	    if (grounded) {        
+	    if (grounded) {
 			y_speed = -jump_height;
 	    }
 	} 	
@@ -85,12 +86,19 @@ if (!grapple_mode) {
 	}
 }
 
+//// Hold and Release to Jump Controls.
+//// Jump (Disabled in grapple mode)
+//if (!grapple_mode) {
+//	if (input_jump_release && animation_id == player_jump && animation_index >= 3.9) {
+//	    if (grounded) {
+//			y_speed = -jump_height;
+//	    }
+//	}
+//}
+
 // Friction
 if (!input_right && !input_left)
     x_speed = Approach(x_speed, 0, temp_fric);
-
-// Room Wrap
-move_wrap(true, false, 0);
 
 // Grapple Controls
 if (input_hold_m2 && !grapple_mode) {
@@ -98,7 +106,7 @@ if (input_hold_m2 && !grapple_mode) {
 	
 	if (input_click_m1) {
 		// Create Rope Object	
-		instance_create_layer(hotspot_x, hotspot_y - sprite_get_height(spr_grapple)/2, "Instances", obj_rope, {creator : obj_player});
+		instance_create_layer(hotspot_x, hotspot_y, "Instances", obj_rope, {creator : obj_player, depth : -100});
 	
 		// Create Hook Object
 		instance_create_layer(hotspot_x, hotspot_y - sprite_get_height(spr_grapple)/2, "Instances", obj_hook, {creator : obj_player});
@@ -111,19 +119,12 @@ if (input_hold_m2 && !grapple_mode) {
 		
 		// Throw Grapple
 		with (obj_hook) {
-			//event_user(2);
 			adjust_physics_vars(self, thrown_physics[0], thrown_physics[1], thrown_physics[2], thrown_physics[3], thrown_physics[4], thrown_physics[5]);
-			//adjust_physics_vars(obj_hook, thrown_physics);
 			var throw_x = lengthdir_x(max_x_speed, aim_direction);
 			var throw_y = lengthdir_y(max_y_speed, aim_direction);
 			
-			show_debug_message(throw_x);
-			show_debug_message(throw_y);
-			
 			x_speed = throw_x;
 			y_speed = throw_y;
-			
-			
 		}
 	}
 }
@@ -137,21 +138,3 @@ if (grapple_mode == true && obj_hook.object_attached != 0) {
 
 // Room Wrap
 move_wrap(true, false, 0);
-
-
-
-// DEBUG CONTROLS - DELETE LATER
-if (keyboard_check_direct(ord("J"))) {
-	//room_goto(Room1);
-	var offset = 0;
-	for (i = 0; i < abs(y_speed); ++i) {
-	    offset += sign(y_speed);
-	}
-	y = 0 + offset;	
-}
-
-// DEBUG CONTROLS - DELETE LATER
-if (keyboard_check_direct(ord("K"))) {
-	//y += -10;
-	y_speed = -10;
-}

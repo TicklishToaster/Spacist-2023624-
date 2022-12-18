@@ -31,3 +31,6 @@ object_attached = 0;
 img_index = 0;
 img_speed = 0;
 img_rot = 0;
+
+// Set depth below rope depth so object is drawn in front.
+depth = -110;

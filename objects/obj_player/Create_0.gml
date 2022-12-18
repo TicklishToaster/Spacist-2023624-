@@ -10,7 +10,9 @@ max_y_speed	= 9.0  * m;
 
 jump_height	= 10.0 * m;
 jump_release_timer = 0;
+
 grounded	= false;
+grounded_ypos = 0;
 
 grav_rise	= 0.10 * m; // 0.2 * 0.5 * m;
 grav_fall	= 0.10 * m; // 0.2 * 0.5 * m;
@@ -24,6 +26,19 @@ air_fric     = 0.10 * m;
 // Grapple Vars ///////////////////////////////////////////////////////////////
 grapple_mode = false;
 grapple_mode_height = 1024 + 512;
+
+// Sprite Vars ////////////////////////////////////////////////////////////////
+player_idle = spr_player_idle;
+player_walk = spr_player_walk;
+player_jump = spr_player_jump;
+player_rope = spr_player_rope;
+
+animation_id = player_idle;
+animation_index = 0;
+animation_index2 = 0;
+
+jumped = false;
+jump_cancel = false;
 
 // Misc ///////////////////////////////////////////////////////////////////////
 hotspot_x = x + sprite_width;

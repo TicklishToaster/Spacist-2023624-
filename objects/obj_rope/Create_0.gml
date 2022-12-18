@@ -2,7 +2,7 @@
 
 // Intialise attributes.
 x_grav = 0;
-y_grav = 1200 - 600 - 600 + 0000;
+y_grav = 1200 - 600 - 600 + 1200;
 joint_num = 32 - 8;
 //rope_len = 320;
 rope_len = obj_camera.camera_height;
