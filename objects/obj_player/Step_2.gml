@@ -23,7 +23,7 @@ for (i = 0; i < abs(y_speed); ++i) {
 for (i = 0; i < abs(x_speed); ++i) {        
     if (!place_meeting(x + sign(x_speed), y, obj_parent_solid)) {
         x += sign(x_speed);
-		if (!grapple_mode) {obj_camera.bg_shift_x += sign(x_speed);}
+		if (!state_grappling) {obj_camera.bg_shift_x += sign(x_speed);}
 		obj_camera.bg_window_shift_x += sign(x_speed);
 	}
     else {

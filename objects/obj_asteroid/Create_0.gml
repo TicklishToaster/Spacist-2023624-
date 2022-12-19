@@ -1,7 +1,7 @@
 // Misc ///////////////////////////////////////////////////////////////////////
 hook_parent = 0;
 hook_attached = false;
-grounded = false;
+state_grounded = false;
 
 if (sprite_index == spr_asteroid_02) {
 	weight = 2;

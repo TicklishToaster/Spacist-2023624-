@@ -14,8 +14,8 @@ repeat constraints_iterations {
 
     // Pin root joint to the creator object (if possible).
 	if (variable_instance_exists(id, "creator")) {
-		var x_root = creator.x + creator.sprite_width/2;
-		var y_root = creator.y + creator.sprite_height/2;	
+		var x_root = creator.grapple_hotspot_x;
+		var y_root = creator.grapple_hotspot_y;	
 	    x_joint[0] = x_root;
 	    y_joint[0] = y_root;
 	}
@@ -35,13 +35,30 @@ repeat constraints_iterations {
     y_joint[joint_num] = y_joint[0] + dir_y;
 	
     
-    // If current joint position meets a collider object then move it back to previous position.
-    for (var i = 0; i <= joint_num; i++) {        
-        var velX = x_joint[i]-x_joint_prev[i];
-        var velY = y_joint[i]-y_joint_prev[i];
-        if (position_meeting(x_joint[i]+velX, y_joint[i], obj_parent_solid))
-            x_joint[i] = x_joint_prev[i];
-        if (position_meeting(x_joint[i], y_joint[i]+velY, obj_parent_solid))
-            y_joint[i] = y_joint_prev[i];
-    }
+    //// If current joint position meets a collider object then move it back to previous position.
+    //for (var i = 0; i <= joint_num; i++) {        
+    //    var velX = x_joint[i]-x_joint_prev[i];
+    //    var velY = y_joint[i]-y_joint_prev[i];
+    //    if (position_meeting(x_joint[i]+velX, y_joint[i], obj_parent_solid))
+    //        x_joint[i] = x_joint_prev[i];
+    //    if (position_meeting(x_joint[i], y_joint[i]+velY, obj_parent_solid))
+    //        y_joint[i] = y_joint_prev[i];
+    //}
 }
+
+// Rope Animation /////////////////////////////////////////////////////////////
+if (obj_hook.y_speed > 0.2) {
+	//animation_index = clamp(animation_index + 0.4, 0, 7.9);
+	animation_index = clamp(animation_index + obj_hook.y_speed/10, 0, 7.9);
+	if (animation_index >= 7.9) {
+		animation_index = 0;
+	}
+}
+	
+if (obj_hook.y_speed < -0.2) {
+	//animation_index = clamp(animation_index - 0.4, 0, 7.9);
+	animation_index = clamp(animation_index + obj_hook.y_speed/10, 0, 7.9);
+	if (animation_index <= 0.0) {
+		animation_index = 7.9;
+	}
+}	

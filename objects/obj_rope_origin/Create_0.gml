@@ -25,3 +25,10 @@ for (var i = 0; i <= joint_num; i++) {
     x_joint_prev[i] = x_joint[i];
     y_joint_prev[i] = y_joint[i];
 }
+
+// Animation Vars
+animation_index = 0;
+animation_visible = false;
+
+// Set higher depth so object is drawn behind grapple launcher.
+depth = 201;

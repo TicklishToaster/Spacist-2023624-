@@ -7,7 +7,9 @@ if instance_exists(target){
 
 // Set Camera Pos /////////////////////////////////////////////////////////////
 camera_set_view_pos(view_camera[0], camera_x, camera_y);
-camera_set_view_pos(view_camera[1], obj_player.hotspot_x- sprite_get_width(obj_player)/2, obj_player.hotspot_y - sprite_get_height(obj_player)/2);
+camera_set_view_pos(view_camera[1], obj_player.hotspot_x - view_get_wport(1)/2, obj_player.hotspot_y - view_get_hport(1)/2);
+
+//camera_set_view_pos(view_camera[1], obj_player.hotspot_x- sprite_get_width(obj_player)/2, obj_player.hotspot_y - sprite_get_height(obj_player)/2);
 //camera_set_view_pos(view_camera[1], obj_player.hotspot_x-view_get_wport(1)/2, obj_player.hotspot_y - sprite_get_height(obj_player)/2);
 //camera_set_view_size(view_camera[1], 240, 240);
 

@@ -1,4 +1,4 @@
-if (!hook_attached && !grounded) {
+if (!hook_attached && !state_grounded) {
 	if variable_struct_exists(self, "row_speed") {
 		x += row_direction * row_speed;
 	}
@@ -8,11 +8,6 @@ if (!hook_attached && !grounded) {
 		//show_debug_message(string(rot_speed))
 	}
 }
-//else {
-//	x += hook_object;
-//	y += 0;
-//}
-
 
 
 

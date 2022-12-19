@@ -12,9 +12,21 @@ repeat constraints_iterations {
         y_joint[i+1]	+= lengthdir_y(diff_dist, diff_dir);   
     }
 	
-	// Position rope origin offscreen, extending towards the player.
-	var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.hotspot_x, creator.hotspot_y);
-	var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.hotspot_x, creator.hotspot_y);	
+	if (obj_hook.state_falling || obj_hook.state_grounded) {
+		// Position rope origin offscreen, extending towards the player (Grapple Launcher Origin).
+		var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
+		var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
+	} else {
+		// Position rope origin offscreen, extending towards the player (Grapple Launcher Hotspot).
+		var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
+		var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
+	}
+	//// Position rope origin offscreen, extending towards the player (Grapple Launcher Hotspot).
+	//var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
+	//var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);	
+	//point_dir = clamp(point_dir, 240, 300);
+	//show_debug_message(point_dir);
+	
 		
 	var dir_x = lengthdir_x(min(point_dist, rope_len), point_dir);
 	var dir_y = lengthdir_y(min(point_dist, rope_len), point_dir);
@@ -26,34 +38,34 @@ repeat constraints_iterations {
     y_joint[joint_num] = obj_hook.y;
 }
 
-if (!creator.grapple_mode && recall_rope && joint_num > 1) {
-	hook_distance = point_distance(obj_hook.x, obj_hook.y, x_joint[joint_num-1], y_joint[joint_num-1]);
-	hook_direction = point_direction(obj_hook.x, obj_hook.y, x_joint[joint_num-1], y_joint[joint_num-1]);
+//if (!creator.state_grappling && recall_rope && joint_num > 1) {
+//	hook_distance = point_distance(obj_hook.x, obj_hook.y, x_joint[joint_num-1], y_joint[joint_num-1]);
+//	hook_direction = point_direction(obj_hook.x, obj_hook.y, x_joint[joint_num-1], y_joint[joint_num-1]);
 	
-	var dir_x = lengthdir_x(hook_distance, hook_direction);
-	var dir_y = lengthdir_y(hook_distance, hook_direction);
+//	var dir_x = lengthdir_x(hook_distance, hook_direction);
+//	var dir_y = lengthdir_y(hook_distance, hook_direction);
 
-	//obj_hook.x = lerp(obj_hook.x, obj_hook.x+dir_x, 0.25);
-	//obj_hook.y = lerp(obj_hook.y, obj_hook.y+dir_y, 0.25);
+//	//obj_hook.x = lerp(obj_hook.x, obj_hook.x+dir_x, 0.25);
+//	//obj_hook.y = lerp(obj_hook.y, obj_hook.y+dir_y, 0.25);
 	
-	//new_dir_x = lengthdir_x(hook_distance, hook_direction);
-	//new_dir_y = lengthdir_y(hook_distance, hook_direction);	
+//	//new_dir_x = lengthdir_x(hook_distance, hook_direction);
+//	//new_dir_y = lengthdir_y(hook_distance, hook_direction);	
 	
-	obj_hook.x = clamp(lerp(obj_hook.x, obj_hook.x+dir_x, 0.25), obj_hook.x, x_joint[joint_num-1]);
-	obj_hook.y = clamp(lerp(obj_hook.y, obj_hook.y+dir_y, 0.25), obj_hook.y, y_joint[joint_num-1]);
+//	obj_hook.x = clamp(lerp(obj_hook.x, obj_hook.x+dir_x, 0.25-0.20), obj_hook.x, x_joint[joint_num-1]);
+//	obj_hook.y = clamp(lerp(obj_hook.y, obj_hook.y+dir_y, 0.25-0.20), obj_hook.y, y_joint[joint_num-1]);
 
-}
+//}
 
-if (keyboard_check_pressed(ord("V"))) {
-	with (obj_hook) {event_user(1);}
-	with (creator) {event_user(1);}
+//if (keyboard_check_pressed(ord("V"))) {
+//	with (obj_hook) {event_user(1);}
+//	with (creator) {event_user(1);}
 	 
-	if (instance_exists(obj_asteroid)) {
-		obj_asteroid.hook_attached = false;
-		obj_asteroid.grounded = true;
-	}
-	obj_hook.grav_fall = 2.2;
-	obj_hook.y_speed = 3;
-	recall_rope = true;
-	alarm[0] = room_speed * 1;
-}
+//	if (instance_exists(obj_asteroid)) {
+//		obj_asteroid.hook_attached = false;
+//		obj_asteroid.grounded = true;
+//	}
+//	obj_hook.grav_fall = 2.2;
+//	obj_hook.y_speed = 3;
+//	recall_rope = true;
+//	alarm[0] = room_speed * 1;
+//}

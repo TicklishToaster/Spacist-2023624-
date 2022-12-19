@@ -2,10 +2,10 @@
 
 // Intialise attributes.
 x_grav = 0;
-y_grav = 1200 - 600 - 600 + 1200;
+y_grav = 1200;
 joint_num = 32 - 8;
 //rope_len = 320;
-rope_len = obj_camera.camera_height;
+rope_len = obj_camera.camera_height + 320;
 draw_joint_connections = false;
 rope_sprite_width = 32;
 end_rotation = 0;
@@ -26,3 +26,6 @@ for (var i = 0; i <= joint_num; i++) {
     x_joint_prev[i] = x_joint[i];
     y_joint_prev[i] = y_joint[i];
 }
+
+// Set higher depth so object is drawn behind grapple launcher, but in front of asteroids.
+depth = 200;

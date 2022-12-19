@@ -16,14 +16,20 @@ air_accel	= 0.75 * m;
 air_fric	= 0.10 * m;
 
 // States /////////////////////////////////////////////////////////////////////
-thrown_state = true;
-move_state = false;
-fall_state = false;
-camera_state = false;
+//thrown_state = true;
+//move_state = false;
+//fall_state = false;
+//camera_state = false;
 
 thrown_physics	= [5.50, 9.00, 0.00, 0.00, 0.75, 0.00];
 move_physics	= [3.00, 3.00, 0.10, 0.00, 0.75, 0.10];
 fall_physics	= [5.50, 9.00 * 2, 0.10, 0.00, 0.75, 0.10];
+
+state_thrown	= true;
+state_moving	= false;
+state_falling	= false;
+state_grounded	= false;
+state_camera	= false;
 
 // Misc ///////////////////////////////////////////////////////////////////////
 object_attached = 0;
@@ -31,6 +37,7 @@ object_attached = 0;
 img_index = 0;
 img_speed = 0;
 img_rot = 0;
+lock_rot = 0;
 
-// Set depth below rope depth so object is drawn in front.
+// Set lower depth so object is drawn in front of rope and asteroids.
 depth = -110;

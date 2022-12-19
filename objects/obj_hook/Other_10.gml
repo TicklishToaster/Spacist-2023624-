@@ -2,8 +2,11 @@
 /// Toggle Popup Camera, Popup Backgrounds and Asteroids Backgrounds.
 
 //// Initialise Rope Object
-//instance_create_layer(creator.x + creator.sprite_width/2, creator.y + creator.sprite_height/2, 
-//	"Instances", obj_rope_player, {creator : obj_player});
+//instance_create_layer(creator.grapple_hotspot_x, creator.grapple_hotspot_y, 
+//	"Instances", obj_rope_origin, {creator : obj_player});
+
+// Set Origin Rope Visibility
+obj_rope_origin.animation_visible = true;
 		
 // Enable Popup Backgrounds.
 layer_set_visible("Window_Terrain_Foreground",	true);

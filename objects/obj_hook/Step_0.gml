@@ -1,4 +1,4 @@
-if (!creator.grapple_mode) {
+if (!creator.state_grappling) {
 	exit;
 }
 
@@ -37,8 +37,8 @@ else {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Input only if move_state is true.
-if (move_state) {
+// Input only if state_moving is true.
+if (state_moving && !state_grounded) {
 	// Up
 	if (input_up && !input_down) {
 	    // Apply acceleration up
@@ -72,8 +72,8 @@ if (move_state) {
 	}
 }
 
-// Special input if fall_state is true.
-if (fall_state) {
+// Special input if state_falling is true.
+if (state_falling && !state_grounded) {
 	// Pull Down
 	if (input_down && !input_up) {
 	    // Apply acceleration down
@@ -82,6 +82,12 @@ if (fall_state) {
 	    y_speed = Approach(y_speed, max_y_speed, 0.10 * m);
 	}
 }
+if (state_grounded) {
+	show_debug_message(state_grounded)
+	adjust_physics_vars(self, thrown_physics[0], thrown_physics[1], thrown_physics[2], thrown_physics[3], thrown_physics[4], thrown_physics[5]);	
+	y_speed = 0;
+	obj_rope.y_grav = 0;
+}
 
 // Friction
 if (!input_right && !input_left)
@@ -89,45 +95,60 @@ if (!input_right && !input_left)
   
 
 // Change Movement State
-if (y < 1024 && !move_state && !fall_state) {
-	thrown_state = false;
-	move_state = true;
+if (y < 1024 && !state_moving && !state_falling && !state_grounded) {
+	state_thrown = false;
+	state_moving = true;
 	adjust_physics_vars(self, move_physics[0], move_physics[1], move_physics[2], move_physics[3], move_physics[4], move_physics[5]);
 }
 
 
 // Grapple Grab
 if (input_grab) {
-	img_index = 0;
-	img_speed = 0.25;
-
-	if (place_meeting(x, y, obj_asteroid)) {
-		object_attached = instance_place(x, y, obj_asteroid);
-		with (object_attached) {
-			hook_parent = obj_hook;
-			hook_attached = true;
-		}
-		adjust_physics_vars(self, fall_physics[0], fall_physics[1], fall_physics[2], fall_physics[3], fall_physics[4], fall_physics[5]);
-		move_state = false;
-		fall_state = true;
+	// Play Grab Animation
+	if (!state_falling) {
+		img_index = 0;
+		img_speed = 0.25;
+		
+		// Check if overlapping an asteroid.
+		if (place_meeting(x, y, obj_asteroid)) {
+			object_attached = instance_place(x, y, obj_asteroid);
+			
+			with (object_attached) {
+				hook_parent = obj_hook;
+				hook_attached = true;
+			}
+			
+			// Adjust Physics
+			adjust_physics_vars(self, fall_physics[0], fall_physics[1], fall_physics[2], fall_physics[3], fall_physics[4], fall_physics[5]);
+			
+			// Halt Movement
+			x_speed = 0;
+			y_speed = 0;
+			
+			// Lock image rotation.
+			lock_rot = img_rot;
+			
+			// Change States
+			state_moving = false;
+			state_falling = true;
+		}		
 	}
 }
 
 // Enable Grapple Settings
-if (y < room_height - obj_player.grapple_mode_height - sprite_get_height(spr_grapple)/2) && (obj_player.grapple_mode) {
-	if (!camera_state) {
+if (y < room_height - obj_player.grapple_mode_height - sprite_get_height(spr_grapple)/2) && (obj_player.state_grappling) {
+	if (!state_camera) {
 		// Toggle Camera State
-		camera_state = true;
-				
+		state_camera = true;
 		event_user(0);
 	}
 }
 
 // Disable Grapple Settings
-else if (y > room_height - obj_player.grapple_mode_height - sprite_get_height(spr_grapple)/2) && (obj_player.grapple_mode) {
-	if (camera_state) {
+else if (y > room_height - obj_player.grapple_mode_height - sprite_get_height(spr_grapple)/2) && (obj_player.state_grappling) {
+	if (state_camera) {
 		// Toggle Camera State
-		camera_state = false;		
+		state_camera = false;		
 		event_user(1);
 	}	
 }

@@ -1,10 +1,10 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_rope_player",
+  "name": "obj_rope_origin",
   "spriteId": {
-    "name": "spr_rope",
-    "path": "sprites/spr_rope/spr_rope.yy",
+    "name": "spr_rope_moving",
+    "path": "sprites/spr_rope_moving/spr_rope_moving.yy",
   },
   "solid": false,
   "visible": true,
