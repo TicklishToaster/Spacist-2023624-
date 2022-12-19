@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMExtension",
+  "resourceVersion": "1.2",
+  "name": "Advanced_Planet_Platformer",
   "optionsFile": "options.json",
   "options": [],
   "exportToGame": true,
@@ -59,8 +62,4 @@
     "name": "Extensions",
     "path": "folders/Extensions.yy",
   },
-  "resourceVersion": "1.2",
-  "name": "Advanced_Planet_Platformer",
-  "tags": [],
-  "resourceType": "GMExtension",
 }

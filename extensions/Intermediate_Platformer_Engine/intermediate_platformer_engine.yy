@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMExtension",
+  "resourceVersion": "1.2",
+  "name": "Intermediate_Platformer_Engine",
   "optionsFile": "options.json",
   "options": [],
   "exportToGame": true,
@@ -97,8 +100,4 @@
     "name": "Extensions",
     "path": "folders/Extensions.yy",
   },
-  "resourceVersion": "1.2",
-  "name": "Intermediate_Platformer_Engine",
-  "tags": [],
-  "resourceType": "GMExtension",
 }
