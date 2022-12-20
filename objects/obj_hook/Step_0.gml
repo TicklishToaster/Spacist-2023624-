@@ -72,6 +72,25 @@ if (state_moving && !state_grounded) {
 	}
 }
 
+//// Input only if state_moving is true.
+//if (state_falling && !state_grounded) {
+//	// Up
+//	if (input_up && !input_down) {
+//	    // Apply acceleration up
+//	    if (y_speed > 0)
+//	        y_speed = Approach(y_speed, 0, temp_fric);   
+//	    y_speed = Approach(y_speed, -max_y_speed, temp_accel);
+//	}
+
+//	// Down
+//	if (input_down && !input_up) {
+//	    // Apply acceleration down
+//	    if (y_speed < 0)
+//	        y_speed = Approach(y_speed, 0, temp_fric);   
+//	    y_speed = Approach(y_speed, max_y_speed, temp_accel);
+//	}
+//}
+
 // Special input if state_falling is true.
 if (state_falling && !state_grounded) {
 	// Pull Down
