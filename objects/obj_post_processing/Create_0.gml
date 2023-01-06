@@ -10,7 +10,7 @@ ppfx_application_render_free();
 terrain_effects_id = ppfx_create();
 ppfx_ids[0] = terrain_effects_id;
 var terrain_profile = ppfx_profile_create("Terrain Curve Effect", [
-	new pp_panorama(true, 0.1),
+	new pp_panorama(true, 0.1 - 0.09),
 	new pp_lens_distortion(false, -0.1)
 ]);
 
