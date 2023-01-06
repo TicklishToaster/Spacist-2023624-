@@ -28,4 +28,4 @@ for (var i = 0; i <= joint_num; i++) {
 }
 
 // Set higher depth so object is drawn behind grapple launcher, but in front of asteroids.
-depth = 200;
+depth = 100;

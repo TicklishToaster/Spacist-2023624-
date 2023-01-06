@@ -7,4 +7,4 @@ selected_slot = noone;
 //slot offset
 slot_offset = 10;
 
-//box_size = sprite_get_width(spr_slot_selected);
+depth = obj_inv_panel_toolbar.depth + 1;

@@ -159,7 +159,7 @@ if (input_jump) {
 	}
 }
 
-// If animation is grapple unreadying or grapple unreadying, and the animation is unfinished. 
+// If animation is charging and the animation is unfinished. 
 if (input_jump_hold) {
 	if (state_charging && !state_jumping && !state_landing && !state_retrieving) {
 		if (animation_id == animation_jump_r && animation_index < 6.9) {
@@ -171,6 +171,8 @@ if (input_jump_hold) {
 				if (animation_index >= 6.9) {
 					animation_id = animation_jump_20;
 					animation_id_r = animation_jump_20_r;
+					animation_index = 0;
+					animation_index_r = 0;
 				}
 			}
 		}

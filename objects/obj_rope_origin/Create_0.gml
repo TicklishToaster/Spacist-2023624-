@@ -31,4 +31,4 @@ animation_index = 0;
 animation_visible = false;
 
 // Set higher depth so object is drawn behind grapple launcher.
-depth = 201;
+depth = 251;
