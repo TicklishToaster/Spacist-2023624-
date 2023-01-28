@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_rope_origin",
+  "name": "obj_rope_window",
   "spriteId": {
     "name": "spr_rope_moving",
     "path": "sprites/spr_rope_moving/spr_rope_moving.yy",
@@ -34,6 +34,6 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Grapple",
-    "path": "folders/Objects/Grapple.yy",
+    "path": "folders/Objects/Player/Grapple.yy",
   },
 }
