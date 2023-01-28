@@ -3,10 +3,10 @@
 
 //// Initialise Rope Object
 //instance_create_layer(creator.grapple_hotspot_x, creator.grapple_hotspot_y, 
-//	"Instances", obj_rope_origin, {creator : obj_player});
+//	"Instances", obj_rope_window, {creator : obj_player});
 
 // Set Origin Rope Visibility
-obj_rope_origin.animation_visible = true;
+obj_rope_window.animation_visible = true;
 		
 // Enable Popup Backgrounds.
 layer_set_visible("Window_Terrain_Foreground",	true);

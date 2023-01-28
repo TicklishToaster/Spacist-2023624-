@@ -6,7 +6,7 @@
 x_speed = 0;
 		
 // Destroy Rope Object.
-instance_destroy(obj_rope_origin);
+instance_destroy(obj_rope_window);
 		
 // Destroy all Asteroids except the one attached to the hook.
 with (obj_asteroid) {
