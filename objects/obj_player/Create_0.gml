@@ -31,6 +31,7 @@ grapple_mode_height = 1024 + 512;
 animation_idle		= spr_player_idle;
 animation_idle_r	= spr_player_idle_right;
 animation_invis		= spr_player_invis;
+animation_shadow	= spr_player_shadow;
 
 animation_walk		= spr_player_walk;
 animation_walk_r	= spr_player_walk_right;
@@ -74,8 +75,8 @@ animation_index_r = 0;
 // States /////////////////////////////////////////////////////////////////////
 default_state	= false;
 slow_state		= false;
-default_physics	= [5.50, 9.00, 0.10, 0.10, 0.75, 0.10];
-slow_physics	= [2.25, 9.00, 0.10, 0.10, 0.75, 0.10];
+default_physics	= [4.00, 9.00, 0.10, 0.10, 0.75, 0.10];
+slow_physics	= [1.50, 9.00, 0.10, 0.10, 0.75, 0.10];
 
 
 state_grounded	= false;
@@ -102,5 +103,5 @@ grapple_origin_y = x;
 grapple_hotspot_x = x;
 grapple_hotspot_y = y;
 
-
+depth = 101;
 ///////////////////////////////////////////////////////////////////////////////

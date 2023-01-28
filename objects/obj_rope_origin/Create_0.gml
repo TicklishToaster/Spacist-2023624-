@@ -5,6 +5,7 @@ x_grav = 0;
 y_grav = 1200 - 600 - 600 + 0000;
 joint_num = 32 - 8-12;
 rope_len = 320;
+//rope_len = 512;
 //rope_len = obj_camera.camera_height;
 //rope_len = obj_player.grapple_mode_height;
 draw_joint_connections = false;

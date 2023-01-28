@@ -135,7 +135,7 @@ if (input_grab) {
 	}
 }
 
-// Enable Grapple Settings
+// Enable Grapple Settings & Camera
 if (y < room_height - obj_player.grapple_mode_height - sprite_get_height(spr_grapple)/2) && (obj_player.state_grappling) {
 	if (!state_camera) {
 		// Toggle Camera State
@@ -144,7 +144,7 @@ if (y < room_height - obj_player.grapple_mode_height - sprite_get_height(spr_gra
 	}
 }
 
-// Disable Grapple Settings
+// Disable Grapple Settings & Camera
 else if (y > room_height - obj_player.grapple_mode_height - sprite_get_height(spr_grapple)/2) && (obj_player.state_grappling) {
 	if (state_camera) {
 		// Toggle Camera State

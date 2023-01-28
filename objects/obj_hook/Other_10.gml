@@ -10,6 +10,7 @@ obj_rope_origin.animation_visible = true;
 		
 // Enable Popup Backgrounds.
 layer_set_visible("Window_Terrain_Foreground",	true);
+layer_set_visible("Terrain_Foreground",			false);
 layer_set_visible("Window_Parallax_1",			true);
 layer_set_visible("Window_Parallax_2",			true);
 layer_set_visible("Window_Parallax_3",			true);

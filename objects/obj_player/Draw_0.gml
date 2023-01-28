@@ -10,11 +10,18 @@ if (state_grappling || state_aiming || state_retrieving) {
 
 // Update Grapple Hotspot (Tip of the Grapple Launcher)
 if (state_grappling || state_aiming || state_retrieving) {
-	grapple_hotspot_x = grapple_origin_x + lengthdir_x(sprite_get_width(spr_player_rope_launcher), aim_angle+90) / 4.5;
-	grapple_hotspot_y = grapple_origin_y + lengthdir_y(sprite_get_height(spr_player_rope_launcher), aim_angle+90) / 4.5;
+	grapple_hotspot_x = grapple_origin_x + lengthdir_x(sprite_get_width(spr_player_rope_launcher), aim_angle+90) / 1;
+	grapple_hotspot_y = grapple_origin_y + lengthdir_y(sprite_get_height(spr_player_rope_launcher), aim_angle+90) / 1;
 }
 
 // Draw Center ////////////////////////////////////////////////////////////////
+if (!state_jumping){
+	// Shadow
+	draw_sprite_ext(animation_shadow, -1,
+		x, y,
+		image_xscale, image_yscale,
+		image_angle, image_blend, image_alpha);
+}
 // Main Body
 draw_sprite_ext(animation_id, animation_index,
 	x, y,
@@ -41,6 +48,12 @@ if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retriev
 }
 
 // Draw Left //////////////////////////////////////////////////////////////////
+// Shadow
+draw_sprite_ext(animation_shadow, -1,
+	x+room_width*-1, y,
+	image_xscale, image_yscale,
+	image_angle, image_blend, image_alpha);
+
 // Main Body
 draw_sprite_ext(animation_id, animation_index,
 	x+room_width*-1, y,
@@ -65,7 +78,14 @@ if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retriev
 		image_xscale, image_yscale,
 		image_angle, image_blend, image_alpha);
 }
+
 // Draw Right /////////////////////////////////////////////////////////////////
+// Shadow
+draw_sprite_ext(animation_shadow, -1,
+	x+room_width*1, y,
+	image_xscale, image_yscale,
+	image_angle, image_blend, image_alpha);
+	
 // Main Body
 draw_sprite_ext(animation_id, animation_index,
 	x+room_width*1, y,
@@ -90,11 +110,3 @@ if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retriev
 		image_xscale, image_yscale,
 		image_angle, image_blend, image_alpha);
 }
-
-//var input_hold_m2 = mouse_check_button(mb_right);
-//if (input_hold_m2 && !grapple_mode) {
-//	//draw_line_width_color(hotspot_x, hotspot_y, mouse_x, mouse_y, 5, c_white, c_white)
-//	draw_line_width_colour(x+sprite_get_xoffset(animation_id_r)*image_xscale, y+sprite_get_yoffset(animation_id_r), mouse_x, mouse_y, 5, c_white, c_white)
-//}
-
-//draw_line_width_colour(grapple_origin_x, grapple_origin_y, grapple_hotspot_x, grapple_hotspot_y, 5, c_orange, c_white)

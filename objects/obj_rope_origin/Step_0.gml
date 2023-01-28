@@ -15,15 +15,11 @@ repeat constraints_iterations {
     // Pin root joint to the creator object (if possible).
 	if (variable_instance_exists(id, "creator")) {
 		var x_root = creator.grapple_hotspot_x;
-		var y_root = creator.grapple_hotspot_y;	
+		var y_root = creator.grapple_hotspot_y;
+		var x_root = creator.grapple_origin_x;
+		var y_root = creator.grapple_origin_y;		
 	    x_joint[0] = x_root;
 	    y_joint[0] = y_root;
-	}
-	
-	// Pin root joint to screen.
-	else {
-	    x_joint[0] = x;
-	    y_joint[0] = y;
 	}
 	
 	// Move last rope joint to hook position, or closest to hook position if maximum length.
@@ -33,17 +29,6 @@ repeat constraints_iterations {
 	var dir_y = lengthdir_y(min(point_dist, rope_len), point_dir);
     x_joint[joint_num] = x_joint[0] + dir_x;
     y_joint[joint_num] = y_joint[0] + dir_y;
-	
-    
-    //// If current joint position meets a collider object then move it back to previous position.
-    //for (var i = 0; i <= joint_num; i++) {        
-    //    var velX = x_joint[i]-x_joint_prev[i];
-    //    var velY = y_joint[i]-y_joint_prev[i];
-    //    if (position_meeting(x_joint[i]+velX, y_joint[i], obj_parent_solid))
-    //        x_joint[i] = x_joint_prev[i];
-    //    if (position_meeting(x_joint[i], y_joint[i]+velY, obj_parent_solid))
-    //        y_joint[i] = y_joint_prev[i];
-    //}
 }
 
 // Rope Animation /////////////////////////////////////////////////////////////

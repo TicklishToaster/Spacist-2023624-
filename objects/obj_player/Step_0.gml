@@ -284,7 +284,6 @@ if (!state_charging && state_jumping && !state_landing) {
 		animation_index = 0;
 		animation_id_r = animation_jump_l_r;
 		animation_index_r = 0;		
-		//show_debug_message("YESSSSSSSSSSSSSSSSS")
 	}
 }
 

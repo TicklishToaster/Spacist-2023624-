@@ -17,6 +17,7 @@ with (obj_asteroid) {
 				
 // Disable Popup Backgrounds.
 layer_set_visible("Window_Terrain_Foreground",	false);
+layer_set_visible("Terrain_Foreground",			true);
 layer_set_visible("Window_Parallax_1",			false);
 layer_set_visible("Window_Parallax_2",			false);
 layer_set_visible("Window_Parallax_3",			false);
