@@ -1,8 +1,23 @@
 // Follow Target //////////////////////////////////////////////////////////////
-if instance_exists(target){
-	camera_x = target.x + target.sprite_width/2 - (camera_width/2);
-	camera_y = target.y + target.sprite_height/2 - (camera_height/2);
+if (instance_exists(target) && !state_panning) {
+	var target_x = target.x + target.sprite_width /2 - (camera_width /2);
+	var target_y = target.y + target.sprite_height/2 - (camera_height/2);
+	camera_x = target_x;
+	camera_y = target_y;
 	camera_y = clamp(camera_y, 0, room_height - camera_height);
+}
+
+if (instance_exists(target) && state_panning) {
+	var target_x = target.x + target.sprite_width /2 - (camera_width /2);
+	var target_y = target.y + target.sprite_height/2 - (camera_height/2);
+	camera_x = lerp(camera_x, target_x, panning_lerp_co);
+	camera_y = lerp(camera_y, target_y, panning_lerp_co);	
+	camera_y = clamp(camera_y, 0, room_height - camera_height);
+	
+	// If camera position reaches at or near target position, disable panning.
+	if (camera_x <= target_x + 2 && camera_x >= target_x - 2) && (camera_y <= target_y + 2 && camera_y >= target_y - 2) {
+		state_panning = false;
+	}
 }
 
 // Set Camera Pos /////////////////////////////////////////////////////////////
