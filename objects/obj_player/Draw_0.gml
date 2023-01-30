@@ -2,6 +2,9 @@
 hotspot_x = x + sprite_width/2;
 hotspot_y = y + sprite_height/2;
 
+// Update Scale and Blending of Shadow Sprite
+var shadow_scale = clamp(128/jump_distance, 0, 1);
+
 // Update Grapple Origin (Center of Grapple Launcher)
 if (state_grappling || state_aiming || state_retrieving) {
 	grapple_origin_x = x + sprite_get_xoffset(spr_player_rope_launcher)*image_xscale;
@@ -15,13 +18,12 @@ if (state_grappling || state_aiming || state_retrieving) {
 }
 
 // Draw Center ////////////////////////////////////////////////////////////////
-if (!state_jumping){
-	// Shadow
-	draw_sprite_ext(animation_shadow, -1,
-		x, y,
-		image_xscale, image_yscale,
-		image_angle, image_blend, image_alpha);
-}
+// Shadow
+draw_sprite_ext(animation_shadow, -1,
+	x+(128-32)*image_xscale, grounded_ypos+(210-32),
+	shadow_scale, shadow_scale,
+	image_angle, image_blend, shadow_scale);
+
 // Main Body
 draw_sprite_ext(animation_id, animation_index,
 	x, y,
@@ -50,9 +52,9 @@ if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retriev
 // Draw Left //////////////////////////////////////////////////////////////////
 // Shadow
 draw_sprite_ext(animation_shadow, -1,
-	x+room_width*-1, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
+	(x+(128-32)*image_xscale) + room_width*-1, grounded_ypos+(210-32),
+	shadow_scale, shadow_scale,
+	image_angle, image_blend, shadow_scale);
 
 // Main Body
 draw_sprite_ext(animation_id, animation_index,
@@ -82,9 +84,9 @@ if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retriev
 // Draw Right /////////////////////////////////////////////////////////////////
 // Shadow
 draw_sprite_ext(animation_shadow, -1,
-	x+room_width*1, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
+	(x+(128-32)*image_xscale) + room_width*1, grounded_ypos+(210-32),
+	shadow_scale, shadow_scale,
+	image_angle, image_blend, shadow_scale);
 	
 // Main Body
 draw_sprite_ext(animation_id, animation_index,

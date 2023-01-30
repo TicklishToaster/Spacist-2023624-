@@ -55,7 +55,7 @@ if (camera_y < room_height - camera_height) {
 
 
 // Parallax Background Layer 1 (Asteroid Field)
-layer_x("Asteroids_Parallax_1", bg_shift_x*0.90)
+layer_x("Asteroids_Parallax_1", bg_shift_x*0.60)
 // Parallax Background Layer 2 (Asteroid Field)
 layer_x("Asteroids_Parallax_2", bg_shift_x*0.70)
 // Parallax Background Layer 3 (Asteroid Field)

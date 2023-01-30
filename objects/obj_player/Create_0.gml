@@ -10,6 +10,7 @@ max_y_speed	= 9.0  * m;
 
 jump_height	= 10.0 * m;
 jump_release_timer = 0;
+jump_distance = 0;
 
 grounded	= false;
 grounded_ypos = 0;
@@ -105,4 +106,6 @@ depth = 101;
 aim_angle_target = 90;
 aim_angle = 0;
 grapple_mode_height = 1024 + 512;
+
+//shadow_scale = 1;
 ///////////////////////////////////////////////////////////////////////////////
