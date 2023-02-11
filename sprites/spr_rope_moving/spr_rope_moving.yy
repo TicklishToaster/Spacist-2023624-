@@ -83,6 +83,6 @@
   "nineSlice": null,
   "parent": {
     "name": "Grapple",
-    "path": "folders/Sprites/Grapple.yy",
+    "path": "folders/Sprites/Player/Grapple.yy",
   },
 }
