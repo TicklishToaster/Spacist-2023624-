@@ -5,8 +5,8 @@ if !surface_exists(popup_window_surface) {
 	view_surface_id[1] = popup_window_surface;	
 }
 
-// Set Up Surfaces ////////////////////////////////////////////////////////////
-if (obj_camera.target.y < room_height - obj_player.grapple_mode_height) {
+// Set Up & Draw Surfaces /////////////////////////////////////////////////////
+if (target.y < obj_player.grapple_camera_height) {
 	// Set the target surface to draw onto.
 	surface_set_target(popup_window_surface);
 
@@ -30,12 +30,9 @@ if (obj_camera.target.y < room_height - obj_player.grapple_mode_height) {
    
 	// Reset the target surface, to the game can go back to drawing everything else normally.
 	surface_reset_target();
-}
 
-
-// Draw Surfaces (Popup Window) ///////////////////////////////////////////////
-if (obj_camera.target.y < room_height - obj_player.grapple_mode_height) {
+	// Draw Surface (Popup Window)
 	if (view_visible[1] && view_current == 0) {
-		draw_surface(popup_window_surface, obj_camera.camera_x, obj_camera.camera_y+obj_camera.camera_height-view_hport[1])
+		draw_surface(popup_window_surface, camera_x, camera_y+camera_height-view_hport[1])
 	}	
 }

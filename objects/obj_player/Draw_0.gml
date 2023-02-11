@@ -13,9 +13,29 @@ if (state_grappling || state_aiming || state_retrieving) {
 
 // Update Grapple Hotspot (Tip of the Grapple Launcher)
 if (state_grappling || state_aiming || state_retrieving) {
-	grapple_hotspot_x = grapple_origin_x + lengthdir_x(sprite_get_width(spr_player_rope_launcher), aim_angle+90) / 1;
-	grapple_hotspot_y = grapple_origin_y + lengthdir_y(sprite_get_height(spr_player_rope_launcher), aim_angle+90) / 1;
+	grapple_hotspot_x = grapple_origin_x + lengthdir_x(sprite_get_width(spr_player_rope_launcher), aim_angle+90)  / 1 + 50;
+	grapple_hotspot_y = grapple_origin_y + lengthdir_y(sprite_get_height(spr_player_rope_launcher), aim_angle+90) / 1 + 50;
 }
+
+// Draw Center ////////////////////////////////////////////////////////////////
+// Grapple Chain
+with (obj_grapple_chain) {
+	x = creator.grapple_origin_x;
+	y = creator.grapple_origin_y;
+	var chain_len = point_distance(x, y, obj_hook.x, obj_hook.y) / sprite_get_height(spr_chain);
+	var chain_ang = point_direction(x, y, obj_hook.x, obj_hook.y);
+
+	draw_sprite_ext(spr_chain, -1,
+		x, y,
+		image_xscale, chain_len,
+		chain_ang-90, image_blend, image_alpha);
+}
+
+// Grapple Hook
+with (obj_hook) {
+	draw_sprite_ext(sprite_index, img_index, x, y, 1, 1, img_rot, -1, 1);
+}
+
 
 // Draw Center ////////////////////////////////////////////////////////////////
 // Shadow
@@ -112,3 +132,11 @@ if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retriev
 		image_xscale, image_yscale,
 		image_angle, image_blend, image_alpha);
 }
+
+// DEBUGGING CODE
+//var throw_x = lengthdir_x(3.0*20, aim_angle_target);
+//var throw_y = lengthdir_y(3.0*20, aim_angle_target);
+//var nx = grapple_origin_x + throw_x;
+//var ny = grapple_origin_y + throw_y;
+
+//draw_line_width(grapple_origin_x, grapple_origin_y, nx, ny, 3);

@@ -7,7 +7,7 @@
     "path": "sprites/spr_rope/spr_rope.yy",
   },
   "solid": false,
-  "visible": true,
+  "visible": false,
   "managed": true,
   "spriteMaskId": null,
   "persistent": false,

@@ -12,20 +12,18 @@ repeat constraints_iterations {
         y_joint[i+1]	+= lengthdir_y(diff_dist, diff_dir);   
     }
 	
-	if (obj_hook.state_falling || obj_hook.state_grounded) {
-		// Position rope origin offscreen, extending towards the player (Grapple Launcher Origin).
-		var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
-		var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
-	} else {
-		// Position rope origin offscreen, extending towards the player (Grapple Launcher Hotspot).
-		var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
-		var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
-	}
-	//// Position rope origin offscreen, extending towards the player (Grapple Launcher Hotspot).
-	//var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
-	//var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);	
-	//point_dir = clamp(point_dir, 240, 300);
-	//show_debug_message(point_dir);
+	var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
+	var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
+	
+	//if (obj_hook.state_falling || obj_hook.state_grounded) {
+	//	// Position rope origin offscreen, extending towards the player (Grapple Launcher Origin).
+	//	var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
+	//	var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_origin_x, creator.grapple_origin_y);
+	//} else {
+	//	// Position rope origin offscreen, extending towards the player (Grapple Launcher Hotspot).
+	//	var point_dist = point_distance(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
+	//	var point_dir = point_direction(x_joint[joint_num], y_joint[joint_num], creator.grapple_hotspot_x, creator.grapple_hotspot_y);
+	//}
 	
 		
 	var dir_x = lengthdir_x(min(point_dist, rope_len), point_dir);

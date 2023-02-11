@@ -1,5 +1,5 @@
 // Check if player is state_grounded.
-state_grounded = place_meeting(x, y + 1, obj_parent_solid);
+state_grounded = place_meeting(x, y + 1, obj_floor);
 if (state_grounded) {
 	grounded_ypos = y;
 	jump_distance = 1;

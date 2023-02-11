@@ -78,9 +78,9 @@ animation_index_r = 0;
 //default_state	= false;
 //slow_state		= false;
 default_physics	= [4.00, 9.00, 0.10, 0.10, 0.75, 0.10];
-slow_physics	= [1.50, 9.00, 0.10, 0.10, 0.75, 0.10];
+grapple_physics	= [0.50, 9.00, 0.10, 0.10, 0.75, 0.10];
 
-
+state_suspended = false;
 state_grounded	= false;
 state_moving	= false;
 state_charging	= false;
@@ -92,6 +92,18 @@ state_retrieving= false;
 
 aim_cancel = false;
 jump_cancel = false;
+
+show_states = function() {
+	show_debug_message("state_suspended: "	+ string(state_suspended));
+	show_debug_message("state_grounded: "	+ string(state_grounded));
+	show_debug_message("state_moving: "		+ string(state_moving));
+	show_debug_message("state_charging: "	+ string(state_charging));
+	show_debug_message("state_jumping: "	+ string(state_jumping));
+	show_debug_message("state_landing: "	+ string(state_landing));
+	show_debug_message("state_aiming: "		+ string(state_aiming));
+	show_debug_message("state_grappling: "	+ string(state_grappling));
+	show_debug_message("state_retrieving: " + string(state_retrieving));
+}
 
 // Misc ///////////////////////////////////////////////////////////////////////
 hotspot_x = x + sprite_width;
@@ -105,7 +117,20 @@ grapple_hotspot_y = y;
 depth = 101;
 aim_angle_target = 90;
 aim_angle = 0;
-grapple_mode_height = 1024 + 512;
+grapple_mode_height = 1280;
+grapple_distance = 0;
+grapple_object = noone;
 
-//shadow_scale = 1;
+grapple_camera_height = room_height - 1024*1.5;
+//grapple_camera_height = 6000;
+
+// Physics Settings Method
+set_phys = function(phys) {
+	max_x_speed	= phys[0];
+	max_y_speed	= phys[1];
+	grav_rise	= phys[2];
+	grav_fall	= phys[3];
+	air_accel	= phys[4];
+	air_fric	= phys[5];
+}
 ///////////////////////////////////////////////////////////////////////////////

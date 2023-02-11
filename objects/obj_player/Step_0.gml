@@ -47,6 +47,7 @@ var input_control_hold		= keyboard_check(vk_control);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// Friction ///////////////////////////////////////////////////////////////////
 // Which form of acceleration/friction to apply
 if (state_grounded) {
     temp_accel = ground_accel;
@@ -54,6 +55,11 @@ if (state_grounded) {
 } else {
     temp_accel = air_accel;
     temp_fric  = air_fric;
+}
+
+// Apply Friction
+if (!input_right_hold && !input_left_hold) {
+    x_speed = Approach(x_speed, 0, temp_fric);
 }
 
 // Gravity ////////////////////////////////////////////////////////////////////
@@ -68,7 +74,8 @@ if (!state_grounded) {
     } 
 }
 
-// Idle ///////////////////////////////////////////////////////////////////////
+// Movement Controls //////////////////////////////////////////////////////////
+// Idle
 if (!input_left_hold && !input_right_hold && !input_space_hold) {
 	if (state_grounded && !state_charging && !state_jumping && !state_landing && !state_aiming && !state_grappling && !state_retrieving) {
 		animation_id = animation_idle;
@@ -78,111 +85,113 @@ if (!input_left_hold && !input_right_hold && !input_space_hold) {
 	}
 }
 
-// Moving /////////////////////////////////////////////////////////////////////
-if (input_left_hold || input_right_hold) {
-	// Move Left 
-	if (input_left_hold && !input_right_hold) {
-	    // Apply acceleration left
-	    if (x_speed > 0) {
-	        x_speed = Approach(x_speed, 0, temp_fric);
-		}
-	    x_speed = Approach(x_speed, -max_x_speed, temp_accel);
-	}
-
-	// Move Right 
-	if (input_right_hold && !input_left_hold) {
-	    // Apply acceleration right
-	    if (x_speed < 0) {
-	        x_speed = Approach(x_speed, 0, temp_fric);
-		}
-	    x_speed = Approach(x_speed, max_x_speed, temp_accel);
-	}	
-	
-	// Torso Animation
-	if (state_grounded && !state_jumping && !state_charging && !state_landing && !state_aiming && !state_retrieving && abs(x_speed) >= 0.4) {
-		// Left 
+// Prevent Movement If State_Suspended
+if (!state_suspended) {
+	// Moving
+	if (input_left_hold || input_right_hold) {
+		// Move Left 
 		if (input_left_hold && !input_right_hold) {
-			// Adjust Sprite Direction
-			if (image_xscale != -1) {
-				x+=sprite_width;
-				image_xscale = -1;		
-			}		
+			// Apply acceleration left
+			if (x_speed > 0) {
+			    x_speed = Approach(x_speed, 0, temp_fric);
+			}
+			x_speed = Approach(x_speed, -max_x_speed, temp_accel);
 		}
 
-		// Right 
+		// Move Right 
 		if (input_right_hold && !input_left_hold) {
-			// Adjust Sprite Direction
-			if (image_xscale != 1) {
-				x+=sprite_width;
-				image_xscale = 1;
+			// Apply acceleration right
+			if (x_speed < 0) {
+			    x_speed = Approach(x_speed, 0, temp_fric);
 			}
+			x_speed = Approach(x_speed, max_x_speed, temp_accel);
 		}
-		
-		// Set Animation Loop
-		if (abs(x_speed) >= 0.4 && state_grounded) {
-			animation_id = animation_walk;
-			animation_index = clamp(animation_index + 0.2, 0, 7.9);
-			animation_id_r = animation_walk_r;
-			animation_index_r = clamp(animation_index_r + 0.2, 0, 7.9);
-			if (animation_index >= 7.9) {
-				animation_index = 0;
-				animation_index_r = 0;
-			}
-		}		
-	}
 	
-	// Tracks Animation
-	if (state_grounded && abs(x_speed) >= 0.2) {
-		var track_speed = 0.1;
-		if (!state_charging && !state_aiming && !state_grappling) {
-			track_speed = 0.2;
-		}
-		
-		if (abs(x_speed) >= 0.2 && state_grounded) {
-			animation_index_t = clamp(animation_index_t + track_speed, 0, 7.9);
-		}	
-	
-		if (animation_index_t >= 7.9) {
-			animation_index_t = 0;
-		}	
-		
-		// Set Animation Loop
-		if (state_charging || state_grappling) {
+		// Torso Animation
+		if (state_grounded && !state_jumping && !state_charging && !state_landing && !state_aiming && !state_retrieving && abs(x_speed) >= 0.4) {
 			// Left 
-			if (image_xscale == -1) {
-				if (x_speed <= -0.2) {
-					animation_id_t = animation_walk_t;
-				}
-				else if (x_speed >= 0.2 && animation_id_t != animation_walk_tr) {
-					animation_id_t = animation_walk_tr;
-					animation_index_t = abs(animation_index_t - 7);	
+			if (input_left_hold && !input_right_hold) {
+				// Adjust Sprite Direction
+				if (image_xscale != -1) {
+					x+=sprite_width;
+					image_xscale = -1;		
 				}		
 			}
-			// Right
-			if (image_xscale == 1) {
-				if (x_speed >= 0.2) {
-					animation_id_t = animation_walk_t;
+
+			// Right 
+			if (input_right_hold && !input_left_hold) {
+				// Adjust Sprite Direction
+				if (image_xscale != 1) {
+					x+=sprite_width;
+					image_xscale = 1;
 				}
-				else if (x_speed <= -0.2 && animation_id_t != animation_walk_tr) {
-					animation_id_t = animation_walk_tr;
-					animation_index_t = abs(animation_index_t - 7);	
-				}	
+			}
+		
+			// Set Animation Loop
+			if (abs(x_speed) >= 0.4 && state_grounded) {
+				animation_id = animation_walk;
+				animation_index = clamp(animation_index + 0.2, 0, 7.9);
+				animation_id_r = animation_walk_r;
+				animation_index_r = clamp(animation_index_r + 0.2, 0, 7.9);
+				if (animation_index >= 7.9) {
+					animation_index = 0;
+					animation_index_r = 0;
+				}
+			}		
+		}
+	
+		// Tracks Animation
+		if (state_grounded && abs(x_speed) >= 0.2) {
+			var track_speed = 0.1;
+			if (!state_charging && !state_aiming && !state_grappling) {
+				track_speed = 0.2;
+			}
+		
+			if (abs(x_speed) >= 0.2 && state_grounded) {
+				animation_index_t = clamp(animation_index_t + track_speed, 0, 7.9);
+			}	
+	
+			if (animation_index_t >= 7.9) {
+				animation_index_t = 0;
+			}	
+		
+			// Set Animation Loop
+			if (state_charging || state_grappling) {
+				// Left 
+				if (image_xscale == -1) {
+					if (x_speed <= -0.2) {
+						animation_id_t = animation_walk_t;
+					}
+					else if (x_speed >= 0.2 && animation_id_t != animation_walk_tr) {
+						animation_id_t = animation_walk_tr;
+						animation_index_t = abs(animation_index_t - 7);	
+					}		
+				}
+				// Right
+				if (image_xscale == 1) {
+					if (x_speed >= 0.2) {
+						animation_id_t = animation_walk_t;
+					}
+					else if (x_speed <= -0.2 && animation_id_t != animation_walk_tr) {
+						animation_id_t = animation_walk_tr;
+						animation_index_t = abs(animation_index_t - 7);	
+					}	
+				}
 			}
 		}
 	}
-}
 
-// Jumping ////////////////////////////////////////////////////////////////////
-// Hold and Release Jump Controls.
-if (input_space_press) {
-	if (state_grounded && !state_charging && !state_jumping && !state_landing && !state_aiming && !state_grappling && !state_retrieving && !jump_cancel) {
-		// Toggle Charge Jump Variables & Charging Animation.
-		state_charging = true;
-		if (animation_id != animation_jump_r) {
-			animation_id = animation_jump_r;
-			animation_index = 0;
-			animation_id_r = animation_jump_r_r;
-			animation_index_r = 0;
+	// Charge Jumping
+	if (input_space_press) {
+		if (state_grounded && !state_charging && !state_jumping && !state_landing && !state_aiming && !state_grappling && !state_retrieving && !jump_cancel) {
+			// Toggle Charge Jump Variables & Charging Animation.
+			state_charging = true;
+			if (animation_id != animation_jump_r) {
+				animation_id = animation_jump_r;
+				animation_index = 0;
+				animation_id_r = animation_jump_r_r;
+				animation_index_r = 0;
+			}
 		}
 	}
 }
@@ -237,7 +246,7 @@ if (input_space_hold) {
 			animation_index_r = 0;
 		}
 		jump_release_timer += (room_speed / 60) / 60;
-		max_x_speed = slow_physics[0]
+		set_phys(grapple_physics);
 	}
 }
 
@@ -269,7 +278,7 @@ if (input_space_release) {
 			animation_index = 0;
 			animation_index_r = 0;
 			
-			max_x_speed = default_physics[0]
+			set_phys(default_physics);
 			jump_release_timer = 0;				
 		}
 	}
@@ -290,7 +299,7 @@ if (!input_space_hold) || (state_grounded) {
 				state_jumping = false;
 				state_landing = false;
 				jump_cancel = false;
-				max_x_speed = default_physics[0];
+				set_phys(default_physics);
 				jump_release_timer = 0;
 			}
 		}
@@ -304,7 +313,7 @@ if (!input_space_hold) || (state_grounded) {
 				state_jumping = false;
 				state_landing = false;
 				jump_cancel = false;
-				max_x_speed = default_physics[0];
+				set_phys(default_physics);
 				jump_release_timer = 0;				
 			}
 		}
@@ -312,7 +321,7 @@ if (!input_space_hold) || (state_grounded) {
 }
 
 // If jumping up, play jumping animation.
-if (!state_charging && state_jumping && !state_landing) {
+if (state_jumping && !state_charging && !state_landing) {
 	// Set Animation Loop.
 	if (animation_id != animation_jump_r) {
 		animation_index = clamp(animation_index + 0.4, 0, sprite_get_number(animation_id)-0.1);
@@ -337,7 +346,7 @@ if ((input_shift_press || input_mouse2_click) && !instance_exists(obj_hook)) {
 		// Start Grapple Animation.
 		if (!state_aiming) {
 			state_aiming = true;
-			max_x_speed = slow_physics[0]
+			set_phys(grapple_physics);
 		}
 		
 		// Set Animation Variables.
@@ -368,13 +377,15 @@ if (input_mouse2_release) {
 if ((input_shift_hold || input_mouse2_hold) && !instance_exists(obj_hook)) {
 	if (state_aiming && !state_grappling && !state_retrieving && !state_charging && !state_jumping && !state_landing && !aim_cancel) {
 		// Rotate grapple launcher anti-clockwise.
-		if (input_leftarrow_press || input_mouse5_click || mouse_wheel_up()) {
-			aim_angle_target = clamp(aim_angle_target + 10, 60, 120);
+		if (input_leftarrow_hold || input_mouse5_click || mouse_wheel_up()) {
+			aim_angle_target = clamp(aim_angle_target + 5, 70, 110);
+			//aim_angle_target = clamp(aim_angle_target + 5, 45, 135);
 		}
 		
 		// Rotate grapple launcher clockwise.
-		if (input_rightarrow_press || input_mouse4_click || mouse_wheel_down()) {
-			aim_angle_target = clamp(aim_angle_target - 10, 60, 120);
+		if (input_rightarrow_hold || input_mouse4_click || mouse_wheel_down()) {
+			aim_angle_target = clamp(aim_angle_target - 5, 70, 110);
+			//aim_angle_target = clamp(aim_angle_target - 5, 45, 135);
 		}
 		
 		// Play the "grapple launcher readying" animation sequence.
@@ -385,7 +396,6 @@ if ((input_shift_hold || input_mouse2_hold) && !instance_exists(obj_hook)) {
 		if (animation_index >= 4.9) {
 			animation_id_r = animation_grapple_launcher;
 			animation_index_r = 0;
-			//aim_angle = lerp(aim_angle, aim_direction-90, 0.15);
 			aim_angle = lerp(aim_angle, aim_angle_target-90, 0.20);
 		}
 	}
@@ -393,43 +403,42 @@ if ((input_shift_hold || input_mouse2_hold) && !instance_exists(obj_hook)) {
 
 // Trigger Grapple Launch
 if ((input_shift_hold || input_mouse2_hold) && (input_space_press || input_mouse1_click) && !instance_exists(obj_hook)) {
-	if (state_aiming && animation_id_r == animation_grapple_launcher) {
-		// Create Rope Object.
-		instance_create_layer(grapple_hotspot_x, grapple_hotspot_y, "Instances", obj_rope, {creator : obj_player, depth : -100});
-		
-		// Create Rope Window Object.
-		instance_create_layer(grapple_hotspot_x, grapple_hotspot_y, "Instances", obj_rope_window, {creator : obj_player, depth : -100});
-			
+	if (state_aiming && animation_id_r == animation_grapple_launcher) {		
 		// Create Hook Object.
-		instance_create_layer(grapple_hotspot_x, grapple_hotspot_y - sprite_get_height(spr_grapple)/2, "Instances", obj_hook, {creator : obj_player});
-			
+		instance_create_layer(grapple_origin_x, grapple_origin_y - sprite_get_height(spr_grapple)/2, "Instances", obj_hook, {creator : obj_player});		
+		
+		// Create Rope Object.
+		instance_create_layer(grapple_origin_x, grapple_origin_y, "Instances", obj_grapple_chain, {creator : obj_player, depth : -100});		
+		
 		// Set Grapple Variables
 		state_grappling = true;
 		
 		// Set Camera Variables
-		obj_camera.state_panning = true;
+		//obj_camera.state_panning = true;
 		obj_camera.target = obj_hook;
-		with (obj_camera) {alarm[0] = room_speed * 1;}
-	
-		// Generate Asteroid Field
-		generate_asteroid_field();
+		obj_camera.bg_asteroid_shift = 0;
+		with (obj_camera) {			
+			pann_camera(obj_player, obj_hook, 0.005);
+		}
 		
 		// Throw Grapple
-		with (obj_hook) {
-			adjust_physics_vars(self, thrown_physics[0], thrown_physics[1], thrown_physics[2], thrown_physics[3], thrown_physics[4], thrown_physics[5]);
-			var throw_x = lengthdir_x(max_x_speed, creator.aim_angle_target);
-			var throw_y = lengthdir_y(max_y_speed, creator.aim_angle_target);
-			x_speed = throw_x;
-			y_speed = throw_y;
+		with (obj_hook) {		
+			// max_y_speed is intentionally set on both.
+			x_speed = lengthdir_x(max_y_speed, creator.aim_angle_target);
+			y_speed = lengthdir_y(max_y_speed, creator.aim_angle_target);
+			horizontal_origin = x;
 		}
 		
 		// Set Grapple Animation
 		animation_id = animation_grapple_launched;
 		animation_index = 0;
+		
+		// Generate Asteroid Field
+		generate_asteroid_field();		
 	}
 }
 
-// Set Torso Animation & Grapple Launcher Angle
+// Set Torso Animation & Grapple Launcher Angle (After Launch)
 if (instance_exists(obj_hook)) {
 	// If grapple was just launched, play "grapple launched" animation.
 	if (state_grappling && animation_id == animation_grapple_launched) {
@@ -443,68 +452,151 @@ if (instance_exists(obj_hook)) {
 	// If "grapple launched" animation complete, angle grapple launcher towards hook object.
 	else if (state_grappling) {	
 		// Get the direction between the grapple launcher and the hook position.
-		var aim_direction = point_direction(grapple_hotspot_x, grapple_hotspot_y, obj_hook.x, obj_hook.y);
-		
-		// Set the angles the grapple launcher can turn between.
-		aim_direction = clamp(aim_direction, 60, 120);
+		var aim_direction = point_direction(grapple_origin_x, grapple_origin_y, obj_hook.x, obj_hook.y);
 		
 		// Rotate the grapple launcher toward the hook object.
-		aim_angle = lerp(aim_angle, aim_direction-90, 0.20);
+		aim_angle = aim_direction-90;
 		
 		// Set player "grapple looking" animation frame.
 		if (aim_direction > 60 ) {animation_index = 3;}
 		if (aim_direction > 80 ) {animation_index = 2;}
 		if (aim_direction > 100) {animation_index = 1;}
 	}
-}
-
-// REVIEW THIS LATER
-if (input_mouse2_click) {
-	if (instance_exists(obj_asteroid) && state_retrieving && !state_aiming && !state_grappling) {
-		if (obj_asteroid.state_grounded) {
-			obj_asteroid.hook_attached = false;
-			with (obj_rope) {
-				constraints_iterations = 1;
-				recall_rope = true;
-				alarm[0] = 1;
-			}
-		}
-	}	
+	
+	//if (aim_angle > 0 && image_xscale == 1) {
+	//	image_xscale = -1;
+	//	x -= sprite_width - sprite_get_yoffset(spr_player_rope_launcher);
+	//}
+	//if (aim_angle < 0 && image_xscale == -1) {
+	//	image_xscale = 1;
+	//	x += sprite_get_yoffset(spr_player_rope_launcher);		
+	//}
+	//show_debug_message(aim_angle)
+	//show_debug_message(grapple_origin_x)
 }
 
 // Regress Aiming Animation (Aim Cancel)
-if (!instance_exists(obj_hook) && state_aiming) {
-	if (aim_cancel) {
+if (!instance_exists(obj_hook)) {
+	if (aim_cancel && state_aiming) {
 		animation_index = clamp(animation_index - 0.3, 0, 4.9);
 		animation_index_r = clamp(animation_index_r - 0.3, 0, 4.9);
 		
 		if (animation_index <= 0) {
 			aim_cancel = false;
 			state_aiming = false;
-			max_x_speed = default_physics[0]
+			set_phys(default_physics);
 		}
 	}
 }
 
-// Retrieve Grapple
-if (!instance_exists(obj_hook) && state_retrieving) {
-	state_retrieving = false;
-	animation_id_r = animation_invis;
-	aim_angle = 0;
-	aim_angle_target = 90;
-	max_x_speed = default_physics[0]
-}
-
-// Toggle grapple mode if an asteroid has been pulled below the threshold.
-if (state_grappling && obj_hook.object_attached != 0) {
-	if (obj_hook.y > room_height - grapple_mode_height - sprite_get_height(spr_grapple)/2) {
-		event_user(1);
+// Check Grapple Retrieved
+if (!instance_exists(obj_hook)) {
+	if (state_retrieving) {
+		// Set States & Animations to Default
+		state_aiming = false;
+		state_grappling = false;
+		state_retrieving = false;
+		animation_id_r = animation_invis;
+		aim_angle = 0;
+		aim_angle_target = 90;
+		set_phys(default_physics);
+		show_states();
+		
+		// Relocate position if too far or too close to the falling asteroid.
+		show_debug_message(grapple_distance);
+		show_debug_message(obj_camera.camera_width/4);
+		if (abs(grapple_distance) > obj_camera.camera_width/4) {
+			if (grapple_distance > 0) {
+				//x = grapple_object.x - obj_camera.camera_width/2 + sprite_width/2;
+				x = grapple_object.x - obj_camera.camera_width/4;
+				//x+=sprite_width;
+				image_xscale = 1;
+			}
+			if (grapple_distance < 0) {
+				//x = grapple_object.x + obj_camera.camera_width/2 + sprite_width/2;
+				x = grapple_object.x + obj_camera.camera_width/4;
+				//x+=sprite_width;
+				image_xscale = -1;				
+			}
+		}
+		else if (abs(grapple_distance) < grapple_object.sprite_width*2) {
+			if (grapple_distance > 0) {
+				x = grapple_object.x - grapple_object.sprite_width*2;
+				//x+=sprite_width;
+				image_xscale = 1;
+			}
+			if (grapple_distance < 0) {
+				x = grapple_object.x + grapple_object.sprite_width*2;
+				//x+=sprite_width;
+				image_xscale = -1;
+			}
+		}
+		
+		grapple_distance = 0;
 	}
 }
 
-// Friction ///////////////////////////////////////////////////////////////////
-if (!input_right_hold && !input_left_hold)
-    x_speed = Approach(x_speed, 0, temp_fric);
+// Enable Popup Window & Asteroids Layer
+if (state_grappling && view_visible[1] == false && obj_hook.y < grapple_camera_height - sprite_get_height(spr_grapple)/2) {
+	// Enable Popup Window
+	view_visible[1] = true;
+	
+	// Enable Popup Backgrounds.
+	layer_set_visible("Window_Terrain_Foreground",	true);
+	layer_set_visible("Terrain_Foreground",			false);
+	layer_set_visible("Window_Parallax_1",			true);
+	layer_set_visible("Window_Parallax_2",			true);
+	layer_set_visible("Window_Parallax_3",			true);
+	layer_set_visible("Window_Parallax_4",			true);
+	layer_set_visible("Window_Parallax_Canvas",		true);
+		
+	// Enable Asteroids Backgrounds.
+	layer_set_visible("Asteroids_Parallax_1",	true);
+	layer_set_visible("Asteroids_Parallax_2",	true);
+	layer_set_visible("Asteroids_Parallax_3",	true);
+	layer_set_visible("Asteroids_Parallax_4",	true);
+	layer_set_visible("Asteroids_Gradient",		true);
+}
+
+// Disable Popup Window & Asteroids Layer
+else if (!state_grappling && view_visible[1] == true) {
+	// Disable Popup Window
+	view_visible[1] = false;
+	
+	// Disable Popup Backgrounds.
+	layer_set_visible("Window_Terrain_Foreground",	false);
+	layer_set_visible("Terrain_Foreground",			true);
+	layer_set_visible("Window_Parallax_1",			false);
+	layer_set_visible("Window_Parallax_2",			false);
+	layer_set_visible("Window_Parallax_3",			false);
+	layer_set_visible("Window_Parallax_4",			false);
+	layer_set_visible("Window_Parallax_Canvas",		false);
+
+	// Disable Asteroids Backgrounds.
+	layer_set_visible("Asteroids_Parallax_1",	false);
+	layer_set_visible("Asteroids_Parallax_2",	false);
+	layer_set_visible("Asteroids_Parallax_3",	false);
+	layer_set_visible("Asteroids_Parallax_4",	false);
+	layer_set_visible("Asteroids_Gradient",		false);	
+}
 
 // Room Wrap //////////////////////////////////////////////////////////////////
-move_wrap(true, false, 0);
+//if (input_mouse5_click) {
+//	x = -200;
+//}
+
+//if (input_mouse4_click) {
+//	x = room_width + 200;
+//}
+//show_debug_message(x)
+
+if (!state_grappling) {
+	move_wrap(true, false, 0);
+}
+
+//if (instance_exists(obj_hook)) {
+//	show_debug_message("Grapple Dist: " + string(grapple_distance))
+//	show_debug_message("Full Dist: " + string(obj_hook.horizontal_distance - grapple_distance))
+//	show_debug_message("Point Dist: " + string(point_distance(x, y, obj_hook.x, y)))
+//	show_debug_message("");
+//}

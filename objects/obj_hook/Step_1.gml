@@ -1,10 +1,23 @@
-// Grapple Animation
-img_index = clamp(img_index + img_speed, 0, 3.9);
+// Update Hotspot (Center of Hook Sprite)
+hotspot_x = x;
+hotspot_y = y;
 
-if (object_attached == 0 && img_index >= 3.9) {
-	img_index = 0;
-	img_speed = 0;
+
+// Update Room Wrap Location (If Hook Leaves Room Boundaries)
+if (x > 0 && x < room_width) {
+	room_wrap_x = 0;
 }
-else if (object_attached != 0 && img_index >= 3.9) {
-	img_speed = 0;
+else if (x < 0) {
+	room_wrap_x = +room_width;
 }
+else if (x > room_width) {
+	room_wrap_x = -room_width;
+}
+
+//// Update Room Wrap Location (If Hook Leaves Room Boundaries)
+//if (x < 0) {
+//	room_wrap_x = room_width;
+//}
+//if (x > room_width) {
+//	room_wrap_x = -room_width;
+//}
