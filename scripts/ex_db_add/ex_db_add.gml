@@ -3,9 +3,11 @@
 ///@arg		{ds_map} item - a ds_map holding the item attributes. The map has to define at least the "key" and "stack_size" attributes.
 ///@arg		{string} [group] - (optional) the group the item belongs to
 function ex_db_add() {
-
-	var _item = argument[0];
-	var _key = _item[? "key"];
+	// For unknown reasons this function cannot read the "key" component of the data correctly,
+	// therefore it must be manually set below.
+	var _item	= argument[0];
+	var _key	= argument[0][? argument[2][# 0, 0]]
+	_item[? "key"] = _key;
 
 	//check for errors
 	if(!ds_map_exists(_item, "key") || !ds_map_exists(_item, "stack_size")) {

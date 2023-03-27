@@ -8,7 +8,6 @@ function ex_db_load() {
 
 	for(var _arg = 0; _arg < argument_count; _arg++) {
 
-
 	    var _filename = argument[_arg];
 		var _csv = load_csv(_filename);
 		var _width = ds_grid_width(_csv);
@@ -29,11 +28,13 @@ function ex_db_load() {
 						var _value = string(_csv[# _col, _row]);
 				}
 	            _data[? _csv[# _col, _headers_row]] = _value;
+				//show_debug_message(_value);
 	        }
         
 			//add item to the database
 			var _group = filename_change_ext(filename_name(_filename), "");
-			ex_db_add(_data, _group);
+			//show_debug_message(_data[? _csv[# 0, _headers_row]]);
+			ex_db_add(_data, _group, _csv);
 		
 		}
 
