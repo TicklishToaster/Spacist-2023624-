@@ -17,7 +17,8 @@ if (state_grappling || state_aiming || state_retrieving) {
 	grapple_hotspot_y = grapple_origin_y + lengthdir_y(sprite_get_height(spr_player_rope_launcher), aim_angle+90) / 1 + 50;
 }
 
-// Draw Center ////////////////////////////////////////////////////////////////
+
+// Grapple Sprite /////////////////////////////////////////////////////////////
 // Grapple Chain
 with (obj_grapple_chain) {
 	x = creator.grapple_origin_x;
@@ -37,106 +38,36 @@ with (obj_hook) {
 }
 
 
-// Draw Center ////////////////////////////////////////////////////////////////
-// Shadow
-draw_sprite_ext(animation_shadow, -1,
-	x+(128-32)*image_xscale, grounded_ypos+(210-32),
-	shadow_scale, shadow_scale,
-	image_angle, image_blend, shadow_scale);
+// Player Sprite //////////////////////////////////////////////////////////////
+for (var i = -1; i < 2; i += 1) {
+	// Shadow
+	draw_sprite_ext(animation_shadow, -1,
+		(x+(128-32)*image_xscale) + room_width*i, grounded_ypos+(210-32),
+		shadow_scale, shadow_scale,
+		image_angle, image_blend, shadow_scale);
 
-// Main Body
-draw_sprite_ext(animation_id, animation_index,
-	x, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
-	
-// Tracks
-draw_sprite_ext(animation_id_t, animation_index_t,
-	x, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
-	
-// Right Arm
-if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retrieving) {
-	draw_sprite_ext(animation_id_r, animation_index_r,
-		grapple_origin_x, grapple_origin_y,
-		image_xscale, image_yscale,
-		aim_angle, image_blend, image_alpha);
-} else {
-	draw_sprite_ext(animation_id_r, animation_index_r,
-		x, y,
+	// Main Body
+	draw_sprite_ext(animation_id, animation_index,
+		x+room_width*i, y,
 		image_xscale, image_yscale,
 		image_angle, image_blend, image_alpha);
-}
-
-// Draw Left //////////////////////////////////////////////////////////////////
-// Shadow
-draw_sprite_ext(animation_shadow, -1,
-	(x+(128-32)*image_xscale) + room_width*-1, grounded_ypos+(210-32),
-	shadow_scale, shadow_scale,
-	image_angle, image_blend, shadow_scale);
-
-// Main Body
-draw_sprite_ext(animation_id, animation_index,
-	x+room_width*-1, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
 	
-// Tracks
-draw_sprite_ext(animation_id_t, animation_index_t,
-	x+room_width*-1, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
+	// Tracks
+	draw_sprite_ext(animation_id_t, animation_index_t,
+		x+room_width*i, y,
+		image_xscale, image_yscale,
+		image_angle, image_blend, image_alpha);
 		
-// Right Arm
-if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retrieving) {
-	draw_sprite_ext(animation_id_r, animation_index_r,
-		grapple_origin_x+room_width*-1, grapple_origin_y,
-		image_xscale, image_yscale,
-		aim_angle, image_blend, image_alpha);
-} else {
-	draw_sprite_ext(animation_id_r, animation_index_r,
-		x+room_width*-1, y,
-		image_xscale, image_yscale,
-		image_angle, image_blend, image_alpha);
+	// Right Arm
+	if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retrieving) {
+		draw_sprite_ext(animation_id_r, animation_index_r,
+			grapple_origin_x+room_width*i, grapple_origin_y,
+			image_xscale, image_yscale,
+			aim_angle, image_blend, image_alpha);
+	} else {
+		draw_sprite_ext(animation_id_r, animation_index_r,
+			x+room_width*i, y,
+			image_xscale, image_yscale,
+			image_angle, image_blend, image_alpha);
+	}
 }
-
-// Draw Right /////////////////////////////////////////////////////////////////
-// Shadow
-draw_sprite_ext(animation_shadow, -1,
-	(x+(128-32)*image_xscale) + room_width*1, grounded_ypos+(210-32),
-	shadow_scale, shadow_scale,
-	image_angle, image_blend, shadow_scale);
-	
-// Main Body
-draw_sprite_ext(animation_id, animation_index,
-	x+room_width*1, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
-	
-// Tracks	
-draw_sprite_ext(animation_id_t, animation_index_t,
-	x+room_width*1, y,
-	image_xscale, image_yscale,
-	image_angle, image_blend, image_alpha);
-		
-// Right Arm
-if (state_aiming && animation_index >= 4.9) || (state_grappling || state_retrieving) {
-	draw_sprite_ext(animation_id_r, animation_index_r,
-		grapple_origin_x+room_width*1, grapple_origin_y,
-		image_xscale, image_yscale,
-		aim_angle, image_blend, image_alpha);
-} else {
-	draw_sprite_ext(animation_id_r, animation_index_r,
-		x+room_width*1, y,
-		image_xscale, image_yscale,
-		image_angle, image_blend, image_alpha);
-}
-
-// DEBUGGING CODE
-//var throw_x = lengthdir_x(3.0*20, aim_angle_target);
-//var throw_y = lengthdir_y(3.0*20, aim_angle_target);
-//var nx = grapple_origin_x + throw_x;
-//var ny = grapple_origin_y + throw_y;
-
-//draw_line_width(grapple_origin_x, grapple_origin_y, nx, ny, 3);

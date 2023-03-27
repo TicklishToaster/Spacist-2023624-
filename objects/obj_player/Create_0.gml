@@ -24,10 +24,6 @@ ground_fric  = 2.00 * m;
 air_accel    = 0.75 * m;
 air_fric     = 0.10 * m;
 
-//// Grapple Vars ///////////////////////////////////////////////////////////////
-//grapple_mode = false;
-//grapple_mode_height = 1024 + 512;
-
 // Sprite Vars ////////////////////////////////////////////////////////////////
 animation_idle		= spr_player_idle;
 animation_idle_r	= spr_player_idle_right;
@@ -69,14 +65,7 @@ animation_index_t = 0;
 animation_id_r = animation_idle_r;
 animation_index_r = 0;
 
-//charging = false
-//jumping = false;
-//jump_cancel = false;
-//landed = false;
-
 // States /////////////////////////////////////////////////////////////////////
-//default_state	= false;
-//slow_state		= false;
 default_physics	= [4.00, 9.00, 0.10, 0.10, 0.75, 0.10];
 grapple_physics	= [0.50, 9.00, 0.10, 0.10, 0.75, 0.10];
 
@@ -86,12 +75,15 @@ state_moving	= false;
 state_charging	= false;
 state_jumping	= false;
 state_landing	= false;
+jump_cancel = false;
+
 state_aiming	= false;
 state_grappling = false;
 state_retrieving= false;
-
 aim_cancel = false;
-jump_cancel = false;
+
+state_building	= false;
+current_building = noone;
 
 show_states = function() {
 	show_debug_message("state_suspended: "	+ string(state_suspended));
@@ -122,7 +114,6 @@ grapple_distance = 0;
 grapple_object = noone;
 
 grapple_camera_height = room_height - 1024*1.5;
-//grapple_camera_height = 6000;
 
 // Physics Settings Method
 set_phys = function(phys) {

@@ -1,8 +1,8 @@
 // Movement & Collision ///////////////////////////////////////////////////////
-var i;
+//var i;
 
 // Vertical
-for (i = 0; i < abs(y_speed); ++i) {
+for (var i = 0; i < abs(y_speed); ++i) {
 	// This will shift the player by a number of pixels equal to the integer of y_speed.
 	// Example: y_speed = 5, move 5 pixels per frame.
     if (!place_meeting(x, y + sign(y_speed), obj_parent_solid)) {
@@ -20,7 +20,7 @@ for (i = 0; i < abs(y_speed); ++i) {
 }
 
 // Horizontal
-for (i = 0; i < abs(x_speed); ++i) {
+for (var i = 0; i < abs(x_speed); ++i) {
 	// This will shift the hook by a number of pixels equal to the integer of x_speed.
 	// Example: x_speed = 2, move 2 pixels per frame.	
     if (!place_meeting(x + sign(x_speed), y, obj_parent_solid)) {

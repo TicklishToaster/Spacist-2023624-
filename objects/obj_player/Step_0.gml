@@ -1,8 +1,3 @@
-//// Declare Temp Variables /////////////////////////////////////////////////////
-//var input_left_hold, input_right_hold, input_up_hold, input_down_hold, input_space_press, input_space_hold, input_space_release, 
-//	temp_accel, temp_fric, input_mouse1_click, input_mouse2_click, input_mouse2_hold, input_mouse2_release;
-/////////////////////////////////////////////////////////////////////////////////
-
 // Input Variables ////////////////////////////////////////////////////////////
 // Input WASD Controls
 var input_up_press			= keyboard_check_pressed(ord("W"));
@@ -44,6 +39,8 @@ var input_shift_press		= keyboard_check_pressed(vk_shift);
 var input_shift_hold		= keyboard_check(vk_shift);
 var input_control_press		= keyboard_check_pressed(vk_control);
 var input_control_hold		= keyboard_check(vk_control);
+
+var input_build_mode		= keyboard_check_pressed(ord("B"));
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -580,23 +577,48 @@ else if (!state_grappling && view_visible[1] == true) {
 	layer_set_visible("Asteroids_Gradient",		false);	
 }
 
+
+// Build Controls /////////////////////////////////////////////////////////////
+// Toggle build mode if a building item is currently selected.
+var selected_item = ex_item_get_item(global.inv_toolbar, array_get_index(obj_inv_panel_toolbar.slots, obj_inv_panel_toolbar.selected_slot))
+if (ds_exists(selected_item, ds_type_map)) {
+	if (selected_item[? "type"] == "building") {
+		state_building = true;
+		show_debug_message(selected_item[? "key"]);
+		show_debug_message(selected_item[? "type"]);
+		show_debug_message("");
+		
+		if (selected_item[? "key"] = "building_smelter") {
+			//current_building = instance_create_layer(x, y, "Instances", obj_smelter)
+			//current_building = obj_smelter;
+			current_building = obj_parent_building;
+			current_building.sprite_index = spr_smelter;
+		}
+		
+		if (selected_item[? "key"] = "building_constructor") {
+			//current_building = instance_create_layer(x, y, "Instances", obj_constructor)
+			//current_building = obj_constructor;
+			current_building = obj_parent_building;
+			current_building.sprite_index = spr_constructor;			
+		}
+		
+		if (selected_item[? "key"] = "building_conveyor_belt_mk1") {
+			//current_building = instance_create_layer(x, y, "Instances", obj_conveyor_belt)
+			//current_building = obj_conveyor_belt;
+			current_building = obj_parent_building;
+			current_building.sprite_index = spr_conveyor_belt;			
+		}
+		
+		show_debug_message(current_building)
+	}	
+}
+else {
+	state_building = false;
+	current_building = noone;
+}
+
+
 // Room Wrap //////////////////////////////////////////////////////////////////
-//if (input_mouse5_click) {
-//	x = -200;
-//}
-
-//if (input_mouse4_click) {
-//	x = room_width + 200;
-//}
-//show_debug_message(x)
-
 if (!state_grappling) {
 	move_wrap(true, false, 0);
 }
-
-//if (instance_exists(obj_hook)) {
-//	show_debug_message("Grapple Dist: " + string(grapple_distance))
-//	show_debug_message("Full Dist: " + string(obj_hook.horizontal_distance - grapple_distance))
-//	show_debug_message("Point Dist: " + string(point_distance(x, y, obj_hook.x, y)))
-//	show_debug_message("");
-//}
