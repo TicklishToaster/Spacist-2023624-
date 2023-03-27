@@ -7,6 +7,7 @@ if (!hook_attached && !state_grounded && !state_returning) {
 
 	if variable_struct_exists(self, "rotation_speed") {
 		image_angle += rotation_speed;
+		show_debug_message(image_angle)
 	}
 }
 
@@ -24,7 +25,6 @@ if (state_grounded && !state_landed) {
 	}
 	obj_player.state_suspended = false;
 }
-
 
 
 // Room Wrap
