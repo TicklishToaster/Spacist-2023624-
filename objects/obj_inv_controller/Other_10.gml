@@ -7,17 +7,30 @@ var _db_size = ds_list_size(_db_keys);
 //create an inventory for the mouse.
 global.inv_mouse = ex_inv_create(1);
 
-//generate a player inventory, and insert some random items
-global.inv_backpack = ex_inv_create(30);
-for(var _i = 0; _i < 30; _i++) {
-	if(choose(true, true, false)) { //try not to fill every slot
-		var _item = _db_keys[| irandom(_db_size - 1)];
-		ex_item_add(global.inv_backpack, _item, irandom(64), _i);
-	}
-}
+////generate a player inventory, and insert some random items
+//global.inv_backpack = ex_inv_create(30);
+//for(var _i = 0; _i < 30; _i++) {
+//	if(choose(true, true, false)) { //try not to fill every slot
+//		var _item = _db_keys[| irandom(_db_size - 1)];
+//		ex_item_add(global.inv_backpack, _item, irandom(64), _i);
+//	}
+//}
 
-//create a toolbar
+
+//generate a player inventory
+global.inv_backpack = ex_inv_create(30);
+ex_item_add(global.inv_backpack, "resource_copper_cable",			1, 0);
+//ex_item_add(global.inv_backpack, "building_constructor",			1, 8);
+//ex_item_add(global.inv_backpack, "building_conveyor_belt_mk1",	1, 9);
+
+
+//create a toolbar and insert specific items
 global.inv_toolbar = ex_inv_create(10);
+//ex_item_add(global.inv_toolbar, _item, 1, 0);
+ex_item_add(global.inv_toolbar, "building_smelter",				1, 7);
+ex_item_add(global.inv_toolbar, "building_constructor",			1, 8);
+ex_item_add(global.inv_toolbar, "building_conveyor_belt_mk1",	1, 9);
+
 
 //create an equipment inventory 
 global.inv_equipment = ex_inv_create(5);

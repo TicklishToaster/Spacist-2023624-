@@ -134,14 +134,15 @@ if (state_pulling && !state_launched && !state_controlled) {
 
 // Grappling Controls /////////////////////////////////////////////////////////
 if (input_space_press || input_mouse1_click) {
-	// If No Object Is Grabbed
+	// If no object is grabbed.
 	if (state_controlled && img_index <= 0) {
-		// Play Grab Animation
+		// Play grab animation.
 		img_index = 0;
 		img_speed = 0.10;
 		
 		// Check if overlapping an asteroid.
-		if (place_meeting(x + room_wrap_x, y, obj_asteroid)) {
+		//if (place_meeting(x + room_wrap_x, y, obj_asteroid)) {
+		if (collision_point(x + room_wrap_x, y, obj_asteroid, true, true)) {
 			attached_object = instance_place(x + room_wrap_x, y, obj_asteroid);
 			
 			// Set Grabbed Object Values

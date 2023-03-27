@@ -19,7 +19,8 @@ display_height = camera_height * display_scale;
 
 window_set_size(display_width, display_height);
 surface_resize(application_surface, display_width, display_height);
-window_set_fullscreen(true);
+window_set_fullscreen(false);
+//window_set_fullscreen(true);
 
 // GUI Vars ///////////////////////////////////////////////////////////////////
 display_set_gui_size(camera_width, camera_height);

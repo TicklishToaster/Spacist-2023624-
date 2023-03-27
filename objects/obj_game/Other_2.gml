@@ -1,0 +1,3 @@
+// Randomise game seed.
+randomise();
+

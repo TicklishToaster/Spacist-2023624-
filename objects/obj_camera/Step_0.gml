@@ -4,6 +4,8 @@ if (instance_exists(target) && (!state_panning)) {
 	camera_x = target.hotspot_x - (camera_width /2);
 	camera_y = target.hotspot_y - (camera_height/2);
 	camera_y = clamp(camera_y, 0, room_height - camera_height);
+	x = camera_x;
+	y = camera_y;
 	
 	if (target == obj_hook && (obj_hook.state_controlled || obj_hook.state_pulling)) {
 		camera_y = clamp(camera_y, 0, 1280 - camera_height);
