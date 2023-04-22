@@ -19,3 +19,6 @@ slots = -1; //stores an array of slot instances
 //inventory box size
 box_size = 64;
 box_size = sprite_get_width(spr_slot_selected);
+//box_size = 64;
+//box_size = 80;
+type_conveyor = false;

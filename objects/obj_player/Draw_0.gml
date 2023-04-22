@@ -71,3 +71,20 @@ for (var i = -1; i < 2; i += 1) {
 			image_angle, image_blend, image_alpha);
 	}
 }
+
+
+
+
+//// Build Mode /////////////////////////////////////////////////////////////////
+//if (state_building) {
+//	draw_snap_to_grid();
+//	if (!current_building_repeating) {
+//		draw_building(current_building_sprite_idle, 0);
+//	}
+	
+//	if (current_building_repeating) {
+//		for (var i = 0; i < 10; i += 1) {
+//			draw_building(current_building_sprite_idle, 0, i*sprite_get_width(current_building_sprite_idle));
+//		}
+//	}
+//}

@@ -1,7 +1,7 @@
 /// @desc draw panel and slots
 
 //draw self if there's a sprite
-if(sprite_index >= 0) {
+if (sprite_index >= 0) {
 	draw_self();
 }
 
@@ -20,7 +20,7 @@ for(var _i = 0; _i < array_length_1d(slots); _i++) {
 		draw_self();
 		
 		//draw the stack amount if greater than 1
-		if(item >= 0 && amount > 1) {
+		if (item >= 0 && amount > 1) {
 			draw_set_color(c_black);
 			draw_text(bbox_right - 7, bbox_bottom - 7, string(amount));
 			draw_set_color(c_white);

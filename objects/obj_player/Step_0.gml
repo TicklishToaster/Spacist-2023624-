@@ -578,44 +578,105 @@ else if (!state_grappling && view_visible[1] == true) {
 }
 
 
-// Build Controls /////////////////////////////////////////////////////////////
-// Toggle build mode if a building item is currently selected.
-var selected_item = ex_item_get_item(global.inv_toolbar, array_get_index(obj_inv_panel_toolbar.slots, obj_inv_panel_toolbar.selected_slot))
-if (ds_exists(selected_item, ds_type_map)) {
-	if (selected_item[? "type"] == "building") {
-		state_building = true;
-		show_debug_message(selected_item[? "key"]);
-		show_debug_message(selected_item[? "type"]);
-		show_debug_message("");
+//// Build Controls /////////////////////////////////////////////////////////////
+//// Toggle build mode if a building item is currently selected.
+//var selected_item = ex_item_get_item(global.inv_toolbar, array_get_index(obj_inv_panel_toolbar.slots, obj_inv_panel_toolbar.selected_slot))
+//if (ds_exists(selected_item, ds_type_map)) {
+//	if (selected_item[? "type"] == "building") {
+//		state_building = true;
+//		show_debug_message(selected_item[? "key"]);
+//		show_debug_message(selected_item[? "type"]);
+//		show_debug_message(selected_item[? "category"]);
+//		show_debug_message("");
 		
-		if (selected_item[? "key"] = "building_smelter") {
-			//current_building = instance_create_layer(x, y, "Instances", obj_smelter)
-			//current_building = obj_smelter;
-			current_building = obj_parent_building;
-			current_building.sprite_index = spr_smelter;
-		}
+//		state_building = true;
+//		current_building = obj_parent_building;
+//		//snap_x = floor(mouse_x/ 32) * 32;
+//		//snap_y = ceil(mouse_y / 32) * 32;		
 		
-		if (selected_item[? "key"] = "building_constructor") {
-			//current_building = instance_create_layer(x, y, "Instances", obj_constructor)
-			//current_building = obj_constructor;
-			current_building = obj_parent_building;
-			current_building.sprite_index = spr_constructor;			
-		}
+//		//switch (selected_item[? "key"]) {
+//		//    case "building_smelter":
+//		//        current_building_sprite_active	= spr_smelter_active;
+//		//		current_building_sprite_idle	= spr_smelter_idle;
+//		//        break;
+//		//    case "building_constructor":
+//		//        current_building_sprite_active	= spr_constructor_active;
+//		//		current_building_sprite_idle	= spr_constructor_idle;
+//		//        break;
+//		//    case "building_conveyor_belt_mk1":
+//		//        current_building_sprite_active	= spr_conveyor_belt_grounded;
+//		//		current_building_sprite_idle	= spr_conveyor_belt_idle;
+//		//        break;
+//		//    default:
+//		//        // code here
+//		//        break;
+//		//}
 		
-		if (selected_item[? "key"] = "building_conveyor_belt_mk1") {
-			//current_building = instance_create_layer(x, y, "Instances", obj_conveyor_belt)
-			//current_building = obj_conveyor_belt;
-			current_building = obj_parent_building;
-			current_building.sprite_index = spr_conveyor_belt;			
-		}
+//		// Determine building sprites and other building variables.
+//		var script_returned_list = select_building(selected_item[? "key"]);
+//		current_building_sprite_active	= script_returned_list[0];
+//		current_building_sprite_idle	= script_returned_list[1];
+//		current_building_repeating		= script_returned_list[2];
 		
-		show_debug_message(current_building)
-	}	
-}
-else {
-	state_building = false;
-	current_building = noone;
-}
+//		// Determine snapped position for building to be placed.
+//		snap_x = floor(mouse_x/ 32) * 32;
+//		snap_y = room_height - 32*5 - sprite_get_height(current_building_sprite_idle)*2;	
+		
+		
+//		if (input_mouse1_click && !current_building_repeating) {
+//			var new_building = instance_create_layer(snap_x, snap_y, "Instances", current_building);
+			
+//			with (new_building) {
+//				x					= other.snap_x;
+//				y					= other.snap_y;
+//				depth				= other.depth + 1;
+//				sprite_active		= other.current_building_sprite_active;
+//				sprite_idle			= other.current_building_sprite_idle;
+//				sprite_index		= sprite_idle;
+//				sprite_alpha		= 1;
+//				animation_frame		= 0;
+//				animation_frame_max = sprite_get_number(sprite_index);
+//				build_mode			= false;
+				
+//				inv_building		= ex_inv_create(2);
+//				inv_open			= false;
+//				ex_item_add(inv_building, "resource_copper_cable", 1, 0);
+//			}			
+//		}
+		
+//		if (input_mouse1_click && current_building_repeating) {
+//			var origin_x = snap_x;
+//			var origin_y = snap_y;
+			
+//			//for (var i = 0; i < 10; i += 1) {
+				
+//			//}
+			
+//			var new_building = instance_create_layer(snap_x, snap_y, "Instances", current_building);
+			
+//			with (new_building) {
+//				x					= other.snap_x;
+//				y					= other.snap_y;
+//				depth				= other.depth + 1;
+//				sprite_active		= other.current_building_sprite_active;
+//				sprite_idle			= other.current_building_sprite_idle;
+//				sprite_index		= sprite_idle;
+//				sprite_alpha		= 1;
+//				animation_frame		= 0;
+//				animation_frame_max = sprite_get_number(sprite_index);
+//				build_mode			= false;
+				
+//				inv_building		= ex_inv_create(2);
+//				inv_open			= false;
+//				ex_item_add(inv_building, "resource_copper_cable", 1, 0);
+//			}			
+//		}
+//	}
+//}
+//else {
+//	state_building = false;
+//	current_building = noone;
+//}
 
 
 // Room Wrap //////////////////////////////////////////////////////////////////

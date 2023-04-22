@@ -9,6 +9,7 @@ if(slot_current == noone || slot.item >= 0) { exit; }
 var _mouse_x = mouse_x_gui;
 var _mouse_y = mouse_y_gui;
 
+
 with(slot_current) {
 
 	if(item >= 0) {

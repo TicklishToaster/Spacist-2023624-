@@ -32,6 +32,10 @@ bg_shift_y = 1;
 bg_window_shift_x = 0;
 bg_asteroid_shift = 0;
 
+nebula_shift_co = 0;
+nebula_shift_x	= 0;
+nebula_shift_y	= 0;
+
 // Popup Window Surface Vars //////////////////////////////////////////////////
 popup_window_surface = -1;
 

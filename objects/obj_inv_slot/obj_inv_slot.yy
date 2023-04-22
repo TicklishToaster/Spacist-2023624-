@@ -30,8 +30,8 @@
   "properties": [],
   "solid": true,
   "spriteId": {
-    "name": "spr_ex_slot_empty",
-    "path": "sprites/spr_ex_slot_empty/spr_ex_slot_empty.yy",
+    "name": "spr_slot_empty",
+    "path": "sprites/spr_slot_empty/spr_slot_empty.yy",
   },
   "spriteMaskId": null,
   "visible": false,

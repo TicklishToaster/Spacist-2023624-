@@ -14,6 +14,77 @@ if(keyboard_check_pressed(ord("I"))) {
 	}
 }
 
+if (keyboard_check_pressed(ord("E"))) {
+	if (collision_point(mouse_x, mouse_y, obj_parent_building, true, true)) {
+		var target_inventory = collision_point(mouse_x, mouse_y, obj_parent_building, true, true);
+		
+		if (target_inventory.inv_building != -1) {		
+			// Close every other open building inventory if they do not belong to the selected building.
+			for (var i = 0; i < instance_number(obj_parent_building); i += 1) {
+				if (instance_find(obj_parent_building, i) != target_inventory) {
+					
+					// Set foriegn inventories to close.
+					instance_find(obj_parent_building, i).inv_open = false;
+					
+					// Close building inventory.
+					ex_ui_panel_close(instance_find(obj_parent_building, i).inv_building_ui);
+				}
+			}
+		
+			// Open selected building inventory if it is currently closed.
+			if (!target_inventory.inv_open) {
+				// Set inventory to open.
+				target_inventory.inv_open = true;
+			
+				// Open building inventory.
+				ex_ui_panel_open(target_inventory.inv_building, target_inventory.inv_building_ui, 
+				obj_camera.camera_width/2, 
+				obj_camera.camera_height/2, layer);
+
+			
+			}
+			// Close selected building inventory if it is currently open.
+			else if (target_inventory.inv_open) {
+				// Set inventory to close.
+				target_inventory.inv_open = false;			
+			
+				// Close building inventory
+				ex_ui_panel_close(target_inventory.inv_building_ui);
+			}
+		}
+		else {
+			// Close every other open building inventory if they do not belong to the selected building.
+			for (var i = 0; i < instance_number(obj_parent_building); i += 1) {
+				if (instance_find(obj_parent_building, i) != target_inventory) {
+					
+					// Check if building has an inventory.
+					if (instance_find(obj_parent_building, i).inv_building != -1) {						
+						// Set foriegn inventories to close.
+						instance_find(obj_parent_building, i).inv_open = false;
+					
+						// Close building inventory.
+						ex_ui_panel_close(target_inventory.inv_building_ui);
+					}
+				}
+			}		
+		}
+	}
+	
+	
+	
+	else {
+	// Close every other open building inventory if no building is selected.
+		for (var i = 0; i < instance_number(obj_parent_building); i += 1) {
+			// Set foriegn inventories to close.
+			instance_find(obj_parent_building, i).inv_open = false;
+					
+			// Close building inventory.
+			ex_ui_panel_close(instance_find(obj_parent_building, i).inv_building_ui);
+			//ex_ui_panel_close(obj_inv_panel_building);
+		}
+	}
+}
+
 /*
 	SAVE INVENTORIES
 	

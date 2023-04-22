@@ -82,8 +82,11 @@ state_grappling = false;
 state_retrieving= false;
 aim_cancel = false;
 
-state_building	= false;
-current_building = noone;
+//state_building	= false;
+//current_building = noone;
+//current_building_sprite_active = noone;
+//current_building_sprite_idle = noone;
+//current_building_repeating = false;
 
 show_states = function() {
 	show_debug_message("state_suspended: "	+ string(state_suspended));

@@ -24,3 +24,13 @@ else {
 	sprite_index = item[? "sprite_index"];
 	image_index = item[? "image_index"];
 }
+
+//upscale sprite
+if (sprite_get_width(sprite_index) <= 32) {
+	image_xscale = 2;
+	image_yscale = 2;
+}
+else {
+	image_xscale = 1;
+	image_yscale = 1;
+}

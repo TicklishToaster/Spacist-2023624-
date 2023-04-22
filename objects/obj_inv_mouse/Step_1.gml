@@ -8,5 +8,5 @@ slot_current = instance_position(mouse_x_gui, mouse_y_gui, obj_inv_slot);
 instance_activate_object(slot);
 
 //move mouse slot to mouse x and y
-slot.x = mouse_x_gui;
-slot.y = mouse_y_gui;
+slot.x = mouse_x_gui-64/2;
+slot.y = mouse_y_gui-64/2;
