@@ -1,10 +1,11 @@
-///@func	ex_item_move(inv1, slot1, inv2, amount, [slot2])
+///@func	ex_item_move(inv1, slot1, inv2, amount, [slot2], type_conveyor)
 ///@desc	moves an item from one slot to another, in the same inventory or a different one
 ///@arg		{number} inv1 - the inventory to move the item from
 ///@arg		{number} slot1 - the slot index in the first inventory
 ///@arg		{number} inv2 - the inventory to move the item to
 ///@arg		{number} amount - amount of items to move (use -1 to move all the items)
 ///@arg		{number} [slot2] - the slot in the second inventory. If omitted, inserts in the first available slots or stacks.
+///@arg		{number} type_conveyor
 ///@return	{number} the actual amount of items moved (same as amount unless there's not enough space in inv2)
 function ex_item_move() {
 
@@ -15,6 +16,13 @@ function ex_item_move() {
 	var _source_key = _source_items[# EX_COLS.key, _source_slot];
 	var _source_tags = _source_items[# EX_COLS.tags, _source_slot];
 	var _source_amount = _source_items[# EX_COLS.amount, _source_slot];
+	var type_conveyor = argument[5];
+	//var type_conveyor = false;
+	
+	//show_debug_message("Conveyor")
+	//show_debug_message(argument[5])
+	//show_debug_message(type_conveyor)
+	//show_debug_message("")
 
 	//prepare destination data
 	var _dest_inv = argument[2];
@@ -22,7 +30,7 @@ function ex_item_move() {
 	var _dest_slot = argument_count > 4 ? argument[4] : -1;
 
 	//add item to the destination inventory
-	var _count = _ex_fn_item_add(_dest_inv, _source_key, _dest_amount, _dest_slot, _source_tags, false);
+	var _count = _ex_fn_item_add(_dest_inv, _source_key, _dest_amount, _dest_slot, _source_tags, false, type_conveyor);
 
 	//remove items
 	_ex_fn_item_remove(_source_inv, _source_key, _count, _source_slot);	

@@ -1,50 +1,55 @@
-﻿key,stack_size,image_index,sprite_index,type,category,name,description
-string,float,float,asset,string,string,string,string
-resource_none,1,-1,none,none,none,none,
-resource_limestone_chunk,32,0,spr_resource_raw,resource,raw,Limestone Chunk,Words Go Here
-resource_copper_ore,32,1,spr_resource_raw,resource,raw,Copper Ore,
-resource_coal_chunk,32,2,spr_resource_raw,resource,raw,Coal Chunk,
-resource_bauxite_chunk,32,3,spr_resource_raw,resource,raw,Bauxite Chunk,
-resource_iron_ore,32,4,spr_resource_raw,resource,raw,Iron Ore,
-resource_steel_debris,32,6,spr_resource_raw,resource,raw,Steel Debris,
-resource_titanium_debris,32,7,spr_resource_raw,resource,raw,Titanium Debris,
-resource_gold_ore,32,8,spr_resource_raw,resource,raw,Gold Ore,
-resource_concrete,32,0,spr_resource_refined,resource,refined,Concrete,Words Go Here
-resource_copper_ingot,32,1,spr_resource_refined,resource,refined,Copper Ingot,
-resource_iron_ingot,32,2,spr_resource_refined,resource,refined,Iron Ingot,
-resource_steel_ingot,32,3,spr_resource_refined,resource,refined,Steel Ingot,
-resource_aluminium_ingot,32,4,spr_resource_refined,resource,refined,Aluminium Ingot,
-resource_titanium_ingot,32,5,spr_resource_refined,resource,refined,Titanium Ingot,
-resource_gold_ingot,32,6,spr_resource_refined,resource,refined,Gold Ingot,
-resource_copper_pipe,32,0,spr_resource_component,resource,component,Copper Pipe,Words Go Here
-resource_copper_cable,64,1,spr_resource_component,resource,component,Copper Cable,
-resource_iron_plate,32,2,spr_resource_component,resource,component,Iron Plate,
-resource_iron_gear,48,3,spr_resource_component,resource,component,Iron Gear,
-resource_iron_bolt,64,4,spr_resource_component,resource,component,Iron Bolt,
-resource_steel_plate,32,5,spr_resource_component,resource,component,Steel Plate,
-resource_steel_pipe,32,6,spr_resource_component,resource,component,Steel Pipe,
-resource_aluminium_sheet,32,7,spr_resource_component,resource,component,Aluminium Sheet,
-resource_gold_wire,64,8,spr_resource_component,resource,component,Gold Wire,
-resource_steel_framework,16,0,spr_resource_advanced,resource,advanced,Steel Framework,Words Go Here
-resource_steel_beam,16,1,spr_resource_advanced,resource,advanced,Steel Beam,
-resource_reinforced_plate,16,2,spr_resource_advanced,resource,advanced,Reinforced Plate,
-resource_aluminium_battery,16,3,spr_resource_advanced,resource,advanced,Aluminium Battery,
-resource_aluminium_capacitor,16,4,spr_resource_advanced,resource,advanced,Aluminium Capacitor,
-resource_heat_sink,16,5,spr_resource_advanced,resource,advanced,Heat Sink,
-resource_electromagnet,16,6,spr_resource_advanced,resource,advanced,Electromagnet,
-resource_induction_motor,16,7,spr_resource_advanced,resource,advanced,Induction Motor,
-resource_industrial_beam,16,8,spr_resource_advanced,resource,advanced,Industrial Beam,
-resource_industrial_framework,16,9,spr_resource_advanced,resource,advanced,Industrial Framework,
-resource_titanium_casing,8,0,spr_resource_complex,resource,complex,Titanium Casing,Words Go Here
-resource_modular_framework,8,1,spr_resource_complex,resource,complex,Modular Framework,
-resource_heat_exchanger,8,2,spr_resource_complex,resource,complex,Heat Exchanger,
-resource_compact_motor,8,3,spr_resource_complex,resource,complex,Compact Motor,
-resource_circuit_board,8,4,spr_resource_complex,resource,complex,Circuit Board,
-resource_supercapacitor,8,5,spr_resource_complex,resource,complex,Supercapacitor,
-resource_combustion_engine,8,6,spr_resource_complex,resource,complex,Combustion Engine,
-resource_track_mechanism,1,0,spr_resource_curio,resource,curio,Track Mechanism,Words Go Here
-resource_thruster_mechanism,1,1,spr_resource_curio,resource,curio,Thruster Mechanism,
-resource_basic_hardrive,1,2,spr_resource_curio,resource,curio,Basic Hardrive,
-resource_advanced_hardrive,1,3,spr_resource_curio,resource,curio,Advanced Hardrive,
-resource_ramm_bot,1,4,spr_resource_curio,resource,curio,R.A.M.M Bot,
-resource_romm_bot,1,5,spr_resource_curio,resource,curio,R.O.M.M Bot,
+﻿key,stack_size,conveyor_stack_size,image_index,sprite_index,type,category,name,description,,stack_size
+string,float,float,float,asset,string,string,string,string,,float
+resource_none,0,0,-1,none,resource,none,none,,,0
+resource_limestone_chunk,32,1,0,spr_resource_raw,resource,raw,Limestone Chunk,Words Go Here,,32
+resource_copper_ore,32,1,1,spr_resource_raw,resource,raw,Copper Ore,,,32
+resource_iron_ore,32,1,2,spr_resource_raw,resource,raw,Iron Ore,,,32
+resource_steel_debris,32,1,3,spr_resource_raw,resource,raw,Steel Debris,,,32
+resource_bauxite_chunk,32,1,4,spr_resource_raw,resource,raw,Bauxite Chunk,,,32
+resource_titanium_debris,32,1,5,spr_resource_raw,resource,raw,Titanium Debris,,,32
+resource_gold_ore,32,1,6,spr_resource_raw,resource,raw,Gold Ore,,,32
+resource_coal_chunk,32,1,7,spr_resource_raw,resource,raw,Coal Chunk,,,32
+,,,,,,,,,,
+resource_concrete,32,1,0,spr_resource_refined,resource,refined,Concrete,Words Go Here,,32
+resource_copper_ingot,32,1,1,spr_resource_refined,resource,refined,Copper Ingot,,,32
+resource_iron_ingot,32,1,2,spr_resource_refined,resource,refined,Iron Ingot,,,32
+resource_steel_ingot,32,1,3,spr_resource_refined,resource,refined,Steel Ingot,,,32
+resource_aluminium_ingot,32,1,4,spr_resource_refined,resource,refined,Aluminium Ingot,,,32
+resource_titanium_ingot,32,1,5,spr_resource_refined,resource,refined,Titanium Ingot,,,32
+resource_gold_ingot,32,1,6,spr_resource_refined,resource,refined,Gold Ingot,,,32
+,,,,,,,,,,
+resource_copper_pipe,32,1,0,spr_resource_component,resource,component,Copper Pipe,Words Go Here,,32
+resource_copper_cable,64,1,1,spr_resource_component,resource,component,Copper Cable,,,64
+resource_iron_plate,32,1,2,spr_resource_component,resource,component,Iron Plate,,,32
+resource_iron_gear,48,1,3,spr_resource_component,resource,component,Iron Gear,,,48
+resource_iron_bolt,64,1,4,spr_resource_component,resource,component,Iron Bolt,,,64
+resource_steel_plate,32,1,5,spr_resource_component,resource,component,Steel Plate,,,32
+resource_steel_pipe,32,1,6,spr_resource_component,resource,component,Steel Pipe,,,32
+resource_aluminium_sheet,32,1,7,spr_resource_component,resource,component,Aluminium Sheet,,,32
+resource_gold_wire,64,1,8,spr_resource_component,resource,component,Gold Wire,,,64
+,,,,,,,,,,
+resource_steel_framework,16,1,0,spr_resource_advanced,resource,advanced,Steel Framework,Words Go Here,,16
+resource_steel_beam,16,1,1,spr_resource_advanced,resource,advanced,Steel Beam,,,16
+resource_reinforced_plate,16,1,2,spr_resource_advanced,resource,advanced,Reinforced Plate,,,16
+resource_aluminium_battery,16,1,3,spr_resource_advanced,resource,advanced,Aluminium Battery,,,16
+resource_aluminium_capacitor,16,1,4,spr_resource_advanced,resource,advanced,Aluminium Capacitor,,,16
+resource_heat_sink,16,1,5,spr_resource_advanced,resource,advanced,Heat Sink,,,16
+resource_electromagnet,16,1,6,spr_resource_advanced,resource,advanced,Electromagnet,,,16
+resource_induction_motor,16,1,7,spr_resource_advanced,resource,advanced,Induction Motor,,,16
+resource_industrial_beam,16,1,8,spr_resource_advanced,resource,advanced,Industrial Beam,,,16
+resource_industrial_framework,16,1,9,spr_resource_advanced,resource,advanced,Industrial Framework,,,16
+,,,,,,,,,,
+resource_titanium_casing,8,1,0,spr_resource_complex,resource,complex,Titanium Casing,Words Go Here,,8
+resource_modular_framework,8,1,1,spr_resource_complex,resource,complex,Modular Framework,,,8
+resource_heat_exchanger,8,1,2,spr_resource_complex,resource,complex,Heat Exchanger,,,8
+resource_compact_motor,8,1,3,spr_resource_complex,resource,complex,Compact Motor,,,8
+resource_circuit_board,8,1,4,spr_resource_complex,resource,complex,Circuit Board,,,8
+resource_supercapacitor,8,1,5,spr_resource_complex,resource,complex,Supercapacitor,,,8
+resource_combustion_engine,8,1,6,spr_resource_complex,resource,complex,Combustion Engine,,,8
+,,,,,,,,,,
+resource_track_mechanism,1,1,0,spr_resource_curio,resource,curio,Track Mechanism,Words Go Here,,1
+resource_thruster_mechanism,1,1,1,spr_resource_curio,resource,curio,Thruster Mechanism,,,1
+resource_basic_hardrive,1,1,2,spr_resource_curio,resource,curio,Basic Hardrive,,,1
+resource_advanced_hardrive,1,1,3,spr_resource_curio,resource,curio,Advanced Hardrive,,,1
+resource_ramm_bot,1,1,4,spr_resource_curio,resource,curio,R.A.M.M Bot,,,1
+resource_romm_bot,1,1,5,spr_resource_curio,resource,curio,R.O.M.M Bot,,,1

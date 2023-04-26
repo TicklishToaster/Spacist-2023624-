@@ -1,0 +1,5 @@
+﻿key,stack_size,image_index,sprite_index,type,category,name
+string,float,float,asset,string,string,string
+tool_grapple,1,0,spr_icon_grapple,,,Grapple Hook
+tool_blueprint,1,0,spr_icon_blueprint,,,Building Blueprint
+tool_demolish,1,0,spr_icon_demolish,,,Building Demolish

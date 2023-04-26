@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "panels",
-    "path": "folders/Scripts/ex/ui/panels.yy",
+    "path": "folders/Scripts/ex Extension/ui/panels.yy",
   },
 }

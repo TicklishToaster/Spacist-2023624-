@@ -16,7 +16,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "ui_base",
-    "path": "folders/Objects/Inventory/ex/ui_base.yy",
+    "path": "folders/Objects/Inventory Extension/ex/ui_base.yy",
   },
   "parentObjectId": null,
   "persistent": false,

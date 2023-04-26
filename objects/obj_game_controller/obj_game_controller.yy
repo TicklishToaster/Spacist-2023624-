@@ -12,7 +12,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "controllers",
-    "path": "folders/Objects/Inventory/controllers.yy",
+    "path": "folders/Objects/Inventory Extension/controllers.yy",
   },
   "parentObjectId": null,
   "persistent": true,

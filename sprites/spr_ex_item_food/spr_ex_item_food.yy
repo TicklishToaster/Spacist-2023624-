@@ -29,7 +29,7 @@
   "origin": 4,
   "parent": {
     "name": "items",
-    "path": "folders/Sprites/ex/items.yy",
+    "path": "folders/Sprites/ex Extension/items.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

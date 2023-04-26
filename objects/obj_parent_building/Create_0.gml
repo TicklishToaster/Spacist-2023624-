@@ -19,6 +19,6 @@ inv_building_ui = obj_inv_panel_building;
 image_xscale = 4;
 image_yscale = 4;
 
-build_mode	= true;
+//build_mode	= true;
 active_mode = false;
 

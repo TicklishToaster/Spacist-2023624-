@@ -15,7 +15,8 @@ function ex_item_add() {
 	var _tags = argument_count > 4 ? argument[4] : -1;
 
 	//add item to the inventory
-	var _count = _ex_fn_item_add(_inv, _key, _amount, _slot, _tags, false);
+	var _count = _ex_fn_item_add(_inv, _key, _amount, _slot, _tags, false, argument[6]);
+	//var _count = _ex_fn_item_add(_inv, _key, _amount, _slot, _tags, false);
 
 	//fire notification
 	ex_ev_notify(_inv, EX_EVENTS.inv_updated);

@@ -19,14 +19,14 @@ global.inv_mouse = ex_inv_create(1);
 
 //generate a player inventory
 global.inv_backpack = ex_inv_create(30);
-ex_item_add(global.inv_backpack, "resource_copper_ore",				1, -1);
-ex_item_add(global.inv_backpack, "resource_concrete",				2, -1);
-ex_item_add(global.inv_backpack, "resource_copper_cable",			3, -1);
-ex_item_add(global.inv_backpack, "resource_heat_sink",				4, -1);
+//ex_item_add(global.inv_backpack, "resource_copper_ore",				1, -1);
+//ex_item_add(global.inv_backpack, "resource_concrete",				2, -1);
+//ex_item_add(global.inv_backpack, "resource_copper_cable",			3, -1);
+//ex_item_add(global.inv_backpack, "resource_heat_sink",				4, -1);
 
-ex_item_add(global.inv_backpack, "resource_copper_ingot",			4, -1);
-ex_item_add(global.inv_backpack, "resource_iron_ingot",				4, -1);
-ex_item_add(global.inv_backpack, "resource_gold_ingot",				4, -1);
+//ex_item_add(global.inv_backpack, "resource_copper_ingot",			4, -1);
+//ex_item_add(global.inv_backpack, "resource_iron_ingot",				4, -1);
+//ex_item_add(global.inv_backpack, "resource_gold_ingot",				4, -1);
 
 //ex_item_add(global.inv_backpack, "building_constructor",			1, 8);
 //ex_item_add(global.inv_backpack, "building_conveyor_belt_mk1",	1, 9);
@@ -34,18 +34,25 @@ ex_item_add(global.inv_backpack, "resource_gold_ingot",				4, -1);
 
 //create a toolbar and insert specific items
 global.inv_toolbar = ex_inv_create(10);
-//ex_item_add(global.inv_toolbar, _item, 1, 0);
-ex_item_add(global.inv_toolbar, "resource_copper_ore",			4, 0);
-ex_item_add(global.inv_toolbar, "resource_iron_ore",			4, 1);
-ex_item_add(global.inv_toolbar, "resource_gold_ore",			4, 2);
+ex_item_add(global.inv_toolbar, "tool_grapple",					1, 0);
+ex_item_add(global.inv_toolbar, "tool_blueprint",				1, 1);
+//ex_item_add(global.inv_toolbar, "tool_demolish",				1, 2);
 
-ex_item_add(global.inv_toolbar, "building_smelter",				1, 7);
-ex_item_add(global.inv_toolbar, "building_constructor",			1, 8);
-ex_item_add(global.inv_toolbar, "building_conveyor_belt_mk1",	1, 9);
+//ex_item_add(global.inv_toolbar, "resource_copper_ore",			4, 7);
+//ex_item_add(global.inv_toolbar, "resource_iron_ore",			4, 8);
+//ex_item_add(global.inv_toolbar, "resource_gold_ore",			4, 9);
+
+//ex_item_add(global.inv_toolbar, "resource_copper_ore",			4, 0);
+//ex_item_add(global.inv_toolbar, "resource_iron_ore",			4, 1);
+//ex_item_add(global.inv_toolbar, "resource_gold_ore",			4, 2);
+
+//ex_item_add(global.inv_toolbar, "building_smelter",				1, 7);
+//ex_item_add(global.inv_toolbar, "building_constructor",			1, 8);
+//ex_item_add(global.inv_toolbar, "building_conveyor_belt_mk1",	1, 9);
 
 
 //create an equipment inventory 
-global.inv_equipment = ex_inv_create(5);
+//global.inv_equipment = ex_inv_create(5);
 
 ////create a crafting inventory 
 //global.inv_craft = ex_inv_create(5);

@@ -11,3 +11,4 @@
 //	keyboard_lastchar = "";
 	
 //}
+type_conveyor = true;

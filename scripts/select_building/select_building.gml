@@ -3,33 +3,48 @@
 function select_building(building_key) {
 	var building_id		 = noone;
 	var building_sprite	 = -1;
-	//var building_sprite_misc1	= spr_smelter_belt_exit;
-	//var building_sprite_misc2	= spr_smelter_belt_holder;
-	var stretch_placement = false;
+	var building_9slice  = false
 		
 	switch (building_key) {
 		case "building_smelter":
 			building_id		= obj_smelter;
 			building_sprite	= spr_smelter_full;
-			//building_sprite_misc1	= spr_smelter_belt_exit;
-			//building_sprite_misc2	= spr_smelter_belt_holder;
 		    break;
 		case "building_constructor":
 			building_id		= obj_constructor;
-			building_sprite	= spr_constructor_full;
-			//building_sprite_misc1	= spr_constructor_belt_exit;
-			//building_sprite_misc2	= spr_constructor_belt_holder;			
+			building_sprite	= spr_constructor_full;		
+		    break;
+		case "building_foundry":
+			building_id		= obj_constructor;
+			building_sprite	= spr_foundry_full;
+		    break;
+		case "building_assembler":
+			building_id		= obj_constructor;
+			building_sprite	= spr_assembler_full;
 		    break;
 		case "building_conveyor_belt_mk1":
 			building_id		= obj_conveyor_belt;
 		    building_sprite	= spr_conveyor_belt;
-			stretch_placement = true;
+			building_9slice = true;
 		    break;
-		default:
-		    //sprite_active	= noone;
-			//building_sprite		= noone;
+		case "building_conveyor_tube_mk1":
+			building_id		= obj_conveyor_belt;
+		    building_sprite	= spr_conveyor_tube;
+			building_9slice = true;
+		    break;
+		case "building_conveyor_splitter":
+			building_id		= obj_conveyor_belt;
+		    building_sprite	= spr_conveyor_splitter;
+		    break;
+		case "building_raised_platform_mk1":
+			building_id		= obj_conveyor_belt;
+		    building_sprite	= spr_platform_top;
+			building_9slice = true;
+		    break;
+		case "building_storage_container_mk1":
+			building_id		= obj_conveyor_belt;
+		    building_sprite	= spr_container_full;
 		    break;
 	}
-	return [building_id, building_sprite, stretch_placement];
-	//return [building_id, building_sprite, [building_sprite_misc1, building_sprite_misc2], stretch_placement];
+	return [building_id, building_sprite, building_9slice];
 }

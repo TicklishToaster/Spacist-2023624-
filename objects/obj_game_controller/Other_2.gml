@@ -6,7 +6,7 @@
 //init inventory system and load database
 ex_init();
 //ex_db_load("database/resources.csv");
-ex_db_load("database/resources.csv", "database/buildings.csv");
+ex_db_load("database/resources.csv", "database/buildings.csv", "database/tools.csv");
 //ex_db_load("ex/armors.csv", "ex/foods.csv", "ex/potions.csv", "ex/weapons.csv");
 
 ////initialize the crafting system

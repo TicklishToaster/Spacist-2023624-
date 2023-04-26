@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "crafting",
-    "path": "folders/Scripts/ex/crafting.yy",
+    "path": "folders/Scripts/ex Extension/crafting.yy",
   },
 }

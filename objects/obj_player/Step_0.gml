@@ -1,48 +1,48 @@
-// Input Variables ////////////////////////////////////////////////////////////
-// Input WASD Controls
-var input_up_press			= keyboard_check_pressed(ord("W"));
-var input_up_hold			= keyboard_check(ord("W"));
-var input_down_press		= keyboard_check_pressed(ord("S"));
-var input_down_hold			= keyboard_check(ord("S"));
-var input_left_press		= keyboard_check_pressed(ord("A"));
-var input_left_hold			= keyboard_check(ord("A"));
-var input_right_press		= keyboard_check_pressed(ord("D"));
-var input_right_hold		= keyboard_check(ord("D"));
+//// Input Variables ////////////////////////////////////////////////////////////
+//// Input WASD Controls
+//var input_up_press			= keyboard_check_pressed(ord("W"));
+//var input_up_hold			= keyboard_check(ord("W"));
+//var input_down_press		= keyboard_check_pressed(ord("S"));
+//var input_down_hold			= keyboard_check(ord("S"));
+//var input_left_press		= keyboard_check_pressed(ord("A"));
+//var input_left_hold			= keyboard_check(ord("A"));
+//var input_right_press		= keyboard_check_pressed(ord("D"));
+//var input_right_hold		= keyboard_check(ord("D"));
 
-// Input Arrow Key Controls
-var input_uparrow_press		= keyboard_check_pressed(vk_up);
-var input_uparrow_hold		= keyboard_check(vk_up);
-var input_downarrow_press	= keyboard_check_pressed(vk_down);
-var input_downarrow_hold	= keyboard_check(vk_down);
-var input_leftarrow_press	= keyboard_check_pressed(vk_left);
-var input_leftarrow_hold	= keyboard_check(vk_left);
-var input_rightarrow_press	= keyboard_check_pressed(vk_right);
-var input_rightarrow_hold	= keyboard_check(vk_right);
+//// Input Arrow Key Controls
+//var input_uparrow_press		= keyboard_check_pressed(vk_up);
+//var input_uparrow_hold		= keyboard_check(vk_up);
+//var input_downarrow_press	= keyboard_check_pressed(vk_down);
+//var input_downarrow_hold	= keyboard_check(vk_down);
+//var input_leftarrow_press	= keyboard_check_pressed(vk_left);
+//var input_leftarrow_hold	= keyboard_check(vk_left);
+//var input_rightarrow_press	= keyboard_check_pressed(vk_right);
+//var input_rightarrow_hold	= keyboard_check(vk_right);
 
-// Input Mouse Controls
-var input_mouse1_click		= mouse_check_button_pressed(mb_left);
-var input_mouse1_hold		= mouse_check_button(mb_left);
-var input_mouse1_release	= mouse_check_button_released(mb_left);
-var input_mouse2_click		= mouse_check_button_pressed(mb_right);
-var input_mouse2_hold		= mouse_check_button(mb_right);
-var input_mouse2_release	= mouse_check_button_released(mb_right);
-var input_mouse4_click		= mouse_check_button_pressed(mb_side1);
-var input_mouse5_click		= mouse_check_button_pressed(mb_side2);
+//// Input Mouse Controls
+//var input_mouse1_click		= mouse_check_button_pressed(mb_left);
+//var input_mouse1_hold		= mouse_check_button(mb_left);
+//var input_mouse1_release	= mouse_check_button_released(mb_left);
+//var input_mouse2_click		= mouse_check_button_pressed(mb_right);
+//var input_mouse2_hold		= mouse_check_button(mb_right);
+//var input_mouse2_release	= mouse_check_button_released(mb_right);
+//var input_mouse4_click		= mouse_check_button_pressed(mb_side1);
+//var input_mouse5_click		= mouse_check_button_pressed(mb_side2);
 
-// Input Space Bar Controls
-var input_space_press		= keyboard_check_pressed(vk_space);
-var input_space_hold		= keyboard_check(vk_space);
-var input_space_release		= keyboard_check_released(vk_space);
+//// Input Space Bar Controls
+//var input_space_press		= keyboard_check_pressed(vk_space);
+//var input_space_hold		= keyboard_check(vk_space);
+//var input_space_release		= keyboard_check_released(vk_space);
 
-// Input Miscellaneous Controls
-var input_shift_press		= keyboard_check_pressed(vk_shift);
-var input_shift_hold		= keyboard_check(vk_shift);
-var input_control_press		= keyboard_check_pressed(vk_control);
-var input_control_hold		= keyboard_check(vk_control);
+//// Input Miscellaneous Controls
+//var input_shift_press		= keyboard_check_pressed(vk_shift);
+//var input_shift_hold		= keyboard_check(vk_shift);
+//var input_control_press		= keyboard_check_pressed(vk_control);
+//var input_control_hold		= keyboard_check(vk_control);
 
-var input_build_mode		= keyboard_check_pressed(ord("B"));
+//var input_build_mode		= keyboard_check_pressed(ord("B"));
 
-///////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 // Friction ///////////////////////////////////////////////////////////////////
 // Which form of acceleration/friction to apply
@@ -337,24 +337,51 @@ if (state_jumping && !state_charging && !state_landing) {
 }
 
 // Grapple Controls ///////////////////////////////////////////////////////////
-// Initiate Grapple Animation
-if ((input_shift_press || input_mouse2_click) && !instance_exists(obj_hook)) {
-	if (!state_grappling && !state_retrieving && !state_charging && !state_jumping && !state_landing && !aim_cancel) {
-		// Start Grapple Animation.
-		if (!state_aiming) {
-			state_aiming = true;
-			set_phys(grapple_physics);
-		}
+// Enable grapple mode if the grapple tool is selected.
+var selected_item = ex_item_get_item(global.inv_toolbar, array_get_index(obj_inv_panel_toolbar.slots, obj_inv_panel_toolbar.selected_slot))
+if (ds_exists(selected_item, ds_type_map)) {
+	if (selected_item[? "key"] == "tool_grapple") {
 		
-		// Set Animation Variables.
-		if (animation_id != animation_grapple_aim) {
-			animation_id = animation_grapple_aim;
-			animation_index = 0;
-			animation_id_r = animation_grapple_aim_r;
-			animation_index_r = 0;	
-		}		
+		// Initiate Grapple Animation
+		if ((input_shift_press || input_mouse2_click) && !instance_exists(obj_hook)) {
+			if (!state_grappling && !state_retrieving && !state_charging && !state_jumping && !state_landing && !aim_cancel) {
+				// Start Grapple Animation.
+				if (!state_aiming) {
+					state_aiming = true;
+					set_phys(grapple_physics);
+				}
+		
+				// Set Animation Variables.
+				if (animation_id != animation_grapple_aim) {
+					animation_id = animation_grapple_aim;
+					animation_index = 0;
+					animation_id_r = animation_grapple_aim_r;
+					animation_index_r = 0;	
+				}		
+			}
+		}
+
 	}
 }
+
+//// Initiate Grapple Animation
+//if ((input_shift_press || input_mouse2_click) && !instance_exists(obj_hook)) {
+//	if (!state_grappling && !state_retrieving && !state_charging && !state_jumping && !state_landing && !aim_cancel) {
+//		// Start Grapple Animation.
+//		if (!state_aiming) {
+//			state_aiming = true;
+//			set_phys(grapple_physics);
+//		}
+		
+//		// Set Animation Variables.
+//		if (animation_id != animation_grapple_aim) {
+//			animation_id = animation_grapple_aim;
+//			animation_index = 0;
+//			animation_id_r = animation_grapple_aim_r;
+//			animation_index_r = 0;	
+//		}		
+//	}
+//}
 
 // Cancel Grapple Animation
 if (input_mouse2_release) {
@@ -431,7 +458,9 @@ if ((input_shift_hold || input_mouse2_hold) && (input_space_press || input_mouse
 		animation_index = 0;
 		
 		// Generate Asteroid Field
-		generate_asteroid_field();		
+		with (obj_asteroid_manager) {
+			event_user(0);
+		}	
 	}
 }
 
@@ -500,8 +529,8 @@ if (!instance_exists(obj_hook)) {
 		show_states();
 		
 		// Relocate position if too far or too close to the falling asteroid.
-		show_debug_message(grapple_distance);
-		show_debug_message(obj_camera.camera_width/4);
+		//show_debug_message(grapple_distance);
+		//show_debug_message(obj_camera.camera_width/4);
 		if (abs(grapple_distance) > obj_camera.camera_width/4) {
 			if (grapple_distance > 0) {
 				//x = grapple_object.x - obj_camera.camera_width/2 + sprite_width/2;
@@ -533,49 +562,49 @@ if (!instance_exists(obj_hook)) {
 	}
 }
 
-// Enable Popup Window & Asteroids Layer
-if (state_grappling && view_visible[1] == false && obj_hook.y < grapple_camera_height - sprite_get_height(spr_grapple)/2) {
-	// Enable Popup Window
-	view_visible[1] = true;
+//// Enable Popup Window & Asteroids Layer
+//if (state_grappling && view_visible[1] == false && obj_hook.y < grapple_camera_height - sprite_get_height(spr_grapple)/2) {
+//	// Enable Popup Window
+//	view_visible[1] = true;
 	
-	// Enable Popup Backgrounds.
-	layer_set_visible("Window_Terrain_Foreground",	true);
-	layer_set_visible("Terrain_Foreground",			false);
-	layer_set_visible("Window_Parallax_1",			true);
-	layer_set_visible("Window_Parallax_2",			true);
-	layer_set_visible("Window_Parallax_3",			true);
-	layer_set_visible("Window_Parallax_4",			true);
-	layer_set_visible("Window_Parallax_Canvas",		true);
+//	// Enable Popup Backgrounds.
+//	layer_set_visible("Window_Terrain_Foreground",	true);
+//	layer_set_visible("Terrain_Foreground",			false);
+//	layer_set_visible("Window_Parallax_1",			true);
+//	layer_set_visible("Window_Parallax_2",			true);
+//	layer_set_visible("Window_Parallax_3",			true);
+//	layer_set_visible("Window_Parallax_4",			true);
+//	layer_set_visible("Window_Parallax_Canvas",		true);
 		
-	// Enable Asteroids Backgrounds.
-	layer_set_visible("Asteroids_Parallax_1",	true);
-	layer_set_visible("Asteroids_Parallax_2",	true);
-	layer_set_visible("Asteroids_Parallax_3",	true);
-	layer_set_visible("Asteroids_Parallax_4",	true);
-	layer_set_visible("Asteroids_Gradient",		true);
-}
+//	// Enable Asteroids Backgrounds.
+//	layer_set_visible("Asteroids_Parallax_1",	true);
+//	layer_set_visible("Asteroids_Parallax_2",	true);
+//	layer_set_visible("Asteroids_Parallax_3",	true);
+//	layer_set_visible("Asteroids_Parallax_4",	true);
+//	layer_set_visible("Asteroids_Gradient",		true);
+//}
 
-// Disable Popup Window & Asteroids Layer
-else if (!state_grappling && view_visible[1] == true) {
-	// Disable Popup Window
-	view_visible[1] = false;
+//// Disable Popup Window & Asteroids Layer
+//else if (!state_grappling && view_visible[1] == true) {
+//	// Disable Popup Window
+//	view_visible[1] = false;
 	
-	// Disable Popup Backgrounds.
-	layer_set_visible("Window_Terrain_Foreground",	false);
-	layer_set_visible("Terrain_Foreground",			true);
-	layer_set_visible("Window_Parallax_1",			false);
-	layer_set_visible("Window_Parallax_2",			false);
-	layer_set_visible("Window_Parallax_3",			false);
-	layer_set_visible("Window_Parallax_4",			false);
-	layer_set_visible("Window_Parallax_Canvas",		false);
+//	// Disable Popup Backgrounds.
+//	layer_set_visible("Window_Terrain_Foreground",	false);
+//	layer_set_visible("Terrain_Foreground",			true);
+//	layer_set_visible("Window_Parallax_1",			false);
+//	layer_set_visible("Window_Parallax_2",			false);
+//	layer_set_visible("Window_Parallax_3",			false);
+//	layer_set_visible("Window_Parallax_4",			false);
+//	layer_set_visible("Window_Parallax_Canvas",		false);
 
-	// Disable Asteroids Backgrounds.
-	layer_set_visible("Asteroids_Parallax_1",	false);
-	layer_set_visible("Asteroids_Parallax_2",	false);
-	layer_set_visible("Asteroids_Parallax_3",	false);
-	layer_set_visible("Asteroids_Parallax_4",	false);
-	layer_set_visible("Asteroids_Gradient",		false);	
-}
+//	// Disable Asteroids Backgrounds.
+//	layer_set_visible("Asteroids_Parallax_1",	false);
+//	layer_set_visible("Asteroids_Parallax_2",	false);
+//	layer_set_visible("Asteroids_Parallax_3",	false);
+//	layer_set_visible("Asteroids_Parallax_4",	false);
+//	layer_set_visible("Asteroids_Gradient",		false);	
+//}
 
 
 //// Build Controls /////////////////////////////////////////////////////////////

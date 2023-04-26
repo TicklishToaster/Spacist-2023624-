@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "slots",
-    "path": "folders/Scripts/ex/ui/slots.yy",
+    "path": "folders/Scripts/ex Extension/ui/slots.yy",
   },
 }

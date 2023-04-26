@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "ex_tag",
-    "path": "folders/Scripts/ex/core/ex_tag.yy",
+    "path": "folders/Scripts/ex Extension/core/ex_tag.yy",
   },
 }

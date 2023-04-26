@@ -6,7 +6,7 @@
 */
 
 if(keyboard_check_pressed(ord("I"))) {	
-	if(inventory_is_open) { 
+	if (inventory_is_open) { 
 		event_user(INV_CONTROLLER_EVENTS.close_toggable_inventories);
 	}
 	else {
@@ -16,6 +16,11 @@ if(keyboard_check_pressed(ord("I"))) {
 
 if (keyboard_check_pressed(ord("E"))) {
 	if (collision_point(mouse_x, mouse_y, obj_parent_building, true, true)) {
+		var target_building = collision_point(mouse_x, mouse_y, obj_parent_building, true, true);
+		if (target_building.sprite_index == spr_raised_platform || target_building.sprite_index == spr_conveyor_tube) {
+			exit;
+		}
+		
 		var target_inventory = collision_point(mouse_x, mouse_y, obj_parent_building, true, true);
 		
 		if (target_inventory.inv_building != -1) {		
@@ -40,9 +45,10 @@ if (keyboard_check_pressed(ord("E"))) {
 				ex_ui_panel_open(target_inventory.inv_building, target_inventory.inv_building_ui, 
 				obj_camera.camera_width/2, 
 				obj_camera.camera_height/2, layer);
-
-			
+				
+				event_user(INV_CONTROLLER_EVENTS.open_toggable_inventories);	
 			}
+			
 			// Close selected building inventory if it is currently open.
 			else if (target_inventory.inv_open) {
 				// Set inventory to close.
@@ -50,6 +56,8 @@ if (keyboard_check_pressed(ord("E"))) {
 			
 				// Close building inventory
 				ex_ui_panel_close(target_inventory.inv_building_ui);
+				
+				event_user(INV_CONTROLLER_EVENTS.close_toggable_inventories);
 			}
 		}
 		else {
@@ -66,7 +74,8 @@ if (keyboard_check_pressed(ord("E"))) {
 						ex_ui_panel_close(target_inventory.inv_building_ui);
 					}
 				}
-			}		
+			}
+			event_user(INV_CONTROLLER_EVENTS.close_toggable_inventories);
 		}
 	}
 	
@@ -81,6 +90,8 @@ if (keyboard_check_pressed(ord("E"))) {
 			// Close building inventory.
 			ex_ui_panel_close(instance_find(obj_parent_building, i).inv_building_ui);
 			//ex_ui_panel_close(obj_inv_panel_building);
+			
+			event_user(INV_CONTROLLER_EVENTS.close_toggable_inventories);
 		}
 	}
 }

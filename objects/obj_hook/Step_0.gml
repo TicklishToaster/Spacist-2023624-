@@ -3,65 +3,6 @@ if (!creator.state_grappling) {
 	exit;
 }
 
-// Input Variables ////////////////////////////////////////////////////////////
-// Input WASD Controls
-var input_up_press			= keyboard_check_pressed(ord("W"));
-var input_up_hold			= keyboard_check(ord("W"));
-var input_down_press		= keyboard_check_pressed(ord("S"));
-var input_down_hold			= keyboard_check(ord("S"));
-var input_left_press		= keyboard_check_pressed(ord("A"));
-var input_left_hold			= keyboard_check(ord("A"));
-var input_right_press		= keyboard_check_pressed(ord("D"));
-var input_right_hold		= keyboard_check(ord("D"));
-
-// Input Arrow Key Controls
-var input_uparrow_press		= keyboard_check_pressed(vk_up);
-var input_uparrow_hold		= keyboard_check(vk_up);
-var input_downarrow_press	= keyboard_check_pressed(vk_down);
-var input_downarrow_hold	= keyboard_check(vk_down);
-var input_leftarrow_press	= keyboard_check_pressed(vk_left);
-var input_leftarrow_hold	= keyboard_check(vk_left);
-var input_rightarrow_press	= keyboard_check_pressed(vk_right);
-var input_rightarrow_hold	= keyboard_check(vk_right);
-
-// Input Mouse Controls
-var input_mouse1_click		= mouse_check_button_pressed(mb_left);
-var input_mouse1_hold		= mouse_check_button(mb_left);
-var input_mouse1_release	= mouse_check_button_released(mb_left);
-var input_mouse2_click		= mouse_check_button_pressed(mb_right);
-var input_mouse2_hold		= mouse_check_button(mb_right);
-var input_mouse2_release	= mouse_check_button_released(mb_right);
-var input_mouse4_click		= mouse_check_button_pressed(mb_side1);
-var input_mouse5_click		= mouse_check_button_pressed(mb_side2);
-
-// Input Space Bar Controls
-var input_space_press		= keyboard_check_pressed(vk_space);
-var input_space_hold		= keyboard_check(vk_space);
-var input_space_release		= keyboard_check_released(vk_space);
-
-// Input Miscellaneous Controls
-var input_shift_press		= keyboard_check_pressed(vk_shift);
-var input_shift_hold		= keyboard_check(vk_shift);
-var input_control_press		= keyboard_check_pressed(vk_control);
-var input_control_hold		= keyboard_check(vk_control);
-
-// Gravity ////////////////////////////////////////////////////////////////////
-//if y_speed < 0 {
-//    // Rise Up
-//    y_speed = Approach(y_speed, max_y_speed, grav_rise);
-//	// Prevent acceleration going above 0.
-//	if y_speed > 0.0 {
-//		y_speed = 0.0;
-//	}
-//}	
-//else {
-//    // Fall Down
-//    y_speed = Approach(y_speed, max_y_speed, grav_fall);
-//	if y_speed < 0.0 {
-//		y_speed = 0.0;
-//	}
-//}
-
 // Decelerate If Inactive
 if (!state_controlled) {
 	//x_speed = Approach(x_speed, 0, air_fric);
@@ -193,7 +134,7 @@ if (input_space_press || input_mouse1_click) {
 // Change movement state when 1st target height is reached.
 if (y < creator.grapple_mode_height - 128) {
 	if (state_launched && !state_controlled && !state_pulling && !state_retrieving) {
-		show_debug_message("1st Target Height Threshold Reached");
+		//show_debug_message("1st Target Height Threshold Reached");
 		// Change Movement State
 		state_launched = false;		
 		set_phys(approach_physics);
@@ -203,7 +144,7 @@ if (y < creator.grapple_mode_height - 128) {
 // Change movement state when 2nd target height is reached.
 if (y < creator.grapple_mode_height/2) {
 	if (!state_controlled && !state_launched && !state_pulling && !state_retrieving) {
-		show_debug_message("2nd Target Height Threshold Reached");
+		//show_debug_message("2nd Target Height Threshold Reached");
 		// Change Movement State
 		//state_launched = false;
 		state_controlled = true;
@@ -214,7 +155,7 @@ if (y < creator.grapple_mode_height/2) {
 // Retrieve grapple hook when object is pulled below target height.
 if (y > creator.grapple_mode_height && instance_exists(attached_object)) {
 	if (state_pulling && !state_launched && !state_controlled && !state_retrieving) {
-		show_debug_message("1st Target Falling Condition Met");		
+		//show_debug_message("1st Target Falling Condition Met");		
 		// Update Attached Object
 		creator.grapple_object = attached_object;
 		var object_offset = attached_object.sprite_width;
@@ -267,7 +208,7 @@ if (y > creator.grapple_mode_height && instance_exists(attached_object)) {
 // Retrieve grapple hook when object is pulled below target height.
 if (y > creator.grapple_mode_height*1.2 && instance_exists(attached_object)) {
 	if (state_retrieving && !state_launched && !state_controlled && !state_pulling) {
-		show_debug_message("2nd Target Falling Condition Met");		
+		//show_debug_message("2nd Target Falling Condition Met");		
 		
 		// Remove Grabbed Object Values
 		with (attached_object) {
@@ -299,11 +240,15 @@ if (instance_exists(obj_grapple_chain) && state_retrieving) {
 		instance_destroy(obj_grapple_chain);
 		instance_destroy(self);
 	
-		// Destroy all objects in the asteroid layer except the one retreived.
-		with (obj_asteroid) {
-			if (!state_returning) {
-				instance_destroy();
-			}
+		//// Destroy all objects in the asteroid layer except the one retreived.
+		//with (obj_asteroid) {
+		//	if (!state_returning) {
+		//		instance_destroy();
+		//	}
+		//}
+		
+		with (obj_asteroid_manager) {
+			event_user(1);
 		}
 	}
 }

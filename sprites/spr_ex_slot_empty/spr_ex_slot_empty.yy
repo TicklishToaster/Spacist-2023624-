@@ -26,7 +26,7 @@
   "origin": 4,
   "parent": {
     "name": "slot",
-    "path": "folders/Sprites/ex/slot.yy",
+    "path": "folders/Sprites/ex Extension/slot.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

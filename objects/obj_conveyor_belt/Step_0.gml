@@ -48,9 +48,13 @@ if (connected_building != noone) {
 		}
 		else if (connector_building_type = "output") {
 			with (connected_building.creator) {
-				target_conveyor_input = other;
+				target_conveyor_output = other;
 			}
+			//connector_entrance = noone;
 		}
+		
+		show_debug_message(id)
+		show_debug_message(connector_building_type)
 		//with (connected_building) {
 		//	target_conveyor = other;
 		//}

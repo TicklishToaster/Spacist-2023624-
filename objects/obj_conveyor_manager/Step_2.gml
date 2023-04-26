@@ -15,7 +15,7 @@
 //	ds_grid_sort(conveyor_list, 1, false);
 //}
 
-
+// Redefine conveyor list contents whenever the total number of conveyor belts changes.
 if (conveyor_count != instance_number(obj_conveyor_belt)) {
 	conveyor_count = instance_number(obj_conveyor_belt);
 	conveyor_list = ds_grid_create(2, conveyor_count);
@@ -26,17 +26,17 @@ if (conveyor_count != instance_number(obj_conveyor_belt)) {
 	}
 
 	
-	for (var i = 0; i < conveyor_count; ++i) {
-	    show_debug_message(string(ds_grid_get(conveyor_list, 0, i)) + " | " + string(ds_grid_get(conveyor_list, 1, i)));
-	}
+	//for (var i = 0; i < conveyor_count; ++i) {
+	//    show_debug_message(string(ds_grid_get(conveyor_list, 0, i)) + " | " + string(ds_grid_get(conveyor_list, 1, i)));
+	//}
 	
 	ds_grid_sort(conveyor_list, 1, false);
 	
-	show_debug_message("NEW")
-	show_debug_message("")	
-	for (var i = 0; i < conveyor_count; ++i) {
-	    show_debug_message(string(ds_grid_get(conveyor_list, 0, i)) + " | " + string(ds_grid_get(conveyor_list, 1, i)));
-	}
-	show_debug_message("")	
-	show_debug_message("")
+	//show_debug_message("NEW")
+	//show_debug_message("")	
+	//for (var i = 0; i < conveyor_count; ++i) {
+	//    show_debug_message(string(ds_grid_get(conveyor_list, 0, i)) + " | " + string(ds_grid_get(conveyor_list, 1, i)));
+	//}
+	//show_debug_message("")	
+	//show_debug_message("")
 }

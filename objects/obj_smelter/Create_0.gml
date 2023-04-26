@@ -1,18 +1,21 @@
-// Inherit the parent event
-event_inherited();
-
+// Sprite variables.
+image_xscale = 4;
+image_yscale = 4;
 sprite_idle			= spr_smelter_idle;
 sprite_active		= spr_smelter_active;
 sprite_belt_exit	= spr_smelter_belt_exit;
 sprite_belt_holder	= spr_smelter_belt_holder;
 sprite_misc			= noone;
 
+animation_frame		= 0;
+animation_frame_max = sprite_get_number(sprite_active);
+
 
 // Initialise building inventory.
 inv_building		= ex_inv_create(2);
 inv_building_ui		= obj_inv_panel_building;
 inv_open			= false;
-ex_item_add(inv_building, "resource_iron_bolt", 2, 0);
+//ex_item_add(inv_building, "resource_iron_bolt", 2, 0);
 
 
 // Create belt exit and belt holder sprite instances.
@@ -33,7 +36,7 @@ connection_exit		= instance_create_layer(x+(sprite_width/2)*0, y, "Logistics", o
 target_conveyor_input = noone;
 target_conveyor_output= noone;
 
-//222
+// Activity variables.
 active_mode		= false;
 recipe_timer	= 0;
 

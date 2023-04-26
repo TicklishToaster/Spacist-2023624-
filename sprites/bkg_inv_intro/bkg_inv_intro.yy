@@ -26,7 +26,7 @@
   "origin": 0,
   "parent": {
     "name": "misc",
-    "path": "folders/Sprites/ex/misc.yy",
+    "path": "folders/Sprites/ex Extension/misc.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

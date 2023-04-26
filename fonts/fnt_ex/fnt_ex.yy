@@ -118,8 +118,8 @@
   "last": 0,
   "maintainGms1Font": false,
   "parent": {
-    "name": "ex",
-    "path": "folders/Fonts/ex.yy",
+    "name": "ex Extension",
+    "path": "folders/Fonts/ex Extension.yy",
   },
   "pointRounding": 0,
   "ranges": [

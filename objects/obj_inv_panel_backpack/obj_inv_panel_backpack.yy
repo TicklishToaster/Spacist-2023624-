@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "ui_panels",
-    "path": "folders/Objects/Inventory/ex/ui_panels.yy",
+    "path": "folders/Objects/Inventory Extension/ex/ui_panels.yy",
   },
   "parentObjectId": {
     "name": "obj_inv_panel",

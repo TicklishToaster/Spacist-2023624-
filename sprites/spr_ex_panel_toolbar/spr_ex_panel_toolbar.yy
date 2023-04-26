@@ -26,7 +26,7 @@
   "origin": 0,
   "parent": {
     "name": "panels",
-    "path": "folders/Sprites/ex/panels.yy",
+    "path": "folders/Sprites/ex Extension/panels.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

@@ -6,7 +6,8 @@
 ///@arg		{number} slot
 ///@arg		{ds_map|number} tags
 ///@arg		{boolean} test
-function _ex_fn_item_add(argument0, argument1, argument2, argument3, argument4, argument5) {
+///@arg		{boolean} type_conveyor
+function _ex_fn_item_add(argument0, argument1, argument2, argument3, argument4, argument5, argument6) {
 
 	var _inv = argument0;
 	var _key = argument1;
@@ -15,6 +16,14 @@ function _ex_fn_item_add(argument0, argument1, argument2, argument3, argument4, 
 	var _slot_to = argument3 < 0 ? _inv[? "max_size"] - 1 : argument3;
 	var _tags = argument4;
 	var _test = argument5;
+	var _conveyor = argument[6];
+	//var _conveyor = false;
+	
+	//show_debug_message("Conveyor")
+	//show_debug_message(_conveyor)
+	//show_debug_message("")
+	////show_debug_message(_slot_to)
+	////show_debug_message("")
 
 	//get item from database and generate stack id
 	var _item = ex_db_get(_key);
@@ -27,6 +36,11 @@ function _ex_fn_item_add(argument0, argument1, argument2, argument3, argument4, 
 	var _inv_items = _inv[? "items"];
 	var _updated_slots = _inv[? "updated_slots"];
 	var _stack_size = _item[? "stack_size"];
+	//if (_conveyor) {
+	//    _stack_size = _item[? "conveyor_stack_size"];
+	//	//show_debug_message(_item[? "conveyor_stack_size"])
+	//	//show_debug_message("YUP")
+	//}
 
 	//if item is stackable, try adding the amount to the existing stacks
 	if(_stack_size > 1) {

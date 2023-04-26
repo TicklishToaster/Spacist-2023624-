@@ -12,7 +12,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "ui_panels",
-    "path": "folders/Objects/Inventory/ex/ui_panels.yy",
+    "path": "folders/Objects/Inventory Extension/ex/ui_panels.yy",
   },
   "parentObjectId": {
     "name": "obj_inv_panel",
@@ -34,8 +34,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_conveyor_inventory",
-    "path": "sprites/spr_conveyor_inventory/spr_conveyor_inventory.yy",
+    "name": "spr_inventory_single",
+    "path": "sprites/spr_inventory_single/spr_inventory_single.yy",
   },
   "spriteMaskId": null,
   "visible": true,
